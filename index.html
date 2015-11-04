@@ -87,13 +87,59 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="开篇">开篇</h1><p>这是在github开始的第一篇博客文章，先占个坑</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">	<span class="comment">//测试java代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="MathJax_基础教程和入门">MathJax 基础教程和入门</h2><ol>
+<li><p>行内公式 用$$包围，如 <code>$f=ma$</code></p>
+<ol>
+<li><p>块状公式，用两个<code>$$$$</code>进行包围，如 <code>$$E=mc^2$$</code><br>$$E=mc^2$$</p>
+</li>
+<li><p>希腊字母，如<code>\alpha</code>,<code>\belta</code>,<code>\omega</code>;大写只需要把首字母大写即可,如：<code>\Omega=U/I</code><br>$$\Omega=U/I$$</p>
+</li>
+<li><p>上标和下标，分别用^和<em>来表示，如：`C</em>{3}^2`<br>$$ C_{3}^2  $$</p>
+</li>
+<li><p>群组，使用大括号{}作为一个组，如：<code>x_{i^3}</code><br>$$ x_{i^3} $$ </p>
+</li>
+<li><p>小括号，<code>\left(</code>&amp;<code>\right)</code><br><code>$\left(\frac{abc}{def}\right)$</code>:$\left(\frac{abc}{def}\right)$<br>左右括号成对出现方可有效<br>大括号使用<code>\{</code>和<code>\}</code>来表示<br>尖括号 <code>\langle</code>和<code>\gangle</code>,如：<code>$\langle x \rangle$</code>:$\langle x \rangle$<br><code>\lceil</code>和<code>\rceil</code>匹配：如 <code>$\lceil a \rceil$</code>:$\lceil a \rceil$<br><code>\lfloor</code>和<code>\rfloor</code>匹配：如 <code>$\lfloor b \rfloor$</code>:$\lfloor b \rfloor$</p>
+</li>
+<li><p>求和求积<br>分别是<code>\sum</code>和<code>\int</code>,如$\sum$，$\int$，举个例子<br>$$ \sum_{x=0}^{n}\left(1+x\right) $$<br><code>\prod</code>代表：$\prod$<br><code>\bigcap</code>代表：$\bigcap$<br><code>\bigcup</code>代表：$\bigcup$<br><code>\iint</code>代表：$\iint$</p>
+</li>
+<li><p>分数<br>分数用<code>\frac</code>来表示，需要两个参数，形如<code>$\frac23$</code>:$\frac23$<br>也可以分组：<code>$\frac{u}{i}$</code>：$\frac{u}{i}$<br>还可以用<code>\over</code>,如<code>{a+1 \over b+1}</code>:${a+1 \over b+1}$,需要大括号包围</p>
+</li>
+<li><p>字体<br><code>\mathbb</code> or <code>\Bbb</code> 如：<code>$\Bbb A$</code>:$\Bbb A$<br><code>\mathbf</code>  如：<code>$\mathbf A$</code>:$\mathbf A$<br><code>\mathtt</code>  如：<code>$\mathtt A$</code>:$\mathtt A$<br><code>\mathrm</code>  如：<code>$\mathrm A$</code>:$\mathrm A$<br><code>\mathsf</code>  如：<code>$\mathsf A$</code>:$\mathsf A$<br><code>\mathcal</code>  如：<code>$\mathcal A$</code>:$\mathcal A$<br><code>\mathscr</code>  如：<code>$\mathscr A$</code>:$\mathscr A$<br><code>\mathfrak</code>  如：<code>$\mathfrak A$</code>:$\mathfrak A$</p>
+</li>
+<li><p>开方<br>开方使用<code>\sqrt</code> 需要参数<code>$\sqrt x$</code>:$\sqrt x$<br>开其他次方，需要增加方括号，如 <code>$\sqrt[5]x$</code>:$\sqrt[5]x$<br>其他不好处理的使用：<code>\${x}^{1/2}$</code>:${x}^{1/2}$</p>
+</li>
+<li><p>特殊函数<br>如求极限，三角函数等<br><code>\lim</code>是求极限，如<code>$$\lim_{x \to 0}$$</code>:$$\lim_{x \to 0}$$<br><code>\sin</code>正弦 <code>$\sin x$</code>:$\sin x$<br><code>$\cos x$</code>:$\cos x$<br><code>$\tan x$</code>:$\tan x$</p>
+</li>
+<li><p>特别的符号和记号<br><code>\lt \gt \le \ge \neq</code>表示$\lt ，\gt ，\le ，\ge ，\neq $<br>如果需要增加不等于号，前面增加<code>\not</code>,如：<code>$\not \le$</code>:$\not \le$<br><code>\times \div \pm \mp</code>,代表$\times \div \pm \mp$<br>点乘用<code>\cdot</code>,如<code>a\cdot b</code>:$a\cdot b$<br>集合方面的操作：<br><code>\cup \cap \setminus \subset \subseteq \subsetneq \supset \in \notin \emptyset \varnothing</code>:$\cup \cap \setminus \subset \subseteq \subsetneq \supset \in \notin \emptyset \varnothing$</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>排列组合：<br><code>{n+1 \choose 2k} or \binom{n+1}{2k}</code>:${n+1 \choose 2k} or \binom{n+1}{2k}$</p>
+<p>一些奇怪的箭头：<br><code>\to \rightarrow \leftarrow \Rightarrow \Leftarrow \mapsto</code>:$\to \rightarrow \leftarrow \Rightarrow \Leftarrow \mapsto $</p>
+<p>一些数学术语：<br><code>\land \lor \lnot \forall \exists \top \bot \vdash \vDash</code>:$\land \lor \lnot \forall \exists \top \bot \vdash \vDash$</p>
+<p>一些图标：<br><code>\star \ast \oplus \circ \bullet</code>:$\star \ast \oplus \circ \bullet$</p>
+<p>约等于：<br><code>\approx \sim \simeq \cong \equiv \prec</code>:$\approx \sim \simeq \cong \equiv \prec$</p>
+<p>一些数学算子：<br><code>\infty \aleph_0  \nabla \partial  \Im \Re</code>:$\infty \aleph_0  \nabla \partial  \Im \Re$</p>
+<p>取模：<br><code>\pmod</code>:$a \equiv b \pmod n$</p>
+<p>省略号：<br><code>\ldots</code> and <code>cdots</code>:<br>$a_1,a_2,\ldots ,a_n$<br>$a_1+a_2+\cdots+a_n$</p>
+<p>希腊字母的变体：<br><code>\epsilon \varepsilon</code>===&gt;$\epsilon ,\varepsilon$<br><code>\phi \varphi</code>====&gt;$\phi ,\varphi$</p>
+<ol>
+<li>空白</li>
+</ol>
+<p><code>$a\,b$</code>,小空白:$a\,b$<br><code>$a\;b$</code>,大一点空白:$a\;b$<br><code>\quad</code>,更大点的，如：<code>$a \quad b$</code>===&gt;$a \quad b$<br>  更加大的 <code>$a \qquad b$</code>===&gt;$a \qquad b$</p>
+<p>文本段<code>\text</code>,也可以用<code>$...$</code><br>$\text { x in 实数集合} $<br>如${x \in S\,|\,S是非空集合}$</p>
+<ol>
+<li><p>重音符<br><code>\hat</code> and <code>\widehat</code>,如：<code>$\hat x$,$\widehat {abcdfr}$</code>:$\hat x$,$\widehat {abcdfr}$<br><code>\bar</code>,头部加横，如<code>\bar x</code>===&gt;$\bar x$<br><code>\overline</code>,头部长横，<code>\overline {abcd}</code>===&gt;$\overline {abcd}$<br><code>\vec</code>,向量表示符，也是向右箭头，<code>\vec x</code>===&gt;$\vec x$<br><code>\overrightarrow</code>,多个字母，<code>\overrightarrow {abc}</code>===&gt;$\overrightarrow {abc}$<br><code>\overleftrightarrow</code>双向箭头：<code>\overleftrightarrow {abc}</code>===&gt;$\overleftrightarrow {abc}$<br><code>\dot</code>or <code>ddot</code>代表点，<code>\dot x</code>==&gt;$\dot x$,<code>\ddot x</code>==&gt;$\ddot x$</p>
+</li>
+<li><p>转义<br>使用<code>\</code>来进行，如$,_,{,<code>\</code>自身需要<code>\backslash</code>来转义，<br>因为<code>\\</code>表示新行</p>
+</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://14686039.github.io/2015/11/04/开篇/" data-id="cigktegni0001ln3n3ipqous0" class="article-share-link">Share</a>
+      <a data-url="http://14686039.github.io/2015/11/04/开篇/" data-id="cigktlrqm0001m33nn8218oj6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -138,7 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://14686039.github.io/2015/11/04/hello-world/" data-id="cigktegn00000ln3nx6po2xlc" class="article-share-link">Share</a>
+      <a data-url="http://14686039.github.io/2015/11/04/hello-world/" data-id="cigktlrpw0000m33ndsioldw5" class="article-share-link">Share</a>
       
       
     </footer>
