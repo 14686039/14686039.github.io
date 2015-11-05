@@ -3,21 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于我 | 技术与生活</title>
+  <title>swift2.0[1] | 技术与生活</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##唐顺
-一名程序猿，码耕于MAC，喜欢钻研技术">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于我">
-<meta property="og:url" content="http://14686039.github.io/about/index.html">
+  <meta name="description" content="记录学习Swift的过程
+基本语法简单值常量用let来定义，变量用var来定义;如：12let staticString=&quot;不变的值&quot;var variableString
+注意：可以使用+进行字符串链接操作，但是数字和字符串连接需要对数字进行强制转化，String(num),或者&amp;quot;\(num)&amp;quot;
+数组和字典 []来定义12345678var cities=[&quot;nanjing&quot;,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swift2.0[1]">
+<meta property="og:url" content="http://14686039.github.io/2015/11/05/swift2-0-1/index.html">
 <meta property="og:site_name" content="技术与生活">
-<meta property="og:description" content="##唐顺
-一名程序猿，码耕于MAC，喜欢钻研技术">
-<meta property="og:updated_time" content="2015-11-05T05:17:29.000Z">
+<meta property="og:description" content="记录学习Swift的过程
+基本语法简单值常量用let来定义，变量用var来定义;如：12let staticString=&quot;不变的值&quot;var variableString
+注意：可以使用+进行字符串链接操作，但是数字和字符串连接需要对数字进行强制转化，String(num),或者&amp;quot;\(num)&amp;quot;
+数组和字典 []来定义12345678var cities=[&quot;nanjing&quot;,">
+<meta property="og:updated_time" content="2015-11-05T12:32:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于我">
-<meta name="twitter:description" content="##唐顺
-一名程序猿，码耕于MAC，喜欢钻研技术">
+<meta name="twitter:title" content="swift2.0[1]">
+<meta name="twitter:description" content="记录学习Swift的过程
+基本语法简单值常量用let来定义，变量用var来定义;如：12let staticString=&quot;不变的值&quot;var variableString
+注意：可以使用+进行字符串链接操作，但是数字和字符串连接需要对数字进行强制转化，String(num),或者&amp;quot;\(num)&amp;quot;
+数组和字典 []来定义12345678var cities=[&quot;nanjing&quot;,">
   
     <link rel="alternative" href="/atom.xml" title="技术与生活" type="application/atom+xml">
   
@@ -69,10 +75,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-swift2-0-1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/about/index.html" class="article-date">
-  <time datetime="2015-11-05T02:56:21.000Z" itemprop="datePublished">2015-11-05</time>
+    <a href="/2015/11/05/swift2-0-1/" class="article-date">
+  <time datetime="2015-11-05T12:15:46.000Z" itemprop="datePublished">2015-11-05</time>
 </a>
     
   </div>
@@ -83,7 +89,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于我
+      swift2.0[1]
     </h1>
   
 
@@ -91,26 +97,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##唐顺</p>
-<p>一名程序猿，码耕于MAC，喜欢钻研技术</p>
+        <p>记录学习Swift的过程</p>
+<h1 id="基本语法">基本语法</h1><h2 id="简单值">简单值</h2><p>常量用<code>let</code>来定义，变量用<code>var</code>来定义;<br>如：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> staticString=<span class="string">"不变的值"</span></span><br><span class="line"><span class="keyword">var</span> variableString</span><br></pre></td></tr></table></figure></p>
+<p>注意：可以使用<code>+</code>进行字符串链接操作，但是数字和字符串连接需要对数字进行强制转化，<code>String(num)</code>,或者<code>&quot;\(num)&quot;</code></p>
+<h2 id="数组和字典_[]来定义">数组和字典 <code>[]</code>来定义</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cities=[<span class="string">"nanjing"</span>,<span class="string">"beijing"</span>,<span class="string">"shanghai"</span>]</span><br><span class="line"><span class="keyword">var</span> provinces=[</span><br><span class="line"><span class="string">"jiangsu"</span>:<span class="string">"nanjing"</span>,</span><br><span class="line"><span class="string">"anhui"</span>:<span class="string">"hefei"</span></span><br><span class="line">]</span><br><span class="line"><span class="comment">//取值</span></span><br><span class="line"><span class="keyword">var</span> city=cities[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">var</span> province=provinces[<span class="string">"jiangsu"</span>]</span><br></pre></td></tr></table></figure>
+<p>创建空数组<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> wmptyArray=[<span class="type">String</span>]()</span><br><span class="line"><span class="keyword">let</span> emptyDictionary=[<span class="type">String</span>:<span class="type">Float</span>]()</span><br></pre></td></tr></table></figure></p>
+<h2 id="控制流">控制流</h2><p>for in的使用<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let cities=["nanjing","beijing","shanghai]</span><br><span class="line"> for city in cities&#123;</span><br><span class="line"> print(city)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用for in进行过滤操作：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let cities=["nanjing","beijing","shanghai]</span><br><span class="line"> for city in cities where city == "nanjing"&#123;</span><br><span class="line"> print(city)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/about/index.html" data-id="cigm7re370001km3n55oe6gkd" class="article-share-link">Share</a>
+      <!--<a data-url="http://14686039.github.io/2015/11/05/swift2-0-1/" data-id="cigm7re3o0006km3ntfavwx7z" class="article-share-link">Share</a>
       -->
 
       <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
       <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
       
-        <a href="http://14686039.github.io/about/index.html#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://14686039.github.io/2015/11/05/swift2-0-1/#disqus_thread" class="article-comment-link">Comments</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift2/">Swift2</a></li></ul>
+
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/05/部署远程tomcat/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">部署远程tomcat</div>
+    </a>
+  
+</nav>
+
   
 </article>
 
@@ -120,7 +143,7 @@
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>-->
   <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="page-undefined" data-title="关于我" data-url="http://14686039.github.io/about/index.html"></div>
+    <div class="ds-thread" data-thread-key="post-swift2-0-1" data-title="swift2.0[1]" data-url="http://14686039.github.io/2015/11/05/swift2-0-1/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -139,6 +162,8 @@
     <!-- 增加页面导航 -->
     <nav id="pagination" >
         
+        
+        <a href="/2015/11/05/部署远程tomcat/" class="alignright next" >next</a>
         
         <div class="clearfix"></div>
     </nav>
@@ -231,7 +256,7 @@
 <script>
   var disqus_shortname = '14686039';
   
-  var disqus_url = 'http://14686039.github.io/about/index.html';
+  var disqus_url = 'http://14686039.github.io/2015/11/05/swift2-0-1/';
   
   (function(){
     var dsq = document.createElement('script');
