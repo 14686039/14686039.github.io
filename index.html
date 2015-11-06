@@ -67,6 +67,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-swift-函数与闭包" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/06/swift-函数与闭包/" class="article-date">
+  <time datetime="2015-11-06T12:10:16.000Z" itemprop="datePublished">2015-11-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/06/swift-函数与闭包/">swift-函数与闭包</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##函数</p>
+<p>使用<code>func</code>来定义一个函数 使用<code>-&gt;</code>代表返回值<br>举个例子<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">hello</span><span class="params">(name:String)</span></span>-&gt;<span class="type">String</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"hello <span class="subst">\(name)</span>！"</span></span><br><span class="line">&#125;</span><br><span class="line">hello(<span class="string">"少年"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>可以使用元组返回多个值<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">minmax</span><span class="params">(nums:[Int])</span></span>-&gt;(<span class="built_in">min</span>:<span class="type">Int</span>,<span class="built_in">max</span>:<span class="type">Int</span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> <span class="built_in">min</span>=nums[<span class="number">0</span>]</span><br><span class="line">	<span class="keyword">var</span> <span class="built_in">max</span>=nums[<span class="number">0</span>]</span><br><span class="line">	<span class="keyword">for</span> num <span class="keyword">in</span> nums&#123;</span><br><span class="line">		<span class="keyword">if</span>(num &gt; <span class="built_in">max</span>)&#123;</span><br><span class="line">			<span class="built_in">max</span> = num</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(num &lt; <span class="built_in">min</span>)&#123;</span><br><span class="line">			<span class="built_in">min</span> = num</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> (<span class="built_in">min</span>,<span class="built_in">max</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> xxx=minmax([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"min:<span class="subst">\(xxx.<span class="built_in">min</span>)</span> max:<span class="subst">\(xxx.<span class="built_in">max</span>)</span>"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>上面<code>func minmax(nums:[Int])-&gt;(min:Int,max:Int){</code>可以写成<code>func minmax(nums:Int...)-&gt;(min:Int,max:Int){</code>,神奇的点点点</p>
+<p>函数嵌套<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">hello</span><span class="params">(name:String)</span></span>-&gt;<span class="type">String</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> string = <span class="string">"good morning,"</span> </span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">hi</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> string+<span class="string">"<span class="subst">\(name)</span>"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> hi()</span><br><span class="line">&#125;</span><br><span class="line">hello(<span class="string">"xiaoming"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>返回函数类型</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">one</span><span class="params">(name:String)</span></span>-&gt;(<span class="type">String</span>-&gt;<span class="type">String</span>)&#123;</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">two</span><span class="params">(string:String)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> string+<span class="string">"<span class="subst">\(name)</span>"</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> two</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> s=one(<span class="string">"xiaoming"</span>)</span><br><span class="line">s=s(<span class="string">"hello"</span>)</span><br></pre></td></tr></table></figure>
+<p>函数作为参数</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">lessThanTen</span><span class="params">(x:Int)</span></span>-&gt;<span class="type">Bool</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x&lt;<span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">hasMatchAny</span><span class="params">(list:[Int],condition:Int-&gt;Bool)</span></span>-&gt;<span class="type">Bool</span>&#123;</span><br><span class="line">	<span class="keyword">for</span> item <span class="keyword">in</span> list&#123;</span><br><span class="line">		<span class="keyword">if</span>(condition(item))&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> number=[<span class="number">12</span>,<span class="number">33</span>,<span class="number">55</span>,<span class="number">9</span>]</span><br><span class="line"><span class="keyword">var</span> hasMatch=hasMatchAny(number,condition:lessThanTen)</span><br></pre></td></tr></table></figure>
+<p>**注意：使用的生活需要<code>condition:</code></p>
+<h2 id="闭包，比较复杂的东西，先来点简单的">闭包，比较复杂的东西，先来点简单的</h2><p>如上的代码可以修改下<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hasnum2=hasMatchAny(number,condition: &#123;(a:<span class="type">Int</span>)-&gt;<span class="type">Bool</span> <span class="keyword">in</span> <span class="keyword">return</span> a&lt;<span class="number">10</span>&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>闭包其实是把函数进行简化处理了，官方计算器的那个例子说明的非常好，摘录下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回 (Int,Int)-&gt;Int) 这样的一个函数</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">caculate</span><span class="params">(opr:String-&gt;<span class="params">(Int,Int)</span></span></span>-&gt;<span class="type">Int</span>)&#123;</span><br><span class="line">	<span class="comment">//定义下+</span></span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">add</span><span class="params">(a:Int,b:Int)</span></span>&#123;<span class="keyword">return</span> a+b&#125;</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">sub</span><span class="params">(a:Int,b:Int)</span></span>&#123;<span class="keyword">return</span> a-b&#125;</span><br><span class="line">	<span class="keyword">var</span> result:(<span class="type">Int</span>,<span class="type">Int</span>)-&gt;<span class="type">Int</span>)</span><br><span class="line">	<span class="keyword">switch</span>(opr)&#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"+"</span></span><br><span class="line">			result=add</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"-"</span></span><br><span class="line">			result=sub</span><br><span class="line">		<span class="keyword">default</span></span><br><span class="line">			result=add</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面这个是一个普通的返回函数的一个函数，可以通过闭包进行改写<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">caculate</span><span class="params">(opr:String-&gt;<span class="params">(Int,Int)</span></span></span>-&gt;<span class="type">Int</span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> result:(<span class="type">Int</span>,<span class="type">Int</span>)-&gt;<span class="type">Int</span>)</span><br><span class="line">	<span class="keyword">switch</span>(opr)&#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"+"</span></span><br><span class="line">			result=&#123;(a:<span class="type">Int</span>,b:<span class="type">Int</span>)-&gt;<span class="type">Int</span> <span class="keyword">in</span> <span class="keyword">return</span> a+b&#125;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"-"</span></span><br><span class="line">			result=&#123;(a:<span class="type">Int</span>,b:<span class="type">Int</span>)-&gt;<span class="type">Int</span> <span class="keyword">in</span> <span class="keyword">return</span> a-b&#125;</span><br><span class="line">		<span class="keyword">default</span></span><br><span class="line">			result=&#123;(a:<span class="type">Int</span>,b:<span class="type">Int</span>)-&gt;<span class="type">Int</span> <span class="keyword">in</span> <span class="keyword">return</span> a+b&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>单行return可以省略，类型智能推断，参数缩写，所以switch部分改写下</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(opr)&#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"+"</span></span><br><span class="line">		result=&#123;$<span class="number">0</span>+$<span class="number">1</span>&#125;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"-"</span></span><br><span class="line">		result=&#123;$<span class="number">0</span>-$<span class="number">1</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <!--<a data-url="http://14686039.github.io/2015/11/06/swift-函数与闭包/" data-id="cignotu830009u23nlnmqbdmh" class="article-share-link">Share</a>
+      -->
+
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+        <a href="http://14686039.github.io/2015/11/06/swift-函数与闭包/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift/">swift</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-mac-ithoughtsX" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/06/mac-ithoughtsX/" class="article-date">
@@ -96,7 +156,7 @@
       
     </div>
     <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/2015/11/06/mac-ithoughtsX/" data-id="cignlzm6l000cpf3nwz7umflr" class="article-share-link">Share</a>
+      <!--<a data-url="http://14686039.github.io/2015/11/06/mac-ithoughtsX/" data-id="cignotu89000fu23n3ex6wrqv" class="article-share-link">Share</a>
       -->
 
       <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
@@ -143,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/2015/11/06/mac-movist/" data-id="cignlzm6j0009pf3nz3l3x3lu" class="article-share-link">Share</a>
+      <!--<a data-url="http://14686039.github.io/2015/11/06/mac-movist/" data-id="cignotu86000cu23njdx9jzqj" class="article-share-link">Share</a>
       -->
 
       <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
@@ -203,7 +263,7 @@
       
     </div>
     <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/2015/11/05/swift2-0-1/" data-id="cignlzm6g0006pf3n2d9l2ldm" class="article-share-link">Share</a>
+      <!--<a data-url="http://14686039.github.io/2015/11/05/swift2-0-1/" data-id="cignotu7x0006u23nrgrlriv4" class="article-share-link">Share</a>
       -->
 
       <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
@@ -249,7 +309,7 @@
       
     </div>
     <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/2015/11/05/部署远程tomcat/" data-id="cignlzm6a0002pf3n3xrf7jgo" class="article-share-link">Share</a>
+      <!--<a data-url="http://14686039.github.io/2015/11/05/部署远程tomcat/" data-id="cignotu7q0002u23nnynm4229" class="article-share-link">Share</a>
       -->
 
       <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
@@ -261,58 +321,6 @@
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/04/hello-world/" class="article-date">
-  <time datetime="2015-11-04T13:47:47.000Z" itemprop="datePublished">2015-11-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/04/hello-world/">Hello World-还是要保留的</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/2015/11/04/hello-world/" data-id="cignlzm5s0000pf3nbtu84u7x" class="article-share-link">Share</a>
-      -->
-
-      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
-      
-        <a href="http://14686039.github.io/2015/11/04/hello-world/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
     </footer>
   </div>
   
@@ -335,7 +343,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -344,7 +352,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java-Tomcat/" style="font-size: 10px;">Java Tomcat</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/Swift2/" style="font-size: 10px;">Swift2</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a>
+      <a href="/tags/Java-Tomcat/" style="font-size: 10px;">Java Tomcat</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/Swift2/" style="font-size: 10px;">Swift2</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a>
     </div>
   </div>
 
@@ -353,7 +361,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -363,6 +371,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/11/06/swift-函数与闭包/">swift-函数与闭包</a>
+          </li>
         
           <li>
             <a href="/2015/11/06/mac-ithoughtsX/">mac-ithoughtsX</a>
@@ -378,10 +390,6 @@
         
           <li>
             <a href="/2015/11/05/部署远程tomcat/">部署远程tomcat</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/04/hello-world/">Hello World-还是要保留的</a>
           </li>
         
       </ul>
