@@ -70,18 +70,26 @@
     <article id="post-activeMQ快速上手" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/26/activeMQ快速上手/" class="article-date">
-  <time datetime="2015-11-26T07:32:15.000Z" itemprop="datePublished">2015-11-26</time>
+  <time datetime="2015-11-26T07:34:43.000Z" itemprop="datePublished">2015-11-26</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/26/activeMQ快速上手/">activeMQ快速上手</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title:activeMQ快速上手<br>date:2015-11-1710:54:19</p>
-<h2 id="tags:ActiveMQ">tags:ActiveMQ</h2><p>#ActiveMQ基本入门</p>
-<p>##ActiveMQ简介<br>ActiveMQ是什么ActiveMQ是Apache推出的,一款开源的,完全支持JMS1.1和J2EE1.4规范的<br>JMSProvider实现的消息中间件(MessageOrientedMiddleware,MOM)</p>
+        <h1 id="ActiveMQ基本入门">ActiveMQ基本入门</h1><p>##ActiveMQ简介<br>ActiveMQ是什么ActiveMQ是Apache推出的,一款开源的,完全支持JMS1.1和J2EE1.4规范的<br>JMSProvider实现的消息中间件(MessageOrientedMiddleware,MOM)</p>
 <p>###ActiveMQ能干什么<br>最主要的功能就是:<br>实现JMSProvider,用来帮助实现高可用、高性能、可伸缩、易用和安全的企业级面向消息服务的系统<br>ActiveMQ特点完全支持JMS1.1和J2EE1.4规范(持久化,XA消息,事务)支持多种传送协议:in-VM,TCP,SSL,NIO,UDP,JGroups,JXTA可插拔的体系结构,可以灵活定制,如:消息存储方式、安全管理等很容易和ApplicatioServer集成使用多种语言和协议编写客户端。语言:Java,C,C++,C#,Ruby,Perl,Python,PHP<br>从设计上保证了高性能的集群,客户端-服务器,点对点,可以很容易的和Spring结合使用<br>支持通过JDBC和journal提供高速的消息持久化支持与Axis的整合</p>
 <p>##消息中间件<br>MOM基本功能:将信息以消息的形式,从一个应用程序传送到另一个或多个应用程序。<br>MOM主要特点:1:消息异步接受,类似手机短信的行为,消息发送者不需要等待消息接受者的响应,减少软<br>件多系统集成的耦合度;2:消息可靠接收,确保消息在中间件可靠保存,只有接收方收到后才删除消息,多个消息也可以组成原子事务<br>消息中间件的主要应用场景:<br>在多个系统间进行整合和通讯的时候,通常会要求:<br>1:可靠传输,数据不能丢失,有的时候,也会要求不能重复传输;<br>2:异步传输,否则各个系统同步发送接受数据,互相等待,造成系统瓶颈</p>
 <p>##ActiveMQ安装和基本使用<br>下载并安装ActiveMQ服务器端1:从<a href="http://activemq.apache.org/download.html下载最新的ActiveMQ2:直接解压,然后拷贝到你要安装的位置就好了" target="_blank" rel="external">http://activemq.apache.org/download.html下载最新的ActiveMQ2:直接解压,然后拷贝到你要安装的位置就好了</a><br>启动运行<br>1:普通启动:到ActiveMQ/bin下面,./activemqstart<br>2:启动并指定日志文件./activemqstart&gt;/tmp/activemqlog<br>检查是否已经启动ActiveMQ默认采用61616端口提供JMS服务,使用8161端口提供管理控制台服务,执行以下命令以便检验是否已经成功启动ActiveMQ服务:<br>1:比如查看61616端口是否打开:netstat-a|grep61616<br>2:也可以直接查看控制台输出或者日志文件3:还可以直接访问ActiveMQ的管理页面:<a href="http://192.168.1.106:8161/admin/" target="_blank" rel="external">http://192.168.1.106:8161/admin/</a><br>默认的用户名和密码是admin/admin<br>关闭ActiveMQ,可以用./activemqstop<br>暴力点的可以用ps-ef|grepactivemq来得到进程号,然后kill掉</p>
@@ -121,7 +129,7 @@
       
     </div>
     <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/2015/11/26/activeMQ快速上手/" data-id="cih2ucxvf000lxm3niiqdslka" class="article-share-link">Share</a>
+      <!--<a data-url="http://14686039.github.io/2015/11/26/activeMQ快速上手/" data-id="cihfxdscm000lz93nbvizyv33" class="article-share-link">Share</a>
       -->
 
       <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
@@ -131,6 +139,8 @@
         <a href="http://14686039.github.io/2015/11/26/activeMQ快速上手/#disqus_thread" class="article-comment-link">Comments</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li></ul>
+
     </footer>
   </div>
   
@@ -171,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/" data-id="cih2ucxtq0000xm3nkld0w30n" class="article-share-link">Share</a>
+      <!--<a data-url="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/" data-id="cihfxdsaw0000z93n6t05lshw" class="article-share-link">Share</a>
       -->
 
       <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
@@ -231,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/2015/11/06/swift-函数与闭包/" data-id="cih2ucxv5000bxm3nmgqqdeqt" class="article-share-link">Share</a>
+      <!--<a data-url="http://14686039.github.io/2015/11/06/swift-函数与闭包/" data-id="cihfxdsc9000bz93nq1ezc6xc" class="article-share-link">Share</a>
       -->
 
       <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
@@ -279,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/2015/11/06/mac-ithoughtsX/" data-id="cih2ucxva000hxm3nilck107i" class="article-share-link">Share</a>
+      <!--<a data-url="http://14686039.github.io/2015/11/06/mac-ithoughtsX/" data-id="cihfxdscg000hz93ndr4h9nkr" class="article-share-link">Share</a>
       -->
 
       <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
@@ -326,7 +336,7 @@
       
     </div>
     <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/2015/11/06/mac-movist/" data-id="cih2ucxv7000exm3n5r2uxpe7" class="article-share-link">Share</a>
+      <!--<a data-url="http://14686039.github.io/2015/11/06/mac-movist/" data-id="cihfxdscc000ez93n8o61z72b" class="article-share-link">Share</a>
       -->
 
       <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
@@ -360,7 +370,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -369,7 +379,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java-Tomcat/" style="font-size: 10px;">Java Tomcat</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MAC-SSH/" style="font-size: 10px;">MAC , SSH</a> <a href="/tags/Swift2/" style="font-size: 10px;">Swift2</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Java-Tomcat/" style="font-size: 10px;">Java Tomcat</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MAC-SSH/" style="font-size: 10px;">MAC , SSH</a> <a href="/tags/Swift2/" style="font-size: 10px;">Swift2</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a>
     </div>
   </div>
 
@@ -390,7 +400,7 @@
       <ul>
         
           <li>
-            <a href="/2015/11/26/activeMQ快速上手/">(no title)</a>
+            <a href="/2015/11/26/activeMQ快速上手/">activeMQ快速上手</a>
           </li>
         
           <li>
