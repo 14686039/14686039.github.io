@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,17 +19,17 @@
     <link rel="alternative" href="/atom.xml" title="技术与生活" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png" type="image/x-ico">
+    <link rel="icon" href="/favicon.ico">
   
-  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
   
-
 </head>
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
+<div id="container">
+  <div id="wrap">
+    <header id="header">
   <div id="banner"></div>
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
@@ -45,11 +46,9 @@
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
         
-          <a class="main-nav-link" href="/">首页</a>
+          <a class="main-nav-link" href="/">Home</a>
         
-          <a class="main-nav-link" href="/archives">存档</a>
-        
-          <a class="main-nav-link" href="/about">关于</a>
+          <a class="main-nav-link" href="/archives">Archives</a>
         
       </nav>
       <nav id="sub-nav">
@@ -59,13 +58,20 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://14686039.github.io"></form>
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="14686039.github.io">
+        </form>
       </div>
     </div>
   </div>
 </header>
-      <div class="outer">
-        <section id="main">
+    <div class="outer">
+      <section id="main">
   
     <article id="post-swift2-0-1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -105,31 +111,17 @@
 <p>这个感觉非常不好，guard出现，语法如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">guard</span> &lt;condition to meet&gt; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 执行假如条件没有匹配要做的动作</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 继续执行一般动作</span></span><br></pre></td></tr></table></figure></p>
 <p>举个例子<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//if where 的方法</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Article</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> title:<span class="type">String</span>?</span><br><span class="line">    <span class="keyword">var</span> description:<span class="type">String</span>?</span><br><span class="line">    <span class="keyword">var</span> author:<span class="type">String</span>?</span><br><span class="line">    <span class="keyword">var</span> totalWords:<span class="type">Int</span>?</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">printInfoByIfWhere</span><span class="params">(article: Article)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> totalWords = article.totalWords <span class="keyword">where</span> totalWords &gt; <span class="number">1000</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> title = article.title &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"Title: <span class="subst">\(title)</span>"</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"Error: Couldn't print the title of the article!"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Error: Couldn't print the total word count!"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">let</span> sampleArticle = <span class="type">Article</span>(title: <span class="string">"Swift Guide"</span>, description: <span class="string">"A beginner's guide to Swift 2"</span>, author: <span class="string">"Simon Ng"</span>, totalWords: <span class="number">1500</span>)</span><br><span class="line">printInfoByIfWhere(sampleArticle)</span><br><span class="line"></span><br><span class="line"><span class="comment">//guard 的方法</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">printInfoByGuard</span><span class="params">(article: Article)</span></span> &#123;</span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> totalWords = article.totalWords <span class="keyword">where</span> totalWords &gt; <span class="number">1000</span> <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Error: Couldn't print the total word count!"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> title = article.title <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Error: Couldn't print the title of the article!"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Title: <span class="subst">\(title)</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line">printInfoByGuard(sampleArticle)</span><br></pre></td></tr></table></figure></p>
 
-
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- artical f2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-9404963564058219"
-     data-ad-slot="7102642795"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-          
-
       
     </div>
     <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/2015/11/05/swift2-0-1/" data-id="cihfxij1o0008zu3njuv9co67" class="article-share-link">Share</a>
-      -->
-
-      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+        <a data-url="http://14686039.github.io/2015/11/05/swift2-0-1/" data-id="cihfxij1o0008zu3njuv9co67" class="article-share-link" data-share="baidu" data-title="swift2.0[1]">分享到</a>
+      
 
       
-        <a href="http://14686039.github.io/2015/11/05/swift2-0-1/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://14686039.github.io/2015/11/05/swift2-0-1/#ds-thread" class="article-comment-link">评论</a>
       
+
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift2/">Swift2</a></li></ul>
 
@@ -164,31 +156,17 @@
       
         <p>如何部署远程Tomcat，别人的经验，这里做个备份</p>
 <h1 id="直接上码_这里:">直接上码 <a href="http://emacsist.github.io/2015/08/31/%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81%E5%88%B0%E8%BF%9C%E7%A8%8BTomcat/" target="_blank" rel="external">这里</a>:</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#23558;&#36825;&#20010;&#33050;&#26412;&#65292;&#25918;&#21040;&#39033;&#30446;&#30340;&#26681;&#30446;&#24405;&#21363;&#21487;.&#10;&#10;#!/bin/bash&#10;&#10;REMOTE_IP=&#34;xxx.xxx.xxx.xxx&#34;&#10;CURRENT_ROOT=$( cd &#34;$( dirname &#34;$&#123;BASH_SOURCE[0]&#125;&#34; )&#34; &#38;&#38; pwd )&#10;SSH_PORT=1850&#10;&#10;# &#36825;&#20010;&#26159;&#23558;&#26576;&#20123;JS&#26367;&#25442;&#25104;&#29983;&#20135;&#29615;&#22659;&#30340;JS&#20195;&#30721;&#29255;&#27573;&#65292;&#25554;&#20837;&#21040;&#26576;&#20010;&#25991;&#20214;&#37324;&#65292;&#25353;&#38656;&#36873;&#25321;&#21363;&#21487;&#10;PRODUCT_APPJS=&#34;var current_lang = &#39;zh-cn&#39;;\n&#10;var GOLBAL_CONFIG = &#123;\n&#10;\t//&#9;&#39;wbapi&#39;: &#39;http://localhost&#39;,\n&#10;\t&#39;wbapi&#39;: &#39;http://wbapi.xxx.xx&#39;,\n&#10;\t&#39;wxapi&#39;: &#39;http://wxapi.xxx.xx&#39;,\n&#10;\t&#39;wbappid&#39;: &#39;xxx.xx&#39;\n&#10;&#125;;\n&#10;&#34;&#10;&#10;# &#36825;&#20010;&#20351;&#29992;scp&#26041;&#24335;&#10;function deploy()&#123;&#10;    cd $&#123;CURRENT_ROOT&#125;&#10;    mvn clean package -Ppre-release -Dmaven.test.skip=true&#10;    cd $&#123;CURRENT_ROOT&#125;/target/ROOT/WEB-INF/&#10;    echo &#34;cd target dir&#34;&#10;    scp -P$&#123;SSH_PORT&#125; -r classes velocity web.xml username@$&#123;REMOTE_IP&#125;:/home/username/tomcat/apache-tomcat-7.0.27_usernamev2/webapps/ROOT/WEB-INF&#10;    echo &#34;scp class OK&#34;&#10;    cd $&#123;CURRENT_ROOT&#125;/target/ROOT/&#10;    sed &#39;1,9d&#39; res/scripts/app.js &#62; res/scripts/app.tmp.js &#38;&#38; mv res/scripts/app.tmp.js res/scripts/app.js&#10;    echo -e $&#123;PRODUCT_APPJS&#125; | cat - res/scripts/app.js &#62; res/scripts/app.js.temp &#38;&#38; mv res/scripts/app.js.temp res/scripts/app.js&#10;    scp -P$&#123;SSH_PORT&#125; -r res index.html username@$&#123;REMOTE_IP&#125;:/home/username/tomcat/apache-tomcat-7.0.27_usernamev2/webapps/ROOT&#10;    echo &#34;scp res OK&#34;&#10;&#10;&#125;&#10;&#10;# &#36825;&#20010;&#27604;&#36739;&#22909;&#65292;&#22686;&#37327;&#26356;&#26032;&#65292;&#20351;&#29992;rsync&#10;function deployUseRsync()&#123;&#10;    cd $&#123;CURRENT_ROOT&#125;&#10;    mvn clean package -Ppre-release -Dmaven.test.skip=true&#10;    cd $&#123;CURRENT_ROOT&#125;/target/ROOT/&#10;    sed &#39;1,9d&#39; res/scripts/app.js &#62; res/scripts/app.tmp.js &#38;&#38; mv res/scripts/app.tmp.js res/scripts/app.js&#10;    echo -e $&#123;PRODUCT_APPJS&#125; | cat - res/scripts/app.js &#62; res/scripts/app.js.temp &#38;&#38; mv res/scripts/app.js.temp res/scripts/app.js&#10;    rm $&#123;CURRENT_ROOT&#125;/target/ROOT/WEB-INF/lib/javax.servlet-api-3.0.1.jar&#10;    rsync -avzh --delete &#34;-e ssh -p $&#123;SSH_PORT&#125;&#34; . username@$&#123;REMOTE_IP&#125;:/home/username/tomcat/apache-tomcat-7.0.27_usernamev2/webapps/ROOT/&#10;    #scp -P$&#123;SSH_PORT&#125; -r res index.html username@$&#123;REMOTE_IP&#125;:/home/username/tomcat/apache-tomcat-7.0.27_usernamev2/webapps/ROOT&#10;    echo &#34;scp res OK&#34;&#10;&#10;&#125;&#10;&#10;deployUseRsync</span><br></pre></td></tr></table></figure>
-
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- artical f2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-9404963564058219"
-     data-ad-slot="7102642795"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-          
-
       
     </div>
     <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/2015/11/05/部署远程tomcat/" data-id="cihfxij1i0004zu3nn07mze68" class="article-share-link">Share</a>
-      -->
-
-      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+        <a data-url="http://14686039.github.io/2015/11/05/部署远程tomcat/" data-id="cihfxij1i0004zu3nn07mze68" class="article-share-link" data-share="baidu" data-title="部署远程tomcat">分享到</a>
+      
 
       
-        <a href="http://14686039.github.io/2015/11/05/部署远程tomcat/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://14686039.github.io/2015/11/05/部署远程tomcat/#ds-thread" class="article-comment-link">评论</a>
       
+
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a></li></ul>
 
@@ -231,31 +209,17 @@
 <h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
-
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- artical f2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-9404963564058219"
-     data-ad-slot="7102642795"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-          
-
       
     </div>
     <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/2015/11/04/hello-world/" data-id="cihfxij25000kzu3nidvgwqr5" class="article-share-link">Share</a>
-      -->
-
-      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+        <a data-url="http://14686039.github.io/2015/11/04/hello-world/" data-id="cihfxij25000kzu3nidvgwqr5" class="article-share-link" data-share="baidu" data-title="Hello World-还是要保留的">分享到</a>
+      
 
       
-        <a href="http://14686039.github.io/2015/11/04/hello-world/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://14686039.github.io/2015/11/04/hello-world/#ds-thread" class="article-comment-link">评论</a>
       
+
       
     </footer>
   </div>
@@ -335,31 +299,17 @@
 </li>
 </ol>
 
-
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- artical f2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-9404963564058219"
-     data-ad-slot="7102642795"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-          
-
       
     </div>
     <footer class="article-footer">
-      <!--<a data-url="http://14686039.github.io/2015/11/04/开篇/" data-id="cihfxij1m0007zu3n90aso70l" class="article-share-link">Share</a>
-      -->
-
-      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
-      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+        <a data-url="http://14686039.github.io/2015/11/04/开篇/" data-id="cihfxij1m0007zu3n90aso70l" class="article-share-link" data-share="baidu" data-title="开篇">分享到</a>
+      
 
       
-        <a href="http://14686039.github.io/2015/11/04/开篇/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://14686039.github.io/2015/11/04/开篇/#ds-thread" class="article-comment-link">评论</a>
       
+
       
     </footer>
   </div>
@@ -374,14 +324,14 @@
     </nav>
   
 </section>
-        
-          <aside id="sidebar">
+      
+      <aside id="sidebar">
   
     
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">标签</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li></ul>
     </div>
@@ -390,7 +340,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
       <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Java-Tomcat/" style="font-size: 10px;">Java Tomcat</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MAC-SSH/" style="font-size: 10px;">MAC , SSH</a> <a href="/tags/Swift2/" style="font-size: 10px;">Swift2</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a>
     </div>
@@ -399,7 +349,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">归档</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">9</span></li></ul>
     </div>
@@ -408,7 +358,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recents</h3>
+    <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
         
@@ -437,52 +387,143 @@
   </div>
 
   
-</aside>
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
         
-      </div>
-      <footer id="footer">
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
   
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2015 唐顺<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
     </div>
   </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
+  </div>
+  <nav id="mobile-nav">
   
-    <a href="/" class="mobile-nav-link">首页</a>
+    <a href="/" class="mobile-nav-link">Home</a>
   
-    <a href="/archives" class="mobile-nav-link">存档</a>
-  
-    <a href="/about" class="mobile-nav-link">关于</a>
+    <a href="/archives" class="mobile-nav-link">Archives</a>
   
 </nav>
-    
-<script>
-  var disqus_shortname = '14686039';
-  
-  (function(){
-    var dsq = document.createElement('script');
-    dsq.type = 'text/javascript';
-    dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"14686039"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
   })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
 </script>
 
+<!-- 百度分享 end -->
 
-<script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="http://cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 
 <script src="/js/script.js" type="text/javascript"></script>
 
-  </div>
+</div>
 <!-- mathjax config similar to math.stackexchange -->
 
 <script type="text/x-mathjax-config">
