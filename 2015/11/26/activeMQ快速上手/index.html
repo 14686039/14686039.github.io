@@ -131,6 +131,19 @@ ActiveMQ能干什么最主要的功能就是:实现JMSProvider,用来帮助实�
 <p>1:需要在连接上设置消费者id,用来识别消费者<br>2:需要创建TopicSubscriber来订阅<br>3:要设置好了过后再start这个connection<br>4:<strong>一定要先运行一次,等于向消息服务中间件注册这个消费者,然后再运行客户端发送信息,这个时候,无论消费者是否在线,都会接收到,不在线的话,下次连接的时候,会把没有收过的消息都接收下来。</strong></p>
 <h3 id="关于持久化和非持久化消息">关于持久化和非持久化消息</h3><p>持久化消息<br>这是ActiveMQ的默认传送模式,此模式保证这些消息只被传送一次和成功使用一次。对于这些消息,可靠性是优先考虑的因素。可靠性的另一个重要方面是确保持久性消息传送至目标后,消息服务在向消费者传送它们之前不会丢失这些消息。这意味着在持久性消息传送至目标时,消息服务将其放入持久性数据存储。如果消息服务由于某种原因导致失败,它可以恢复此消息并将此消息传送至相应的消费者。虽然这样增加了消息传送的开销,但却增加了可靠性。<br>非持久化消息<br>保证这些消息最多被传送一次。对于这些消息,可靠性并非主要的考虑因素。此模式并不要求持久性的数据存储,也不保证消息服务由于某种原因导致失败后消息不会丢失。有两种方法指定传送模式:<br>1.使用setDeliveryMode方法,这样所有的消息都采用此传送模式;如:<code>producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);</code><br>2.使用send方法为每一条消息设置传送模式</p>
 
+
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- artical footer -->
+          <ins class="adsbygoogle"
+               style="display:inline-block;width:728px;height:90px"
+               data-ad-client="ca-pub-9404963564058219"
+               data-ad-slot="4347652798"></ins>
+          <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+
+          
+
       
     </div>
     <footer class="article-footer">
