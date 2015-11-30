@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>java自动生成图像 | 技术与生活</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="项目中需要一些固定图片，比如右上角显示药品名称，下面放张图，图旁边是价格信息，等等，为了加快速度，商品的图已经有了，需要进行一个压缩（压缩也要注意比例问题），之后的是都是雷同的如果在PS上操作的话，这个工作可以使用个程序来搞定；
+
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java自动生成图像">
+<meta property="og:url" content="http://14686039.github.io/2015/11/30/java自动生成图像/index.html">
+<meta property="og:site_name" content="技术与生活">
+<meta property="og:description" content="项目中需要一些固定图片，比如右上角显示药品名称，下面放张图，图旁边是价格信息，等等，为了加快速度，商品的图已经有了，需要进行一个压缩（压缩也要注意比例问题），之后的是都是雷同的如果在PS上操作的话，这个工作可以使用个程序来搞定；
+
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464">
+<meta property="og:image" content="http://i68.tinypic.com/5ebiq1.jpg">
+<meta property="og:image" content="http://i64.tinypic.com/33ng8r5.jpg">
+<meta property="og:updated_time" content="2015-11-30T08:45:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java自动生成图像">
+<meta name="twitter:description" content="项目中需要一些固定图片，比如右上角显示药品名称，下面放张图，图旁边是价格信息，等等，为了加快速度，商品的图已经有了，需要进行一个压缩（压缩也要注意比例问题），之后的是都是雷同的如果在PS上操作的话，这个工作可以使用个程序来搞定；
+
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464">
+  
+    <link rel="alternative" href="/atom.xml" title="技术与生活" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">技术与生活</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">热爱技术、更爱生活</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于我</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="14686039.github.io">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-java自动生成图像" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/30/java自动生成图像/" class="article-date">
+  <time datetime="2015-11-30T08:37:31.000Z" itemprop="datePublished">2015-11-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java自动生成图像
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>项目中需要一些固定图片，比如右上角显示药品名称，下面放张图，图旁边是价格信息，等等，为了加快速度，商品的图已经有了，需要进行一个压缩（压缩也要注意比例问题），之后的是都是雷同的如果在PS上操作的话，这个工作可以使用个程序来搞定；</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ImageTest</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    String ext=<span class="string">"png"</span>;</span><br><span class="line">    FileInputStream in = <span class="keyword">new</span> FileInputStream(<span class="string">"/Users/tangshun/Desktop/img-01.jpg"</span>);</span><br><span class="line">    <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[in.available()];</span><br><span class="line">    in.read(bytes);</span><br><span class="line">    in.close();</span><br><span class="line">    Random random=<span class="keyword">new</span> Random(System.currentTimeMillis());</span><br><span class="line">    </span><br><span class="line">    ImageIcon imageIcon = <span class="keyword">new</span> ImageIcon(bytes);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 图形大小</span></span><br><span class="line">    <span class="keyword">int</span> width=<span class="number">236</span>,height=<span class="number">150</span>;</span><br><span class="line">    <span class="comment">// 建立内存图像</span></span><br><span class="line">    BufferedImage image = <span class="keyword">new</span> BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);</span><br><span class="line">    <span class="comment">// 从图像中取得图形对象</span></span><br><span class="line">    Graphics2D gg=(Graphics2D)image.getGraphics();</span><br><span class="line">    gg.setBackground(<span class="keyword">new</span> Color(<span class="number">233</span>,<span class="number">229</span>,<span class="number">252</span>));</span><br><span class="line">    gg.clearRect(<span class="number">0</span>, <span class="number">0</span>, width, height);</span><br><span class="line">    <span class="comment">//消除锯齿</span></span><br><span class="line">    gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);</span><br><span class="line">    <span class="comment">//消除文字锯齿</span></span><br><span class="line">    gg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//画图</span></span><br><span class="line">    gg.drawImage(imageIcon.getImage(),<span class="number">10</span>,<span class="number">55</span>,imageIcon.getIconWidth(),imageIcon.getIconHeight(),imageIcon.getImageObserver());</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//画圆角矩形</span></span><br><span class="line">    RoundRectangle2D rr2d = <span class="keyword">new</span> RoundRectangle2D.Float(<span class="number">10</span>+imageIcon.getIconWidth()+<span class="number">10</span>,<span class="number">55</span>+<span class="number">40</span>,<span class="number">76</span>,<span class="number">30</span>, <span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line">    gg.setColor(<span class="keyword">new</span> Color(<span class="number">133</span>,<span class="number">92</span>,<span class="number">200</span>));</span><br><span class="line">    gg.fill(rr2d);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//自定义字体</span></span><br><span class="line">    java.io.FileInputStream fi = <span class="keyword">new</span> java.io.FileInputStream(<span class="keyword">new</span> File(<span class="string">"/Users/tangshun/Documents/picture/UIUX/字体/open-sans/OpenSans-Bold.ttf"</span>));</span><br><span class="line">    java.io.BufferedInputStream fb = <span class="keyword">new</span> java.io.BufferedInputStream(fi);</span><br><span class="line">    Font nf = Font.createFont(Font.TRUETYPE_FONT, fb);</span><br><span class="line">    nf = nf.deriveFont(Font.BOLD, <span class="number">14</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//画字符串</span></span><br><span class="line">    Font f1 = <span class="keyword">new</span> Font(<span class="string">"PingFang SC"</span>,Font.BOLD,<span class="number">18</span>);</span><br><span class="line">    gg.setFont(f1);</span><br><span class="line">    gg.setColor(<span class="keyword">new</span> Color(<span class="number">133</span>,<span class="number">92</span>,<span class="number">200</span>));<span class="comment">//new Color(R,G,B);</span></span><br><span class="line">    gg.setStroke(<span class="keyword">new</span> BasicStroke(<span class="number">3</span>));</span><br><span class="line">    gg.drawString(<span class="string">"维达康 替吉奥胶囊"</span>, <span class="number">10</span>,<span class="number">30</span>);<span class="comment">//维达康 替吉奥胶囊</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//删除线的字符串</span></span><br><span class="line">    Font f2 = <span class="keyword">new</span> Font(<span class="string">"Microsoft YaHei"</span>,Font.PLAIN|Font.ITALIC,<span class="number">12</span>);</span><br><span class="line">    gg.setColor(Color.GRAY);<span class="comment">//new Color(R,G,B);</span></span><br><span class="line">    AttributedString as = <span class="keyword">new</span> AttributedString(<span class="string">"原价：90.88"</span>);</span><br><span class="line">    as.addAttribute(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);</span><br><span class="line">    as.addAttribute(TextAttribute.FONT, f2);</span><br><span class="line">    gg.drawString(as.getIterator(), <span class="number">10</span>+imageIcon.getIconWidth()+<span class="number">10</span>,<span class="number">55</span>+<span class="number">20</span>);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    Font f3 = <span class="keyword">new</span> Font(<span class="string">"Apple Braille"</span>,Font.BOLD,<span class="number">14</span>);</span><br><span class="line">    gg.setFont(nf);</span><br><span class="line">    gg.setColor(Color.WHITE);<span class="comment">//new Color(R,G,B);</span></span><br><span class="line">    gg.drawString(<span class="string">"￥48.88"</span>, <span class="number">10</span>+imageIcon.getIconWidth()+<span class="number">10</span>+<span class="number">10</span>,<span class="number">55</span>+<span class="number">40</span>+(<span class="number">30</span>/<span class="number">2</span>)+<span class="number">6</span>);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    String filepath = <span class="string">"/Users/tangshun/Desktop/"</span> + random.nextInt(<span class="number">99999</span>) + <span class="string">"."</span> + ext;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      ImageIO.write(image,ext,<span class="keyword">new</span> File(filepath));</span><br><span class="line">      System.out.println(<span class="string">"文件已经生成，路经为"</span> + filepath);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">      ex.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>素材：<br><img src="http://i68.tinypic.com/5ebiq1.jpg" alt="素材图片"></p>
+<p>结论：<br><img src="http://i64.tinypic.com/33ng8r5.jpg" alt="最后的图"></p>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2015/11/30/java自动生成图像/" data-id="cihlpncyn000h2h3nyvc4bkba" class="article-share-link" data-share="baidu" data-title="java自动生成图像">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2015/11/30/java自动生成图像/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/26/activeMQ快速上手/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">activeMQ快速上手</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <div id="ds-thread" class="ds-thread" data-thread-key="2015/11/30/java自动生成图像/" data-title="java自动生成图像" data-url="http://14686039.github.io/2015/11/30/java自动生成图像/"></div>
+  </section>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Java-Tomcat/" style="font-size: 10px;">Java Tomcat</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MAC-SSH/" style="font-size: 10px;">MAC , SSH</a> <a href="/tags/Swift2/" style="font-size: 10px;">Swift2</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/11/30/java自动生成图像/">java自动生成图像</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/26/activeMQ快速上手/">activeMQ快速上手</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/12/Mac下SSH终端证书方式到远程服务器/">Mac下SSH终端证书方式到远程服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/swift-函数与闭包/">swift-函数与闭包</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/mac-ithoughtsX/">mac-ithoughtsX</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://vividict.com" target="_blank">在线字典</a>
+          </li>
+        
+          <li>
+            <a href="https://www.cmacapps.com/" target="_blank">破解Mac软件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 唐顺<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于我</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"14686039"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="http://cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
