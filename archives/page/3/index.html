@@ -4,31 +4,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Mac下SSH终端证书方式到远程服务器 | 技术与生活</title>
+  <title>Archives | 技术与生活</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="选择证书进行登录，便捷，安全；我这里也只是一个演示；我在MAC系统下需要远程到其他Linux服务器；
-
-首先，再本地MAC系统下cd ~/.ssh/
-使用 ssh-keygen -t rsa 创建公钥和私钥，公钥：id_rsa.pub私钥：id_rsa将公钥文件上传到远程服务器用户主目录下的.ssh文件下（如果没有就新建一个）
-登陆到远程服务器，进入.ssh目录 cd ~/.ssh执行命令 cat">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Mac下SSH终端证书方式到远程服务器">
-<meta property="og:url" content="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/index.html">
+  <meta name="description" content="好好工作；好好生活">
+<meta property="og:type" content="website">
+<meta property="og:title" content="技术与生活">
+<meta property="og:url" content="http://14686039.github.io/archives/page/3/index.html">
 <meta property="og:site_name" content="技术与生活">
-<meta property="og:description" content="选择证书进行登录，便捷，安全；我这里也只是一个演示；我在MAC系统下需要远程到其他Linux服务器；
-
-首先，再本地MAC系统下cd ~/.ssh/
-使用 ssh-keygen -t rsa 创建公钥和私钥，公钥：id_rsa.pub私钥：id_rsa将公钥文件上传到远程服务器用户主目录下的.ssh文件下（如果没有就新建一个）
-登陆到远程服务器，进入.ssh目录 cd ~/.ssh执行命令 cat">
-<meta property="og:image" content="http://i66.tinypic.com/e0s848.jpg">
-<meta property="og:updated_time" content="2015-11-12T13:01:15.000Z">
+<meta property="og:description" content="好好工作；好好生活">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mac下SSH终端证书方式到远程服务器">
-<meta name="twitter:description" content="选择证书进行登录，便捷，安全；我这里也只是一个演示；我在MAC系统下需要远程到其他Linux服务器；
-
-首先，再本地MAC系统下cd ~/.ssh/
-使用 ssh-keygen -t rsa 创建公钥和私钥，公钥：id_rsa.pub私钥：id_rsa将公钥文件上传到远程服务器用户主目录下的.ssh文件下（如果没有就新建一个）
-登陆到远程服务器，进入.ssh目录 cd ~/.ssh执行命令 cat">
+<meta name="twitter:title" content="技术与生活">
+<meta name="twitter:description" content="好好工作；好好生活">
   
     <link rel="alternative" href="/atom.xml" title="技术与生活" type="application/atom+xml">
   
@@ -87,93 +73,39 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-Mac下SSH终端证书方式到远程服务器" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/12/Mac下SSH终端证书方式到远程服务器/" class="article-date">
-  <time datetime="2015-11-12T12:52:52.000Z" itemprop="datePublished">2015-11-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+      <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      Mac下SSH终端证书方式到远程服务器
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2015" class="archive-year">2015</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2015/11/04/开篇/" class="archive-article-date">
+  <time datetime="2015-11-04T12:59:46.000Z" itemprop="datePublished">11月 4</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2015/11/04/开篇/">开篇</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>选择证书进行登录，便捷，安全；<br>我这里也只是一个演示；我在MAC系统下需要远程到其他Linux服务器；</p>
-<ul>
-<li>首先，再本地MAC系统下<code>cd ~/.ssh/</code></li>
-<li>使用 <code>ssh-keygen -t rsa</code> 创建公钥和私钥，<br><img src="http://i66.tinypic.com/e0s848.jpg" alt=""><br>公钥：id_rsa.pub<br>私钥：id_rsa<br>将公钥文件上传到远程服务器用户主目录下的.ssh文件下（如果没有就新建一个）</li>
-<li>登陆到远程服务器，进入.ssh目录 cd ~/.ssh<br>执行命令 cat id_rsa.pub &gt;&gt; authorized_keys<br>再执行命令 rm id_rsa.pub （删除之前上传的公钥）<br>退出远程服务器</li>
-<li>在Mac终端下执行登陆命令 ssh username@server；即可免密码登录到远程服务器</li>
-</ul>
-
-
-        
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- artical f2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-9404963564058219"
-     data-ad-slot="7102642795"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-        
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/" data-id="cihtwtdv0000plt3nuymztcok" class="article-share-link" data-share="baidu" data-title="Mac下SSH终端证书方式到远程服务器">分享到</a>
-      
-
-      
-        <a href="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/11/26/activeMQ快速上手/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          activeMQ快速上手
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/11/06/swift-函数与闭包/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">swift-函数与闭包</div>
-    </a>
-  
-</nav>
-
-  
 </article>
-
-
-  <section id="comments">
-    <div id="ds-thread" class="ds-thread" data-thread-key="2015/11/12/Mac下SSH终端证书方式到远程服务器/" data-title="Mac下SSH终端证书方式到远程服务器" data-url="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/"></div>
-  </section>
+  
+  
+    </div></section>
+  
 </section>
       
       <aside id="sidebar">

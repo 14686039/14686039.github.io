@@ -4,31 +4,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Mac下SSH终端证书方式到远程服务器 | 技术与生活</title>
+  <title>activeMQ 一个服务器启动多个Broker | 技术与生活</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="选择证书进行登录，便捷，安全；我这里也只是一个演示；我在MAC系统下需要远程到其他Linux服务器；
+  <meta name="description" content="1:把整个conf文件夹复制一份,比如叫做conf2
+2:修改里面的activemq.xml文件
 
-首先，再本地MAC系统下cd ~/.ssh/
-使用 ssh-keygen -t rsa 创建公钥和私钥，公钥：id_rsa.pub私钥：id_rsa将公钥文件上传到远程服务器用户主目录下的.ssh文件下（如果没有就新建一个）
-登陆到远程服务器，进入.ssh目录 cd ~/.ssh执行命令 cat">
+(1)里面的brokerName 不能跟原来的重复 
+(2)数据存放的文件名称不能重复,比如:&amp;lt;kahaDB directory=&amp;quot;${activemq.data}/kahadb_2&amp;quot;/&amp;gt;
+(3)所有涉及的transportConnectors 的端口,都要跟前面的不">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mac下SSH终端证书方式到远程服务器">
-<meta property="og:url" content="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/index.html">
+<meta property="og:title" content="activeMQ 一个服务器启动多个Broker">
+<meta property="og:url" content="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/index.html">
 <meta property="og:site_name" content="技术与生活">
-<meta property="og:description" content="选择证书进行登录，便捷，安全；我这里也只是一个演示；我在MAC系统下需要远程到其他Linux服务器；
+<meta property="og:description" content="1:把整个conf文件夹复制一份,比如叫做conf2
+2:修改里面的activemq.xml文件
 
-首先，再本地MAC系统下cd ~/.ssh/
-使用 ssh-keygen -t rsa 创建公钥和私钥，公钥：id_rsa.pub私钥：id_rsa将公钥文件上传到远程服务器用户主目录下的.ssh文件下（如果没有就新建一个）
-登陆到远程服务器，进入.ssh目录 cd ~/.ssh执行命令 cat">
-<meta property="og:image" content="http://i66.tinypic.com/e0s848.jpg">
-<meta property="og:updated_time" content="2015-11-12T13:01:15.000Z">
+(1)里面的brokerName 不能跟原来的重复 
+(2)数据存放的文件名称不能重复,比如:&amp;lt;kahaDB directory=&amp;quot;${activemq.data}/kahadb_2&amp;quot;/&amp;gt;
+(3)所有涉及的transportConnectors 的端口,都要跟前面的不">
+<meta property="og:updated_time" content="2015-12-06T02:27:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mac下SSH终端证书方式到远程服务器">
-<meta name="twitter:description" content="选择证书进行登录，便捷，安全；我这里也只是一个演示；我在MAC系统下需要远程到其他Linux服务器；
+<meta name="twitter:title" content="activeMQ 一个服务器启动多个Broker">
+<meta name="twitter:description" content="1:把整个conf文件夹复制一份,比如叫做conf2
+2:修改里面的activemq.xml文件
 
-首先，再本地MAC系统下cd ~/.ssh/
-使用 ssh-keygen -t rsa 创建公钥和私钥，公钥：id_rsa.pub私钥：id_rsa将公钥文件上传到远程服务器用户主目录下的.ssh文件下（如果没有就新建一个）
-登陆到远程服务器，进入.ssh目录 cd ~/.ssh执行命令 cat">
+(1)里面的brokerName 不能跟原来的重复 
+(2)数据存放的文件名称不能重复,比如:&amp;lt;kahaDB directory=&amp;quot;${activemq.data}/kahadb_2&amp;quot;/&amp;gt;
+(3)所有涉及的transportConnectors 的端口,都要跟前面的不">
   
     <link rel="alternative" href="/atom.xml" title="技术与生活" type="application/atom+xml">
   
@@ -87,10 +89,10 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-Mac下SSH终端证书方式到远程服务器" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-activeMQ-一个服务器启动多个Broker" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/12/Mac下SSH终端证书方式到远程服务器/" class="article-date">
-  <time datetime="2015-11-12T12:52:52.000Z" itemprop="datePublished">2015-11-12</time>
+    <a href="/2015/12/06/activeMQ-一个服务器启动多个Broker/" class="article-date">
+  <time datetime="2015-12-06T02:25:15.000Z" itemprop="datePublished">2015-12-06</time>
 </a>
     
   </div>
@@ -101,7 +103,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Mac下SSH终端证书方式到远程服务器
+      activeMQ 一个服务器启动多个Broker
     </h1>
   
 
@@ -109,12 +111,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>选择证书进行登录，便捷，安全；<br>我这里也只是一个演示；我在MAC系统下需要远程到其他Linux服务器；</p>
+        <p>1:把整个conf文件夹复制一份,比如叫做conf2</p>
+<p>2:修改里面的activemq.xml文件</p>
 <ul>
-<li>首先，再本地MAC系统下<code>cd ~/.ssh/</code></li>
-<li>使用 <code>ssh-keygen -t rsa</code> 创建公钥和私钥，<br><img src="http://i66.tinypic.com/e0s848.jpg" alt=""><br>公钥：id_rsa.pub<br>私钥：id_rsa<br>将公钥文件上传到远程服务器用户主目录下的.ssh文件下（如果没有就新建一个）</li>
-<li>登陆到远程服务器，进入.ssh目录 cd ~/.ssh<br>执行命令 cat id_rsa.pub &gt;&gt; authorized_keys<br>再执行命令 rm id_rsa.pub （删除之前上传的公钥）<br>退出远程服务器</li>
-<li>在Mac终端下执行登陆命令 ssh username@server；即可免密码登录到远程服务器</li>
+<li>(1)里面的brokerName 不能跟原来的重复 </li>
+<li>(2)数据存放的文件名称不能重复,比如:<br><code>&lt;kahaDB directory=&quot;${activemq.data}/kahadb_2&quot;/&gt;</code></li>
+<li>(3)所有涉及的transportConnectors 的端口,都要跟前面的不一样 </li>
+</ul>
+<p>3:修改jetty.xml,主要就是修改端口,比如:<br><code>&lt;property name=“port” value=“8181”/&gt;</code>端口必须和前面的不一样 </p>
+<p>4:到bin下面,复制一个activemq,比如叫做activemq2: </p>
+<ul>
+<li>(1)修改程序的id,不能和前面的重复<br><code>ACTIVEMQ_PIDFILE=&quot;$ACTIVEMQ_DATA/activemq2-\</code>hostname`.pid” `</li>
+<li>(2)修改配置文件路径<br><code>ACTIVEMQ_CONF=&quot;$ACTIVEMQ_BASE/conf2&quot;</code></li>
+<li>(3)修改端口,里面有个tcp的61616的端口,要改成不一样的,最好跟activemq.xml里面的tcp的端口一致 </li>
+<li>(4)然后就可以执行了,如果执行没有权限的话,就授权:<code>chmod 751 activemq2</code></li>
 </ul>
 
 
@@ -134,35 +144,24 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/" data-id="cihtwtdv0000plt3nuymztcok" class="article-share-link" data-share="baidu" data-title="Mac下SSH终端证书方式到远程服务器">分享到</a>
+        <a data-url="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/" data-id="cihtwtduy000olt3nowoynf7q" class="article-share-link" data-share="baidu" data-title="activeMQ 一个服务器启动多个Broker">分享到</a>
       
 
       
-        <a href="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/#ds-thread" class="article-comment-link">评论</a>
+        <a href="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/#ds-thread" class="article-comment-link">评论</a>
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a></li></ul>
-
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2015/11/26/activeMQ快速上手/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          activeMQ快速上手
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/11/06/swift-函数与闭包/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/11/30/java自动生成图像/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">swift-函数与闭包</div>
+      <div class="article-nav-title">java自动生成图像</div>
     </a>
   
 </nav>
@@ -172,7 +171,7 @@
 
 
   <section id="comments">
-    <div id="ds-thread" class="ds-thread" data-thread-key="2015/11/12/Mac下SSH终端证书方式到远程服务器/" data-title="Mac下SSH终端证书方式到远程服务器" data-url="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/"></div>
+    <div id="ds-thread" class="ds-thread" data-thread-key="2015/12/06/activeMQ-一个服务器启动多个Broker/" data-title="activeMQ 一个服务器启动多个Broker" data-url="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/"></div>
   </section>
 </section>
       
