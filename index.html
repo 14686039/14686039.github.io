@@ -78,7 +78,7 @@
     <article id="post-百度云加速下载" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/02/25/百度云加速下载/" class="article-date">
-  <time datetime="2016-02-25T06:34:51.000Z" itemprop="datePublished">2016-02-25</time>
+  <time datetime="2016-02-25T06:43:33.000Z" itemprop="datePublished">2016-02-25</time>
 </a>
     
   </div>
@@ -88,13 +88,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>title: 百度云加速下载<br>date: 2016-02-25 14:08:59</p>
-<h2 id="tags:_软件与工具">tags: 软件与工具</h2><p>转帖 <img src="http://zwpaper.github.io/2015/07/19/baiduyun-fastdown/" alt="这里"> </p>
+<h2 id="tags:_软件与工具">tags: 软件与工具</h2><p>转帖 <a href="http://zwpaper.github.io/2015/07/19/baiduyun-fastdown/" target="_blank" rel="external">这里</a> </p>
 <ul>
 <li>自从百度云成为视频下载神器，百度云下载就广为人知，又从百度云无耻限速，百度云又被骂得广为人知，如果你还在因限速而惆怅，刚好你又在用 Chrome/Firefox，来这里，就对了。</li>
 </ul>
 <h2 id="说明">说明</h2><p>文章没有干货，只是自己碰巧找到两个好用的软件，效果惊人，所以总结一下自己的使用情况。<br>因为要用到命令行，所以 Windows 没试过，Mac 和 Linux 用户应该是无压力的。<br>效果<br>扯别的都没用，先说一下我自己的速度情况。<br>以下都是同一个网络环境：<br>– Chrome 默认下载：200 - 300 KBps<br>– Axel：下不鸟………<br>– Android ES 浏览器：500 - 1000 KBps<br>本文所用，Aria2：1 - 3 MBps<br>其中 Android 的 ES 浏览器 也很让我意外，基本可以稳定在 700 KBps。</p>
 <h2 id="软件">软件</h2><p>其实总共要用的软件就一个，Aria2，其它都是插件。</p>
-<p>##Aria2##<br>上面说到了要用命令行，就是因为 Aria2 是一个命令行软件，但是在用上相应插件后，完全不用担心自己不用全命令行。<br><img src="http://sourceforge.net/projects/aria2/" alt="Aria2主页"><br><img src="https://github.com/tatsuhiro-t/aria2" alt="Aria2 Github 主页"><br>然你要是和我一样喜欢命令行那就更无压力啦！</p>
+<p>##Aria2##<br>上面说到了要用命令行，就是因为 Aria2 是一个命令行软件，但是在用上相应插件后，完全不用担心自己不用全命令行。<br><a href="http://sourceforge.net/projects/aria2/" target="_blank" rel="external">Aria2主页</a><br><a href="https://github.com/tatsuhiro-t/aria2" target="_blank" rel="external">Aria2 Github 主页</a><br>然你要是和我一样喜欢命令行那就更无压力啦！</p>
 <h2 id="安装">安装</h2><p>以下内容要用到命令行，所以<br>Mac 用户请打开 Terminal，也就是终端，打开程序菜单打 terminal 可以直接找到。<br>Linux 用户我觉得不用我说了吧？也是 terminal，看发行版，自己解决。</p>
 <h2 id="Mac">Mac</h2><p>Mac 推荐用 Homebrew 安装，只要一句<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install aria2</span><br></pre></td></tr></table></figure></p>
 <p>Homebrew 的安装要 Xcode 环境，所以如果没有安装 Homebrew 还得先安装 Xcode。<br>想安装 Homebrew 的用户请看这里 -&gt; 我是Homebrew<br>其实就是下面的命令就可以安装（也是 Terminal 中输入）：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e &#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&#34;</span><br></pre></td></tr></table></figure></p>
@@ -107,8 +107,8 @@
 <p>然后<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure></p>
 <p>相信我，你已经接近完成了。</p>
 <h2 id="插件">插件</h2><p>以下安装一个即可<br>Chrome 插件，百度网盘助手<br>Firefox 插件，百度网盘助手<br>这个其实都可以不安装，就是一个网页，下面是它的主页<br>YAAW<br>使用<br>好了，现在装备齐全了，要怎么样才可以用的最舒服呢！<br>从现在开始，以后只用按以下步骤就可以高速下载<br>运行 Aria2<br>打开一个 Terminal 界面，输入以下并回车。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aria2rpc</span><br></pre></td></tr></table></figure></p>
-<p>好了，可以关闭 Terminal。<br>每次开机后运行一次即可。<br>打开 <img src="http://binux.github.io/yaaw/demo/" alt="YAAW"><br>还记得我说的 YAAW 其实就是一个页面吗？打开它：<br><img src="http://binux.github.io/yaaw/demo/" alt="YAAW"><br>这真是个应该有一个错误<br>Error: Internal server error<br>点右上角的扳手按钮，修改 JSON-RPC Path 内容，<br>把 <a href="http://binux.github.io:6800/jsonrpc" target="_blank" rel="external">http://binux.github.io:6800/jsonrpc</a> 改为 <a href="http://127.0.0.1:6800/jsonrpc" target="_blank" rel="external">http://127.0.0.1:6800/jsonrpc</a><br>保存，Save。<br>百度云<br>终于到激动人心的时候了，-&gt; <img src="http://pan.baidu.com/disk/home" alt="点我打开百度云"><br>看到上面的图标了吗？</p>
-<p>如果没有请重启一下 Chrome 或打开一个新 Chome 窗口，注意，不是新标签页。<br>选中要下载的文件，鼠标放到图标上，点击 Aria2 RPC<br>看看 YAAW 的页面？有没有惊喜？<br>后记<br>这个真的是一劳多逸，如果有命令行经验的话，连劳都不算。<br>后面没说 Linux 的东西了，不是我忘了，而是觉得大家应该都会。<br>如果能帮上忙就点个赞吧！XD</p>
+<p>好了，可以关闭 Terminal。<br>每次开机后运行一次即可。<br>打开 <a href="http://binux.github.io/yaaw/demo/" target="_blank" rel="external">YAAW</a><br>还记得我说的 YAAW 其实就是一个页面吗？打开它：<br><a href="http://binux.github.io/yaaw/demo/" target="_blank" rel="external">YAAW</a><br>这真是个应该有一个错误<br>Error: Internal server error<br>点右上角的扳手按钮，修改 JSON-RPC Path 内容，<br>把 <code>http://binux.github.io:6800/jsonrpc</code> 改为 <code>http://127.0.0.1:6800/jsonrpc</code><br>保存，Save。<br>百度云<br>终于到激动人心的时候了，-&gt; <a href="http://pan.baidu.com/disk/home" target="_blank" rel="external">点我打开百度云</a><br>看到上面的图标了吗？</p>
+<p>如果没有请重启一下 Chrome 或打开一个新 Chome 窗口，注意，不是新标签页。<br>选中要下载的文件，鼠标放到图标上，点击 <code>Aria2 RPC</code><br>看看 YAAW 的页面？有没有惊喜？<br>后记<br>这个真的是一劳多逸，如果有命令行经验的话，连劳都不算。<br>后面没说 Linux 的东西了，不是我忘了，而是觉得大家应该都会。<br>如果能帮上忙就点个赞吧！XD</p>
 
 
         
@@ -127,7 +127,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/02/25/百度云加速下载/" data-id="cil1waylx0004aw3nc5cjfk78" class="article-share-link" data-share="baidu" data-title="">分享到</a>
+        <a data-url="http://14686039.github.io/2016/02/25/百度云加速下载/" data-id="cil1wm0xq0004ck3n3v16bxrm" class="article-share-link" data-share="baidu" data-title="">分享到</a>
       
 
       
@@ -197,7 +197,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/" data-id="cil1waymy000paw3nhl2tekm5" class="article-share-link" data-share="baidu" data-title="activeMQ 一个服务器启动多个Broker">分享到</a>
+        <a data-url="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/" data-id="cil1wm0yx000pck3nv7jwv8ue" class="article-share-link" data-share="baidu" data-title="activeMQ 一个服务器启动多个Broker">分享到</a>
       
 
       
@@ -260,7 +260,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/30/java自动生成图像/" data-id="cil1waymm000iaw3nbdug0cmx" class="article-share-link" data-share="baidu" data-title="java自动生成图像">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/30/java自动生成图像/" data-id="cil1wm0ym000ick3nvnk4m0qz" class="article-share-link" data-share="baidu" data-title="java自动生成图像">分享到</a>
       
 
       
@@ -353,7 +353,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/26/activeMQ快速上手/" data-id="cil1waymu000maw3npqgo5c2k" class="article-share-link" data-share="baidu" data-title="activeMQ快速上手">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/26/activeMQ快速上手/" data-id="cil1wm0yt000mck3nvuuitl7i" class="article-share-link" data-share="baidu" data-title="activeMQ快速上手">分享到</a>
       
 
       
@@ -417,7 +417,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/" data-id="cil1wayn1000raw3n3e8yr6yo" class="article-share-link" data-share="baidu" data-title="Mac下SSH终端证书方式到远程服务器">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/" data-id="cil1wm0z0000rck3navl4u7do" class="article-share-link" data-share="baidu" data-title="Mac下SSH终端证书方式到远程服务器">分享到</a>
       
 
       
