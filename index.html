@@ -75,6 +75,73 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-百度云加速下载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/25/百度云加速下载/" class="article-date">
+  <time datetime="2016-02-25T06:56:07.000Z" itemprop="datePublished">2016-02-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: 百度云加速下载<br>date: 2016-02-25 14:08:59</p>
+<h2 id="tags:_tools">tags: tools</h2><p>转帖 <a href="http://zwpaper.github.io/2015/07/19/baiduyun-fastdown/" target="_blank" rel="external">这里</a> </p>
+<ul>
+<li>自从百度云成为视频下载神器，百度云下载就广为人知，又从百度云无耻限速，百度云又被骂得广为人知，如果你还在因限速而惆怅，刚好你又在用 Chrome/Firefox，来这里，就对了。</li>
+</ul>
+<h2 id="说明">说明</h2><p>文章没有干货，只是自己碰巧找到两个好用的软件，效果惊人，所以总结一下自己的使用情况。<br>因为要用到命令行，所以 Windows 没试过，Mac 和 Linux 用户应该是无压力的。<br>效果<br>扯别的都没用，先说一下我自己的速度情况。<br>以下都是同一个网络环境：<br>– Chrome 默认下载：200 - 300 KBps<br>– Axel：下不鸟………<br>– Android ES 浏览器：500 - 1000 KBps<br>本文所用，Aria2：1 - 3 MBps<br>其中 Android 的 ES 浏览器 也很让我意外，基本可以稳定在 700 KBps。</p>
+<h2 id="软件">软件</h2><p>其实总共要用的软件就一个，Aria2，其它都是插件。</p>
+<p>##Aria2##<br>上面说到了要用命令行，就是因为 Aria2 是一个命令行软件，但是在用上相应插件后，完全不用担心自己不用全命令行。<br><a href="http://sourceforge.net/projects/aria2/" target="_blank" rel="external">Aria2主页</a><br><a href="https://github.com/tatsuhiro-t/aria2" target="_blank" rel="external">Aria2 Github 主页</a><br>然你要是和我一样喜欢命令行那就更无压力啦！</p>
+<h2 id="安装">安装</h2><p>以下内容要用到命令行，所以<br>Mac 用户请打开 Terminal，也就是终端，打开程序菜单打 terminal 可以直接找到。<br>Linux 用户我觉得不用我说了吧？也是 terminal，看发行版，自己解决。</p>
+<h2 id="Mac">Mac</h2><p>Mac 推荐用 Homebrew 安装，只要一句<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install aria2</span><br></pre></td></tr></table></figure></p>
+<p>Homebrew 的安装要 Xcode 环境，所以如果没有安装 Homebrew 还得先安装 Xcode。<br>想安装 Homebrew 的用户请看这里 -&gt; 我是Homebrew<br>其实就是下面的命令就可以安装（也是 Terminal 中输入）：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e &#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&#34;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Linux">Linux</h2><p>发行版的差异真让我不知道应该怎么说明 Linux 安装。<br>举一个粟子吧，Ubuntu<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install aria2</span><br></pre></td></tr></table></figure></p>
+<p>这个是基本，但不是关键，所以安装完就好了。</p>
+<h2 id="从源码安装">从源码安装</h2><p>如果以上方式你都觉得不合适，也可以从源码安装，但我已经忘记 Mac 默认会缺哪几个软件了，所以如果你真要这么干双不会的话，欢迎点左边的微博图标骚扰我。</p>
+<h2 id="Aria2_配置">Aria2 配置</h2><p>Aria2 是一个命令行软件，所以配置是写在文件里的，你要把下面的内容放到一个能找到的地方，例如 ~/Documents/aria2.conf<br>如果你不知道这是哪里，那你就打开 Mac 的 Finder，然后在侧边栏点 文档（Documents），新建一个文件叫 aria2.conf 然后打开写下以下内容，注意修改两个地方：<br>用户名 改为自己的用户名，不知道是什么的，请在命令行中输入 pwd 然后回车。<br>最后一行，如果是 SSD 即 固态硬盘 就不用改，如果是传统硬盘，就改成 file-<br>file-allocation=none</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ===========================================&#10;#&#20801;&#35768;rpc&#10;enable-rpc=true&#10;#&#20801;&#35768;&#38750;&#22806;&#37096;&#35775;&#38382;&#10;rpc-listen-all=true&#10;#RPC&#31471;&#21475;, &#20165;&#24403;&#40664;&#35748;&#31471;&#21475;&#34987;&#21344;&#29992;&#26102;&#20462;&#25913;&#10;rpc-listen-port=6800&#10;&#10;#&#26368;&#22823;&#21516;&#26102;&#19979;&#36733;&#25968;(&#20219;&#21153;&#25968;), &#36335;&#30001;&#24314;&#35758;&#20540;: 3&#10;max-concurrent-downloads=10&#10;#&#26029;&#28857;&#32493;&#20256;&#10;continue=true&#10;#&#21516;&#26381;&#21153;&#22120;&#36830;&#25509;&#25968;&#10;max-connection-per-server=10&#10;#&#26368;&#23567;&#25991;&#20214;&#20998;&#29255;&#22823;&#23567;, &#19979;&#36733;&#32447;&#31243;&#25968;&#19978;&#38480;&#21462;&#20915;&#20110;&#33021;&#20998;&#20986;&#22810;&#23569;&#29255;, &#23545;&#20110;&#23567;&#25991;&#20214;&#37325;&#35201;&#10;min-split-size=10M&#10;#&#21333;&#25991;&#20214;&#26368;&#22823;&#32447;&#31243;&#25968;, &#36335;&#30001;&#24314;&#35758;&#20540;: 5&#10;split=10&#10;#&#19979;&#36733;&#36895;&#24230;&#38480;&#21046;&#10;max-overall-download-limit=0&#10;#&#21333;&#25991;&#20214;&#36895;&#24230;&#38480;&#21046;&#10;max-download-limit=0&#10;#&#19978;&#20256;&#36895;&#24230;&#38480;&#21046;&#10;max-overall-upload-limit=0&#10;#&#21333;&#25991;&#20214;&#36895;&#24230;&#38480;&#21046;&#10;max-upload-limit=0&#10;&#10;#&#25991;&#20214;&#20445;&#23384;&#36335;&#24452;, &#40664;&#35748;&#20026;&#24403;&#21069;&#21551;&#21160;&#20301;&#32622;&#10;dir=/Users/&#29992;&#25143;&#21517;/Downloads&#10;&#10;#&#20801;&#35768;&#25152;&#26377;&#26469;&#28304;, web&#30028;&#38754;&#36328;&#22495;&#26435;&#38480;&#38656;&#35201;&#10;rpc-allow-origin-all=true&#10;&#10;#&#25991;&#20214;&#39044;&#20998;&#37197;, &#33021;&#26377;&#25928;&#38477;&#20302;&#25991;&#20214;&#30862;&#29255;, &#25552;&#39640;&#30913;&#30424;&#24615;&#33021;. &#32570;&#28857;&#26159;&#39044;&#20998;&#37197;&#26102;&#38388;&#36739;&#38271;&#10;#&#25152;&#38656;&#26102;&#38388; none &#60; falloc ? trunc &#60;&#60; prealloc, falloc&#21644;trunc&#38656;&#35201;&#25991;&#20214;&#31995;&#32479;&#21644;&#20869;&#26680;&#25903;&#25345;&#10;# !!&#20165;&#38024;&#23545;&#20256;&#32479;&#30913;&#30424;&#65292;SSD &#38477;&#20302;&#25991;&#20214;&#30862;&#29255;&#24182;&#19981;&#26159;&#20160;&#20040;&#22909;&#20107;&#12290;&#10;file-allocation=none&#10; # ===========================================</span><br></pre></td></tr></table></figure>
+<p>Aria2 命令快捷设置<br>在命令行中输入以后命令，用户名 还是一样改成上文那个。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#34;alias aria2rpc=&#39;aria2c --conf-path=/Users/&#29992;&#25143;&#21517;/Documents/aria2.conf -D&#39;&#34; &#62;&#62; ~/.bash_profile</span><br></pre></td></tr></table></figure></p>
+<p>然后<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure></p>
+<p>相信我，你已经接近完成了。</p>
+<h2 id="插件">插件</h2><p>以下安装一个即可<br>Chrome 插件，百度网盘助手<br>Firefox 插件，百度网盘助手<br>这个其实都可以不安装，就是一个网页，下面是它的主页<br>YAAW<br>使用<br>好了，现在装备齐全了，要怎么样才可以用的最舒服呢！<br>从现在开始，以后只用按以下步骤就可以高速下载<br>运行 Aria2<br>打开一个 Terminal 界面，输入以下并回车。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aria2rpc</span><br></pre></td></tr></table></figure></p>
+<p>好了，可以关闭 Terminal。<br>每次开机后运行一次即可。<br>打开 <a href="http://binux.github.io/yaaw/demo/" target="_blank" rel="external">YAAW</a><br>还记得我说的 YAAW 其实就是一个页面吗？打开它：<br><a href="http://binux.github.io/yaaw/demo/" target="_blank" rel="external">YAAW</a><br>这真是个应该有一个错误<br>Error: Internal server error<br>点右上角的扳手按钮，修改 JSON-RPC Path 内容，<br>把 <code>http://binux.github.io:6800/jsonrpc</code> 改为 <code>http://127.0.0.1:6800/jsonrpc</code><br>保存，Save。<br>百度云<br>终于到激动人心的时候了，-&gt; <a href="http://pan.baidu.com/disk/home" target="_blank" rel="external">点我打开百度云</a><br>看到上面的图标了吗？</p>
+<p>如果没有请重启一下 Chrome 或打开一个新 Chome 窗口，注意，不是新标签页。<br>选中要下载的文件，鼠标放到图标上，点击 <code>Aria2 RPC</code><br>看看 YAAW 的页面？有没有惊喜？<br>后记<br>这个真的是一劳多逸，如果有命令行经验的话，连劳都不算。<br>后面没说 Linux 的东西了，不是我忘了，而是觉得大家应该都会。<br>如果能帮上忙就点个赞吧！XD</p>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/02/25/百度云加速下载/" data-id="cil1x29jr0004fm3nh21mdx4r" class="article-share-link" data-share="baidu" data-title="">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/02/25/百度云加速下载/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-30行代码实现JS中的MVC" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/02/25/30行代码实现JS中的MVC/" class="article-date">
@@ -147,7 +214,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/02/25/30行代码实现JS中的MVC/" data-id="cil1x0goi000uf43nxivy773m" class="article-share-link" data-share="baidu" data-title="30行代码实现JS中的MVC">分享到</a>
+        <a data-url="http://14686039.github.io/2016/02/25/30行代码实现JS中的MVC/" data-id="cil1x29l4000ufm3n1m1kmzhw" class="article-share-link" data-share="baidu" data-title="30行代码实现JS中的MVC">分享到</a>
       
 
       
@@ -157,73 +224,6 @@
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-百度云加速下载" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/25/百度云加速下载/" class="article-date">
-  <time datetime="2016-02-25T06:49:09.000Z" itemprop="datePublished">2016-02-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: 百度云加速下载<br>date: 2016-02-25 14:08:59</p>
-<h2 id="tags:_software&amp;tools">tags: software&amp;tools</h2><p>转帖 <a href="http://zwpaper.github.io/2015/07/19/baiduyun-fastdown/" target="_blank" rel="external">这里</a> </p>
-<ul>
-<li>自从百度云成为视频下载神器，百度云下载就广为人知，又从百度云无耻限速，百度云又被骂得广为人知，如果你还在因限速而惆怅，刚好你又在用 Chrome/Firefox，来这里，就对了。</li>
-</ul>
-<h2 id="说明">说明</h2><p>文章没有干货，只是自己碰巧找到两个好用的软件，效果惊人，所以总结一下自己的使用情况。<br>因为要用到命令行，所以 Windows 没试过，Mac 和 Linux 用户应该是无压力的。<br>效果<br>扯别的都没用，先说一下我自己的速度情况。<br>以下都是同一个网络环境：<br>– Chrome 默认下载：200 - 300 KBps<br>– Axel：下不鸟………<br>– Android ES 浏览器：500 - 1000 KBps<br>本文所用，Aria2：1 - 3 MBps<br>其中 Android 的 ES 浏览器 也很让我意外，基本可以稳定在 700 KBps。</p>
-<h2 id="软件">软件</h2><p>其实总共要用的软件就一个，Aria2，其它都是插件。</p>
-<p>##Aria2##<br>上面说到了要用命令行，就是因为 Aria2 是一个命令行软件，但是在用上相应插件后，完全不用担心自己不用全命令行。<br><a href="http://sourceforge.net/projects/aria2/" target="_blank" rel="external">Aria2主页</a><br><a href="https://github.com/tatsuhiro-t/aria2" target="_blank" rel="external">Aria2 Github 主页</a><br>然你要是和我一样喜欢命令行那就更无压力啦！</p>
-<h2 id="安装">安装</h2><p>以下内容要用到命令行，所以<br>Mac 用户请打开 Terminal，也就是终端，打开程序菜单打 terminal 可以直接找到。<br>Linux 用户我觉得不用我说了吧？也是 terminal，看发行版，自己解决。</p>
-<h2 id="Mac">Mac</h2><p>Mac 推荐用 Homebrew 安装，只要一句<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install aria2</span><br></pre></td></tr></table></figure></p>
-<p>Homebrew 的安装要 Xcode 环境，所以如果没有安装 Homebrew 还得先安装 Xcode。<br>想安装 Homebrew 的用户请看这里 -&gt; 我是Homebrew<br>其实就是下面的命令就可以安装（也是 Terminal 中输入）：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e &#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&#34;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Linux">Linux</h2><p>发行版的差异真让我不知道应该怎么说明 Linux 安装。<br>举一个粟子吧，Ubuntu<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install aria2</span><br></pre></td></tr></table></figure></p>
-<p>这个是基本，但不是关键，所以安装完就好了。</p>
-<h2 id="从源码安装">从源码安装</h2><p>如果以上方式你都觉得不合适，也可以从源码安装，但我已经忘记 Mac 默认会缺哪几个软件了，所以如果你真要这么干双不会的话，欢迎点左边的微博图标骚扰我。</p>
-<h2 id="Aria2_配置">Aria2 配置</h2><p>Aria2 是一个命令行软件，所以配置是写在文件里的，你要把下面的内容放到一个能找到的地方，例如 ~/Documents/aria2.conf<br>如果你不知道这是哪里，那你就打开 Mac 的 Finder，然后在侧边栏点 文档（Documents），新建一个文件叫 aria2.conf 然后打开写下以下内容，注意修改两个地方：<br>用户名 改为自己的用户名，不知道是什么的，请在命令行中输入 pwd 然后回车。<br>最后一行，如果是 SSD 即 固态硬盘 就不用改，如果是传统硬盘，就改成 file-<br>file-allocation=none</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ===========================================&#10;#&#20801;&#35768;rpc&#10;enable-rpc=true&#10;#&#20801;&#35768;&#38750;&#22806;&#37096;&#35775;&#38382;&#10;rpc-listen-all=true&#10;#RPC&#31471;&#21475;, &#20165;&#24403;&#40664;&#35748;&#31471;&#21475;&#34987;&#21344;&#29992;&#26102;&#20462;&#25913;&#10;rpc-listen-port=6800&#10;&#10;#&#26368;&#22823;&#21516;&#26102;&#19979;&#36733;&#25968;(&#20219;&#21153;&#25968;), &#36335;&#30001;&#24314;&#35758;&#20540;: 3&#10;max-concurrent-downloads=10&#10;#&#26029;&#28857;&#32493;&#20256;&#10;continue=true&#10;#&#21516;&#26381;&#21153;&#22120;&#36830;&#25509;&#25968;&#10;max-connection-per-server=10&#10;#&#26368;&#23567;&#25991;&#20214;&#20998;&#29255;&#22823;&#23567;, &#19979;&#36733;&#32447;&#31243;&#25968;&#19978;&#38480;&#21462;&#20915;&#20110;&#33021;&#20998;&#20986;&#22810;&#23569;&#29255;, &#23545;&#20110;&#23567;&#25991;&#20214;&#37325;&#35201;&#10;min-split-size=10M&#10;#&#21333;&#25991;&#20214;&#26368;&#22823;&#32447;&#31243;&#25968;, &#36335;&#30001;&#24314;&#35758;&#20540;: 5&#10;split=10&#10;#&#19979;&#36733;&#36895;&#24230;&#38480;&#21046;&#10;max-overall-download-limit=0&#10;#&#21333;&#25991;&#20214;&#36895;&#24230;&#38480;&#21046;&#10;max-download-limit=0&#10;#&#19978;&#20256;&#36895;&#24230;&#38480;&#21046;&#10;max-overall-upload-limit=0&#10;#&#21333;&#25991;&#20214;&#36895;&#24230;&#38480;&#21046;&#10;max-upload-limit=0&#10;&#10;#&#25991;&#20214;&#20445;&#23384;&#36335;&#24452;, &#40664;&#35748;&#20026;&#24403;&#21069;&#21551;&#21160;&#20301;&#32622;&#10;dir=/Users/&#29992;&#25143;&#21517;/Downloads&#10;&#10;#&#20801;&#35768;&#25152;&#26377;&#26469;&#28304;, web&#30028;&#38754;&#36328;&#22495;&#26435;&#38480;&#38656;&#35201;&#10;rpc-allow-origin-all=true&#10;&#10;#&#25991;&#20214;&#39044;&#20998;&#37197;, &#33021;&#26377;&#25928;&#38477;&#20302;&#25991;&#20214;&#30862;&#29255;, &#25552;&#39640;&#30913;&#30424;&#24615;&#33021;. &#32570;&#28857;&#26159;&#39044;&#20998;&#37197;&#26102;&#38388;&#36739;&#38271;&#10;#&#25152;&#38656;&#26102;&#38388; none &#60; falloc ? trunc &#60;&#60; prealloc, falloc&#21644;trunc&#38656;&#35201;&#25991;&#20214;&#31995;&#32479;&#21644;&#20869;&#26680;&#25903;&#25345;&#10;# !!&#20165;&#38024;&#23545;&#20256;&#32479;&#30913;&#30424;&#65292;SSD &#38477;&#20302;&#25991;&#20214;&#30862;&#29255;&#24182;&#19981;&#26159;&#20160;&#20040;&#22909;&#20107;&#12290;&#10;file-allocation=none&#10; # ===========================================</span><br></pre></td></tr></table></figure>
-<p>Aria2 命令快捷设置<br>在命令行中输入以后命令，用户名 还是一样改成上文那个。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#34;alias aria2rpc=&#39;aria2c --conf-path=/Users/&#29992;&#25143;&#21517;/Documents/aria2.conf -D&#39;&#34; &#62;&#62; ~/.bash_profile</span><br></pre></td></tr></table></figure></p>
-<p>然后<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure></p>
-<p>相信我，你已经接近完成了。</p>
-<h2 id="插件">插件</h2><p>以下安装一个即可<br>Chrome 插件，百度网盘助手<br>Firefox 插件，百度网盘助手<br>这个其实都可以不安装，就是一个网页，下面是它的主页<br>YAAW<br>使用<br>好了，现在装备齐全了，要怎么样才可以用的最舒服呢！<br>从现在开始，以后只用按以下步骤就可以高速下载<br>运行 Aria2<br>打开一个 Terminal 界面，输入以下并回车。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aria2rpc</span><br></pre></td></tr></table></figure></p>
-<p>好了，可以关闭 Terminal。<br>每次开机后运行一次即可。<br>打开 <a href="http://binux.github.io/yaaw/demo/" target="_blank" rel="external">YAAW</a><br>还记得我说的 YAAW 其实就是一个页面吗？打开它：<br><a href="http://binux.github.io/yaaw/demo/" target="_blank" rel="external">YAAW</a><br>这真是个应该有一个错误<br>Error: Internal server error<br>点右上角的扳手按钮，修改 JSON-RPC Path 内容，<br>把 <code>http://binux.github.io:6800/jsonrpc</code> 改为 <code>http://127.0.0.1:6800/jsonrpc</code><br>保存，Save。<br>百度云<br>终于到激动人心的时候了，-&gt; <a href="http://pan.baidu.com/disk/home" target="_blank" rel="external">点我打开百度云</a><br>看到上面的图标了吗？</p>
-<p>如果没有请重启一下 Chrome 或打开一个新 Chome 窗口，注意，不是新标签页。<br>选中要下载的文件，鼠标放到图标上，点击 <code>Aria2 RPC</code><br>看看 YAAW 的页面？有没有惊喜？<br>后记<br>这个真的是一劳多逸，如果有命令行经验的话，连劳都不算。<br>后面没说 Linux 的东西了，不是我忘了，而是觉得大家应该都会。<br>如果能帮上忙就点个赞吧！XD</p>
-
-
-        
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- artical f2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-9404963564058219"
-     data-ad-slot="7102642795"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-        
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://14686039.github.io/2016/02/25/百度云加速下载/" data-id="cil1x0gna0004f43nz4dg1hvn" class="article-share-link" data-share="baidu" data-title="">分享到</a>
-      
-
-      
-        <a href="http://14686039.github.io/2016/02/25/百度云加速下载/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
     </footer>
   </div>
   
@@ -286,7 +286,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/" data-id="cil1x0goc000pf43nxpkqeds2" class="article-share-link" data-share="baidu" data-title="activeMQ 一个服务器启动多个Broker">分享到</a>
+        <a data-url="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/" data-id="cil1x29ky000pfm3nse875tgs" class="article-share-link" data-share="baidu" data-title="activeMQ 一个服务器启动多个Broker">分享到</a>
       
 
       
@@ -349,7 +349,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/30/java自动生成图像/" data-id="cil1x0go2000if43n1g7oby62" class="article-share-link" data-share="baidu" data-title="java自动生成图像">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/30/java自动生成图像/" data-id="cil1x29km000ifm3nrvxmojlh" class="article-share-link" data-share="baidu" data-title="java自动生成图像">分享到</a>
       
 
       
@@ -442,7 +442,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/26/activeMQ快速上手/" data-id="cil1x0go9000mf43nojxyesqr" class="article-share-link" data-share="baidu" data-title="activeMQ快速上手">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/26/activeMQ快速上手/" data-id="cil1x29ku000mfm3nrenpdyo4" class="article-share-link" data-share="baidu" data-title="activeMQ快速上手">分享到</a>
       
 
       
@@ -504,11 +504,11 @@
       <ul>
         
           <li>
-            <a href="/2016/02/25/30行代码实现JS中的MVC/">30行代码实现JS中的MVC</a>
+            <a href="/2016/02/25/百度云加速下载/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2016/02/25/百度云加速下载/">(no title)</a>
+            <a href="/2016/02/25/30行代码实现JS中的MVC/">30行代码实现JS中的MVC</a>
           </li>
         
           <li>
