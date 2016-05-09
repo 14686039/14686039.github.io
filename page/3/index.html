@@ -75,6 +75,78 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-swift2-0-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/05/swift2-0-1/" class="article-date">
+  <time datetime="2015-11-05T12:15:46.000Z" itemprop="datePublished">2015-11-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/05/swift2-0-1/">swift2.0[1]</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>记录学习Swift的过程</p>
+<h1 id="基本语法">基本语法</h1><h2 id="简单值">简单值</h2><p>常量用<code>let</code>来定义，变量用<code>var</code>来定义;<br>如：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> staticString=<span class="string">"不变的值"</span></span><br><span class="line"><span class="keyword">var</span> variableString</span><br></pre></td></tr></table></figure></p>
+<p>注意：可以使用<code>+</code>进行字符串链接操作，但是数字和字符串连接需要对数字进行强制转化，<code>String(num)</code>,或者<code>&quot;\(num)&quot;</code></p>
+<h2 id="数组和字典_[]来定义">数组和字典 <code>[]</code>来定义</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cities=[<span class="string">"nanjing"</span>,<span class="string">"beijing"</span>,<span class="string">"shanghai"</span>]</span><br><span class="line"><span class="keyword">var</span> provinces=[</span><br><span class="line"><span class="string">"jiangsu"</span>:<span class="string">"nanjing"</span>,</span><br><span class="line"><span class="string">"anhui"</span>:<span class="string">"hefei"</span></span><br><span class="line">]</span><br><span class="line"><span class="comment">//取值</span></span><br><span class="line"><span class="keyword">var</span> city=cities[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">var</span> province=provinces[<span class="string">"jiangsu"</span>]</span><br></pre></td></tr></table></figure>
+<p>创建空数组<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> wmptyArray=[<span class="type">String</span>]()</span><br><span class="line"><span class="keyword">let</span> emptyDictionary=[<span class="type">String</span>:<span class="type">Float</span>]()</span><br></pre></td></tr></table></figure></p>
+<h2 id="控制流">控制流</h2><p>for in的使用<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let cities=["nanjing","beijing","shanghai]</span><br><span class="line"> for city in cities&#123;</span><br><span class="line"> print(city)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用for in进行过滤操作：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let cities=["nanjing","beijing","shanghai]</span><br><span class="line"> for city in cities where city == "nanjing"&#123;</span><br><span class="line"> print(city)</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">let numbers = [20, 18, 39, 49, 68, 230, 499, 238, 239, 723, 332]</span><br><span class="line">for number in numbers where number &gt; 100 &#123;</span><br><span class="line">    print(number)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>do while变成 repeat while<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span></span><br><span class="line"><span class="keyword">repeat</span> &#123;</span><br><span class="line">    i++</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line">&#125; <span class="keyword">while</span> i &lt; <span class="number">10</span></span><br></pre></td></tr></table></figure></p>
+<p>if case模式<br>以前的switch样子<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> examResult = <span class="number">59</span></span><br><span class="line">	</span><br><span class="line"><span class="keyword">switch</span> examResult &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">0</span>...<span class="number">59</span>: <span class="built_in">print</span>(<span class="string">"不及格!"</span>)</span><br><span class="line"><span class="keyword">case</span> <span class="number">60</span>...<span class="number">100</span>: <span class="built_in">print</span>(<span class="string">"及格!"</span>)</span><br><span class="line"><span class="keyword">default</span>: <span class="keyword">break</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在变成<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">case</span> <span class="number">0</span>...<span class="number">59</span> = examResult &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"不及格!"</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">case</span> <span class="number">60</span>...<span class="number">100</span> = examResult &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"及格!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再高级一点<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//元组一个</span></span><br><span class="line"><span class="keyword">let</span> userInfo = (id: <span class="string">"petersmith"</span>, name: <span class="string">"Peter Smith"</span>, age: <span class="number">18</span>, email: <span class="string">"simon"</span>)</span><br><span class="line">	</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">case</span> (<span class="number">_</span>, <span class="number">_</span>, <span class="number">0</span>..&lt;<span class="number">18</span>, <span class="number">_</span>) = userInfo &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"你太年轻了"</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">case</span> (<span class="number">_</span>, <span class="number">_</span>, <span class="number">_</span>, <span class="keyword">let</span> email) = userInfo <span class="keyword">where</span> email == <span class="string">""</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"没有邮箱不能注册哟."</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"ok!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>*说明，第一个if case表示大于18岁，第二个表示Email不为空</p>
+<p>再高级一点，<code>guard</code>，如果我们不停的if else ，如同<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> some conditions are met &#123;</span><br><span class="line">    <span class="comment">// 执行动作</span></span><br><span class="line"><span class="keyword">if</span> some conditions are met &#123;</span><br><span class="line">    <span class="comment">// 执行动作</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 执行动作</span></span><br><span class="line">&#125; <span class="keyword">else</span>  &#123;</span><br><span class="line">    <span class="comment">// 执行动作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个感觉非常不好，guard出现，语法如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">guard</span> &lt;condition to meet&gt; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 执行假如条件没有匹配要做的动作</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 继续执行一般动作</span></span><br></pre></td></tr></table></figure></p>
+<p>举个例子<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//if where 的方法</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Article</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> title:<span class="type">String</span>?</span><br><span class="line">    <span class="keyword">var</span> description:<span class="type">String</span>?</span><br><span class="line">    <span class="keyword">var</span> author:<span class="type">String</span>?</span><br><span class="line">    <span class="keyword">var</span> totalWords:<span class="type">Int</span>?</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">printInfoByIfWhere</span><span class="params">(article: Article)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> totalWords = article.totalWords <span class="keyword">where</span> totalWords &gt; <span class="number">1000</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> title = article.title &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"Title: <span class="subst">\(title)</span>"</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"Error: Couldn't print the title of the article!"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Error: Couldn't print the total word count!"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">let</span> sampleArticle = <span class="type">Article</span>(title: <span class="string">"Swift Guide"</span>, description: <span class="string">"A beginner's guide to Swift 2"</span>, author: <span class="string">"Simon Ng"</span>, totalWords: <span class="number">1500</span>)</span><br><span class="line">printInfoByIfWhere(sampleArticle)</span><br><span class="line"></span><br><span class="line"><span class="comment">//guard 的方法</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">printInfoByGuard</span><span class="params">(article: Article)</span></span> &#123;</span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> totalWords = article.totalWords <span class="keyword">where</span> totalWords &gt; <span class="number">1000</span> <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Error: Couldn't print the total word count!"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> title = article.title <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Error: Couldn't print the title of the article!"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Title: <span class="subst">\(title)</span>"</span>)</span><br><span class="line">&#125;</span><br><span class="line">printInfoByGuard(sampleArticle)</span><br></pre></td></tr></table></figure></p>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2015/11/05/swift2-0-1/" data-id="cinzn42gt0006ej3n3n6vcwy9" class="article-share-link" data-share="baidu" data-title="swift2.0[1]">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2015/11/05/swift2-0-1/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift2/">Swift2</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-部署远程tomcat" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/05/部署远程tomcat/" class="article-date">
@@ -116,7 +188,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/05/部署远程tomcat/" data-id="cil1x29jj0001fm3nznmlswla" class="article-share-link" data-share="baidu" data-title="部署远程tomcat">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/05/部署远程tomcat/" data-id="cinzn42gf0001ej3n6mikc2o7" class="article-share-link" data-share="baidu" data-title="部署远程tomcat">分享到</a>
       
 
       
@@ -182,7 +254,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/04/hello-world/" data-id="cil1x29kp000lfm3nlx193iub" class="article-share-link" data-share="baidu" data-title="Hello World-还是要保留的">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/04/hello-world/" data-id="cinzn42he000lej3nrg2ubttb" class="article-share-link" data-share="baidu" data-title="Hello World-还是要保留的">分享到</a>
       
 
       
@@ -285,7 +357,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/04/开篇/" data-id="cil1x29ju0005fm3nudwqf5vb" class="article-share-link" data-share="baidu" data-title="开篇">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/04/开篇/" data-id="cinzn42gq0005ej3nhy9gvbvc" class="article-share-link" data-share="baidu" data-title="开篇">分享到</a>
       
 
       
@@ -315,7 +387,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -324,7 +396,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 20px;">ActiveMQ</a> <a href="/tags/Java-Tomcat/" style="font-size: 10px;">Java Tomcat</a> <a href="/tags/MAC/" style="font-size: 10px;">MAC</a> <a href="/tags/MAC-SSH/" style="font-size: 10px;">MAC , SSH</a> <a href="/tags/Swift2/" style="font-size: 10px;">Swift2</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 20px;">ActiveMQ</a> <a href="/tags/Java-Tomcat/" style="font-size: 10px;">Java Tomcat</a> <a href="/tags/MAC/" style="font-size: 20px;">MAC</a> <a href="/tags/MAC-SSH/" style="font-size: 10px;">MAC , SSH</a> <a href="/tags/Swift2/" style="font-size: 10px;">Swift2</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a>
     </div>
   </div>
 
@@ -333,7 +405,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -343,6 +415,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/05/09/MAC升级后无法修改-usr-sbin等目录/">MAC升级后无法修改/usr/sbin等目录</a>
+          </li>
         
           <li>
             <a href="/2016/02/25/百度云加速下载/">(no title)</a>
@@ -358,10 +434,6 @@
         
           <li>
             <a href="/2015/11/30/java自动生成图像/">java自动生成图像</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/26/activeMQ快速上手/">activeMQ快速上手</a>
           </li>
         
       </ul>
