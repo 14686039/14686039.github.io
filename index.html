@@ -75,6 +75,84 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-促销模型小记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/17/促销模型小记/" class="article-date">
+  <time datetime="2016-11-17T02:17:56.000Z" itemprop="datePublished">2016-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/17/促销模型小记/">促销模型小记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>不管是B2B,C2C,在有交易的电子商务过程当中，不可避免的出现促销这样的事，一般常见的促销包括打折优惠，买多少减多少，买多少送几样等等，甚至是订单满多少钱可以免邮什么的，距离几公里内可以免邮什么的，五花八门，不易穷举。针对这样的情况，做了个小型的促销模型。</p>
+</blockquote>
+<p>下面就直接开始撸模型吧。</p>
+<p>###1、策略<br>我们需要一个基础的策略对象，比如买3送1，买5送3等这样的一个具体行为；这个策略对象有一些基本属性，包括策略的名字如买3送1，还要有个策略的计算方法，这个是核心，<strong>【坑】</strong>，稍后再说。再加上其他主键什么的大致样子如下<br><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f93awz9rmcj30a60ci74o.jpg" alt="策略"></p>
+<p>###2、策略组<br>我们知道，在一次促销活动中，常见的一种现象是买3送1，买5送2；或者买100送10，买200送25这样的情况；那么我们如果购买5件，是不是就同时这两个优惠都起作用呢？显示不是，这样的活动其实是一种排他性的，同时也有优先级，比如满足买5送3的优先级就应该高于买2送1，否则买3送1就没有意义了。一旦满足高级别的促销，优先处理，否则继续寻找低级别的促销，直到结束。<br>这里把策略组和策略组的细节分为两个部分，分别表示策略组的基本熟悉和策略组组成部分<br><img src="http://ww1.sinaimg.cn/large/65e4f1e6gw1f93c0xhoh4j20nm0c2ab3.jpg" alt="策略组"></p>
+<blockquote>
+<p>有了策略组基本定义，可以继续完善对应的商品和策略之间的关联了</p>
+</blockquote>
+<p>###3、商品与策略组<br>商品不再与具体策略关联，而是和策略组进行，这样方便商品展示的时候显示该商品的促销描述，比如买5送3，买2送1，而这两个具体促销在促销表是两个行记录，需要处理才可以方便展现；当然，商品假设可能有多个促销策略，那么策略组之间也包括优先级，但某种程度上是并集效果，如买5送3同时又买200减10，假设买200减10优先级高，那么先处理，之后再计算买5送3，但一般商家不会这么干滴。<br><img src="http://ww1.sinaimg.cn/large/65e4f1e6gw1f93cdbjwlhj209q0cqmxg.jpg" alt="商品与策略组"></p>
+<p>###4、全局与策略<br>全局促销是针对某个会员对某次购买行为这样的整体促销，如订单满多少钱免邮什么的，会员打几折等，这些内容一般最后处理，在商品与策略组计算完毕之后总订单进行，如果有需要，也可以提前处理，看具体业务情况；这样的全局比较复杂，内容是包罗万象，比如配送距离3km免邮啦，各种会员等级折扣不同，订单满X元减Y元等等。为了方便处理，这里所有的情况统一为后面的策略处理对象。<br><img src="http://ww2.sinaimg.cn/large/65e4f1e6gw1f93cl7wunkj20940c83yu.jpg" alt="全局策略"></p>
+<p>###5、策略处理<br>回到一开始的一个坑，这里填下<br>策略公式可以是一段JSON对象，也可以是一个脚本，这里先是一个JSON对象来做个演示，比如买3送1这个具体的促销行为，转换为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'buyCount'</span>:<span class="string">'3'</span>,<span class="string">'giftCount'</span>:<span class="string">'1'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里的buyCount和giftCount都是预先准备好的，需要约束；算法以此为蓝本，传入一堆入参，进行处理，比如某个商品作为例子，该商品入参形式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'goodsID'</span>:<span class="string">'1000000000'</span>,<span class="string">'goodsPrice'</span>:<span class="string">'12.5'</span>,<span class="string">'count'</span>:<span class="string">'3'</span>,<span class="string">'allPrice'</span>:<span class="string">'37.5'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>该算法出来结果是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'new'</span>:<span class="string">'T'</span>,<span class="string">'goodsID'</span>:<span class="string">'1000000000'</span>,<span class="string">'goodsPrice'</span>:<span class="string">'12.5'</span>,<span class="string">'giftCount'</span>:<span class="string">'1'</span>,<span class="string">'lastPrice'</span>:<span class="string">'0'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中new的属性表示在商品列表新增一个条目，作为赠品出现<br>如果是优惠价格，比如优惠促销行为是：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'buyMoney'</span>:<span class="string">'200'</span>,<span class="string">'reduceCost'</span>:<span class="string">'10'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>入参修改为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'goodsID'</span>:<span class="string">'1000000000'</span>,<span class="string">'goodsPrice'</span>:<span class="string">'125'</span>,<span class="string">'count'</span>:<span class="string">'3'</span>,<span class="string">'allPrice'</span>:<span class="string">'375'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最终计算出来的结果是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'new'</span>:<span class="string">'F'</span>,<span class="string">'goodsID'</span>:<span class="string">'1000000000'</span>,<span class="string">'goodsPrice'</span>:<span class="string">'125'</span>,<span class="string">'reduCost'</span>:<span class="string">'10'</span>,<span class="string">'lastPrice'</span>:<span class="string">'365'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###6、策略对象封装</p>
+<blockquote>
+<p>策略处理更加灵活的方式采用动态脚本进行</p>
+</blockquote>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/11/17/促销模型小记/" data-id="civlqaune0006zt3ntfqs9yti" class="article-share-link" data-share="baidu" data-title="促销模型小记">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/11/17/促销模型小记/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模型/">设计模型</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-MAC升级后无法修改-usr-sbin等目录" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/09/MAC升级后无法修改-usr-sbin等目录/" class="article-date">
@@ -125,7 +203,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/05/09/MAC升级后无法修改-usr-sbin等目录/" data-id="cinzn42ht000uej3n64kiin59" class="article-share-link" data-share="baidu" data-title="MAC升级后无法修改/usr/sbin等目录">分享到</a>
+        <a data-url="http://14686039.github.io/2016/05/09/MAC升级后无法修改-usr-sbin等目录/" data-id="civlqauov000xzt3ndynxxqxe" class="article-share-link" data-share="baidu" data-title="MAC升级后无法修改/usr/sbin等目录">分享到</a>
       
 
       
@@ -194,7 +272,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/02/25/百度云加速下载/" data-id="cinzn42go0004ej3nwrv2aj4d" class="article-share-link" data-share="baidu" data-title="">分享到</a>
+        <a data-url="http://14686039.github.io/2016/02/25/百度云加速下载/" data-id="civlqaun80004zt3nt9czlbhe" class="article-share-link" data-share="baidu" data-title="">分享到</a>
       
 
       
@@ -281,7 +359,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/02/25/30行代码实现JS中的MVC/" data-id="cinzn42hx000wej3nohghr2ot" class="article-share-link" data-share="baidu" data-title="30行代码实现JS中的MVC">分享到</a>
+        <a data-url="http://14686039.github.io/2016/02/25/30行代码实现JS中的MVC/" data-id="civlqauoy000zzt3nmizokqib" class="article-share-link" data-share="baidu" data-title="30行代码实现JS中的MVC">分享到</a>
       
 
       
@@ -353,7 +431,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/" data-id="cinzn42ho000pej3nophlilxl" class="article-share-link" data-share="baidu" data-title="activeMQ 一个服务器启动多个Broker">分享到</a>
+        <a data-url="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/" data-id="civlqauon000szt3n1n2oz0s1" class="article-share-link" data-share="baidu" data-title="activeMQ 一个服务器启动多个Broker">分享到</a>
       
 
       
@@ -362,69 +440,6 @@
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java自动生成图像" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/30/java自动生成图像/" class="article-date">
-  <time datetime="2015-11-30T08:37:31.000Z" itemprop="datePublished">2015-11-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/30/java自动生成图像/">java自动生成图像</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>项目中需要一些固定图片，比如右上角显示药品名称，下面放张图，图旁边是价格信息，等等，为了加快速度，商品的图已经有了，需要进行一个压缩（压缩也要注意比例问题），之后的是都是雷同的如果在PS上操作的话，这个工作可以使用个程序来搞定；</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ImageTest</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    String ext=<span class="string">"png"</span>;</span><br><span class="line">    FileInputStream in = <span class="keyword">new</span> FileInputStream(<span class="string">"/Users/tangshun/Desktop/img-01.jpg"</span>);</span><br><span class="line">    <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[in.available()];</span><br><span class="line">    in.read(bytes);</span><br><span class="line">    in.close();</span><br><span class="line">    Random random=<span class="keyword">new</span> Random(System.currentTimeMillis());</span><br><span class="line">    </span><br><span class="line">    ImageIcon imageIcon = <span class="keyword">new</span> ImageIcon(bytes);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 图形大小</span></span><br><span class="line">    <span class="keyword">int</span> width=<span class="number">236</span>,height=<span class="number">150</span>;</span><br><span class="line">    <span class="comment">// 建立内存图像</span></span><br><span class="line">    BufferedImage image = <span class="keyword">new</span> BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);</span><br><span class="line">    <span class="comment">// 从图像中取得图形对象</span></span><br><span class="line">    Graphics2D gg=(Graphics2D)image.getGraphics();</span><br><span class="line">    gg.setBackground(<span class="keyword">new</span> Color(<span class="number">233</span>,<span class="number">229</span>,<span class="number">252</span>));</span><br><span class="line">    gg.clearRect(<span class="number">0</span>, <span class="number">0</span>, width, height);</span><br><span class="line">    <span class="comment">//消除锯齿</span></span><br><span class="line">    gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);</span><br><span class="line">    <span class="comment">//消除文字锯齿</span></span><br><span class="line">    gg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//画图</span></span><br><span class="line">    gg.drawImage(imageIcon.getImage(),<span class="number">10</span>,<span class="number">55</span>,imageIcon.getIconWidth(),imageIcon.getIconHeight(),imageIcon.getImageObserver());</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//画圆角矩形</span></span><br><span class="line">    RoundRectangle2D rr2d = <span class="keyword">new</span> RoundRectangle2D.Float(<span class="number">10</span>+imageIcon.getIconWidth()+<span class="number">10</span>,<span class="number">55</span>+<span class="number">40</span>,<span class="number">76</span>,<span class="number">30</span>, <span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line">    gg.setColor(<span class="keyword">new</span> Color(<span class="number">133</span>,<span class="number">92</span>,<span class="number">200</span>));</span><br><span class="line">    gg.fill(rr2d);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//自定义字体</span></span><br><span class="line">    java.io.FileInputStream fi = <span class="keyword">new</span> java.io.FileInputStream(<span class="keyword">new</span> File(<span class="string">"/Users/tangshun/Documents/picture/UIUX/字体/open-sans/OpenSans-Bold.ttf"</span>));</span><br><span class="line">    java.io.BufferedInputStream fb = <span class="keyword">new</span> java.io.BufferedInputStream(fi);</span><br><span class="line">    Font nf = Font.createFont(Font.TRUETYPE_FONT, fb);</span><br><span class="line">    nf = nf.deriveFont(Font.BOLD, <span class="number">14</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//画字符串</span></span><br><span class="line">    Font f1 = <span class="keyword">new</span> Font(<span class="string">"PingFang SC"</span>,Font.BOLD,<span class="number">18</span>);</span><br><span class="line">    gg.setFont(f1);</span><br><span class="line">    gg.setColor(<span class="keyword">new</span> Color(<span class="number">133</span>,<span class="number">92</span>,<span class="number">200</span>));<span class="comment">//new Color(R,G,B);</span></span><br><span class="line">    gg.setStroke(<span class="keyword">new</span> BasicStroke(<span class="number">3</span>));</span><br><span class="line">    gg.drawString(<span class="string">"维达康 替吉奥胶囊"</span>, <span class="number">10</span>,<span class="number">30</span>);<span class="comment">//维达康 替吉奥胶囊</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//删除线的字符串</span></span><br><span class="line">    Font f2 = <span class="keyword">new</span> Font(<span class="string">"Microsoft YaHei"</span>,Font.PLAIN|Font.ITALIC,<span class="number">12</span>);</span><br><span class="line">    gg.setColor(Color.GRAY);<span class="comment">//new Color(R,G,B);</span></span><br><span class="line">    AttributedString as = <span class="keyword">new</span> AttributedString(<span class="string">"原价：90.88"</span>);</span><br><span class="line">    as.addAttribute(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);</span><br><span class="line">    as.addAttribute(TextAttribute.FONT, f2);</span><br><span class="line">    gg.drawString(as.getIterator(), <span class="number">10</span>+imageIcon.getIconWidth()+<span class="number">10</span>,<span class="number">55</span>+<span class="number">20</span>);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    Font f3 = <span class="keyword">new</span> Font(<span class="string">"Apple Braille"</span>,Font.BOLD,<span class="number">14</span>);</span><br><span class="line">    gg.setFont(nf);</span><br><span class="line">    gg.setColor(Color.WHITE);<span class="comment">//new Color(R,G,B);</span></span><br><span class="line">    gg.drawString(<span class="string">"￥48.88"</span>, <span class="number">10</span>+imageIcon.getIconWidth()+<span class="number">10</span>+<span class="number">10</span>,<span class="number">55</span>+<span class="number">40</span>+(<span class="number">30</span>/<span class="number">2</span>)+<span class="number">6</span>);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    String filepath = <span class="string">"/Users/tangshun/Desktop/"</span> + random.nextInt(<span class="number">99999</span>) + <span class="string">"."</span> + ext;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      ImageIO.write(image,ext,<span class="keyword">new</span> File(filepath));</span><br><span class="line">      System.out.println(<span class="string">"文件已经生成，路经为"</span> + filepath);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">      ex.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>素材：<br><img src="http://i68.tinypic.com/5ebiq1.jpg" alt="素材图片"></p>
-<p>结论：<br><img src="http://i64.tinypic.com/33ng8r5.jpg" alt="最后的图"></p>
-
-
-        
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- artical f2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-9404963564058219"
-     data-ad-slot="7102642795"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-        
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://14686039.github.io/2015/11/30/java自动生成图像/" data-id="cinzn42hc000iej3nixtvnw8c" class="article-share-link" data-share="baidu" data-title="java自动生成图像">分享到</a>
-      
-
-      
-        <a href="http://14686039.github.io/2015/11/30/java自动生成图像/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 
     </footer>
   </div>
@@ -448,7 +463,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -457,7 +472,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 20px;">ActiveMQ</a> <a href="/tags/Java-Tomcat/" style="font-size: 10px;">Java Tomcat</a> <a href="/tags/MAC/" style="font-size: 20px;">MAC</a> <a href="/tags/MAC-SSH/" style="font-size: 10px;">MAC , SSH</a> <a href="/tags/Swift2/" style="font-size: 10px;">Swift2</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 20px;">ActiveMQ</a> <a href="/tags/Java-Tomcat/" style="font-size: 10px;">Java Tomcat</a> <a href="/tags/MAC/" style="font-size: 20px;">MAC</a> <a href="/tags/MAC-SSH/" style="font-size: 10px;">MAC , SSH</a> <a href="/tags/Swift2/" style="font-size: 10px;">Swift2</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/设计模型/" style="font-size: 10px;">设计模型</a>
     </div>
   </div>
 
@@ -466,7 +481,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -476,6 +491,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/11/17/促销模型小记/">促销模型小记</a>
+          </li>
         
           <li>
             <a href="/2016/05/09/MAC升级后无法修改-usr-sbin等目录/">MAC升级后无法修改/usr/sbin等目录</a>
@@ -491,10 +510,6 @@
         
           <li>
             <a href="/2015/12/06/activeMQ-一个服务器启动多个Broker/">activeMQ 一个服务器启动多个Broker</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/30/java自动生成图像/">java自动生成图像</a>
           </li>
         
       </ul>
