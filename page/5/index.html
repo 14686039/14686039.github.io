@@ -1,0 +1,675 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>技术与生活</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="好好工作；好好生活">
+<meta property="og:type" content="website">
+<meta property="og:title" content="技术与生活">
+<meta property="og:url" content="http://14686039.github.io/page/5/index.html">
+<meta property="og:site_name" content="技术与生活">
+<meta property="og:description" content="好好工作；好好生活">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="技术与生活">
+<meta name="twitter:description" content="好好工作；好好生活">
+  
+    <link rel="alternative" href="/atom.xml" title="技术与生活" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">技术与生活</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">热爱技术、更爱生活</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于我</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="14686039.github.io">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main">
+  
+    <article id="post-MAC升级后无法修改-usr-sbin等目录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/09/MAC升级后无法修改-usr-sbin等目录/" class="article-date">
+  <time datetime="2016-05-09T06:38:31.000Z" itemprop="datePublished">2016-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/09/MAC升级后无法修改-usr-sbin等目录/">MAC升级后无法修改/usr/sbin等目录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="MAC升级后无法修改/usr/sbin等目录">MAC升级后无法修改/usr/sbin等目录</h3><p>例如, 我想在 /usr/sbin 目录下创建一个文件, 如 nginx 软链, 会提示错误:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.. Operation not permitted</span><br></pre></td></tr></table></figure>
+<p>原来这是 Mac 所谓的 <code>System Integrity Protection</code>, 狗屎的东西! 这个所谓的保护, 苹果电脑只能作为上网本了, 还能做什么? 还算电脑吗!</p>
+<p>按下面的步骤关闭:</p>
+<ol>
+<li>重启电脑, 在重启时按住 <code>CMD + R</code> 不放</li>
+<li>打开终端 Terminal</li>
+<li>执行 <code>csrutil disable</code></li>
+<li>重启</li>
+</ol>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/05/09/MAC升级后无法修改-usr-sbin等目录/" data-id="civlqwmtm001ylv3nlrcy31mm" class="article-share-link" data-share="baidu" data-title="MAC升级后无法修改/usr/sbin等目录">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/05/09/MAC升级后无法修改-usr-sbin等目录/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MAC/">MAC</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-百度云加速下载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/25/百度云加速下载/" class="article-date">
+  <time datetime="2016-02-25T06:56:07.000Z" itemprop="datePublished">2016-02-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: 百度云加速下载<br>date: 2016-02-25 14:08:59</p>
+<h2 id="tags:_tools">tags: tools</h2><p>转帖 <a href="http://zwpaper.github.io/2015/07/19/baiduyun-fastdown/" target="_blank" rel="external">这里</a> </p>
+<ul>
+<li>自从百度云成为视频下载神器，百度云下载就广为人知，又从百度云无耻限速，百度云又被骂得广为人知，如果你还在因限速而惆怅，刚好你又在用 Chrome/Firefox，来这里，就对了。</li>
+</ul>
+<h2 id="说明">说明</h2><p>文章没有干货，只是自己碰巧找到两个好用的软件，效果惊人，所以总结一下自己的使用情况。<br>因为要用到命令行，所以 Windows 没试过，Mac 和 Linux 用户应该是无压力的。<br>效果<br>扯别的都没用，先说一下我自己的速度情况。<br>以下都是同一个网络环境：<br>– Chrome 默认下载：200 - 300 KBps<br>– Axel：下不鸟………<br>– Android ES 浏览器：500 - 1000 KBps<br>本文所用，Aria2：1 - 3 MBps<br>其中 Android 的 ES 浏览器 也很让我意外，基本可以稳定在 700 KBps。</p>
+<h2 id="软件">软件</h2><p>其实总共要用的软件就一个，Aria2，其它都是插件。</p>
+<p>##Aria2##<br>上面说到了要用命令行，就是因为 Aria2 是一个命令行软件，但是在用上相应插件后，完全不用担心自己不用全命令行。<br><a href="http://sourceforge.net/projects/aria2/" target="_blank" rel="external">Aria2主页</a><br><a href="https://github.com/tatsuhiro-t/aria2" target="_blank" rel="external">Aria2 Github 主页</a><br>然你要是和我一样喜欢命令行那就更无压力啦！</p>
+<h2 id="安装">安装</h2><p>以下内容要用到命令行，所以<br>Mac 用户请打开 Terminal，也就是终端，打开程序菜单打 terminal 可以直接找到。<br>Linux 用户我觉得不用我说了吧？也是 terminal，看发行版，自己解决。</p>
+<h2 id="Mac">Mac</h2><p>Mac 推荐用 Homebrew 安装，只要一句<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install aria2</span><br></pre></td></tr></table></figure></p>
+<p>Homebrew 的安装要 Xcode 环境，所以如果没有安装 Homebrew 还得先安装 Xcode。<br>想安装 Homebrew 的用户请看这里 -&gt; 我是Homebrew<br>其实就是下面的命令就可以安装（也是 Terminal 中输入）：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e &#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&#34;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Linux">Linux</h2><p>发行版的差异真让我不知道应该怎么说明 Linux 安装。<br>举一个粟子吧，Ubuntu<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install aria2</span><br></pre></td></tr></table></figure></p>
+<p>这个是基本，但不是关键，所以安装完就好了。</p>
+<h2 id="从源码安装">从源码安装</h2><p>如果以上方式你都觉得不合适，也可以从源码安装，但我已经忘记 Mac 默认会缺哪几个软件了，所以如果你真要这么干双不会的话，欢迎点左边的微博图标骚扰我。</p>
+<h2 id="Aria2_配置">Aria2 配置</h2><p>Aria2 是一个命令行软件，所以配置是写在文件里的，你要把下面的内容放到一个能找到的地方，例如 ~/Documents/aria2.conf<br>如果你不知道这是哪里，那你就打开 Mac 的 Finder，然后在侧边栏点 文档（Documents），新建一个文件叫 aria2.conf 然后打开写下以下内容，注意修改两个地方：<br>用户名 改为自己的用户名，不知道是什么的，请在命令行中输入 pwd 然后回车。<br>最后一行，如果是 SSD 即 固态硬盘 就不用改，如果是传统硬盘，就改成 file-<br>file-allocation=none</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ===========================================&#10;#&#20801;&#35768;rpc&#10;enable-rpc=true&#10;#&#20801;&#35768;&#38750;&#22806;&#37096;&#35775;&#38382;&#10;rpc-listen-all=true&#10;#RPC&#31471;&#21475;, &#20165;&#24403;&#40664;&#35748;&#31471;&#21475;&#34987;&#21344;&#29992;&#26102;&#20462;&#25913;&#10;rpc-listen-port=6800&#10;&#10;#&#26368;&#22823;&#21516;&#26102;&#19979;&#36733;&#25968;(&#20219;&#21153;&#25968;), &#36335;&#30001;&#24314;&#35758;&#20540;: 3&#10;max-concurrent-downloads=10&#10;#&#26029;&#28857;&#32493;&#20256;&#10;continue=true&#10;#&#21516;&#26381;&#21153;&#22120;&#36830;&#25509;&#25968;&#10;max-connection-per-server=10&#10;#&#26368;&#23567;&#25991;&#20214;&#20998;&#29255;&#22823;&#23567;, &#19979;&#36733;&#32447;&#31243;&#25968;&#19978;&#38480;&#21462;&#20915;&#20110;&#33021;&#20998;&#20986;&#22810;&#23569;&#29255;, &#23545;&#20110;&#23567;&#25991;&#20214;&#37325;&#35201;&#10;min-split-size=10M&#10;#&#21333;&#25991;&#20214;&#26368;&#22823;&#32447;&#31243;&#25968;, &#36335;&#30001;&#24314;&#35758;&#20540;: 5&#10;split=10&#10;#&#19979;&#36733;&#36895;&#24230;&#38480;&#21046;&#10;max-overall-download-limit=0&#10;#&#21333;&#25991;&#20214;&#36895;&#24230;&#38480;&#21046;&#10;max-download-limit=0&#10;#&#19978;&#20256;&#36895;&#24230;&#38480;&#21046;&#10;max-overall-upload-limit=0&#10;#&#21333;&#25991;&#20214;&#36895;&#24230;&#38480;&#21046;&#10;max-upload-limit=0&#10;&#10;#&#25991;&#20214;&#20445;&#23384;&#36335;&#24452;, &#40664;&#35748;&#20026;&#24403;&#21069;&#21551;&#21160;&#20301;&#32622;&#10;dir=/Users/&#29992;&#25143;&#21517;/Downloads&#10;&#10;#&#20801;&#35768;&#25152;&#26377;&#26469;&#28304;, web&#30028;&#38754;&#36328;&#22495;&#26435;&#38480;&#38656;&#35201;&#10;rpc-allow-origin-all=true&#10;&#10;#&#25991;&#20214;&#39044;&#20998;&#37197;, &#33021;&#26377;&#25928;&#38477;&#20302;&#25991;&#20214;&#30862;&#29255;, &#25552;&#39640;&#30913;&#30424;&#24615;&#33021;. &#32570;&#28857;&#26159;&#39044;&#20998;&#37197;&#26102;&#38388;&#36739;&#38271;&#10;#&#25152;&#38656;&#26102;&#38388; none &#60; falloc ? trunc &#60;&#60; prealloc, falloc&#21644;trunc&#38656;&#35201;&#25991;&#20214;&#31995;&#32479;&#21644;&#20869;&#26680;&#25903;&#25345;&#10;# !!&#20165;&#38024;&#23545;&#20256;&#32479;&#30913;&#30424;&#65292;SSD &#38477;&#20302;&#25991;&#20214;&#30862;&#29255;&#24182;&#19981;&#26159;&#20160;&#20040;&#22909;&#20107;&#12290;&#10;file-allocation=none&#10; # ===========================================</span><br></pre></td></tr></table></figure>
+<p>Aria2 命令快捷设置<br>在命令行中输入以后命令，用户名 还是一样改成上文那个。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#34;alias aria2rpc=&#39;aria2c --conf-path=/Users/&#29992;&#25143;&#21517;/Documents/aria2.conf -D&#39;&#34; &#62;&#62; ~/.bash_profile</span><br></pre></td></tr></table></figure></p>
+<p>然后<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure></p>
+<p>相信我，你已经接近完成了。</p>
+<h2 id="插件">插件</h2><p>以下安装一个即可<br>Chrome 插件，百度网盘助手<br>Firefox 插件，百度网盘助手<br>这个其实都可以不安装，就是一个网页，下面是它的主页<br>YAAW<br>使用<br>好了，现在装备齐全了，要怎么样才可以用的最舒服呢！<br>从现在开始，以后只用按以下步骤就可以高速下载<br>运行 Aria2<br>打开一个 Terminal 界面，输入以下并回车。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aria2rpc</span><br></pre></td></tr></table></figure></p>
+<p>好了，可以关闭 Terminal。<br>每次开机后运行一次即可。<br>打开 <a href="http://binux.github.io/yaaw/demo/" target="_blank" rel="external">YAAW</a><br>还记得我说的 YAAW 其实就是一个页面吗？打开它：<br><a href="http://binux.github.io/yaaw/demo/" target="_blank" rel="external">YAAW</a><br>这真是个应该有一个错误<br>Error: Internal server error<br>点右上角的扳手按钮，修改 JSON-RPC Path 内容，<br>把 <code>http://binux.github.io:6800/jsonrpc</code> 改为 <code>http://127.0.0.1:6800/jsonrpc</code><br>保存，Save。<br>百度云<br>终于到激动人心的时候了，-&gt; <a href="http://pan.baidu.com/disk/home" target="_blank" rel="external">点我打开百度云</a><br>看到上面的图标了吗？</p>
+<p>如果没有请重启一下 Chrome 或打开一个新 Chome 窗口，注意，不是新标签页。<br>选中要下载的文件，鼠标放到图标上，点击 <code>Aria2 RPC</code><br>看看 YAAW 的页面？有没有惊喜？<br>后记<br>这个真的是一劳多逸，如果有命令行经验的话，连劳都不算。<br>后面没说 Linux 的东西了，不是我忘了，而是觉得大家应该都会。<br>如果能帮上忙就点个赞吧！XD</p>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/02/25/百度云加速下载/" data-id="civlqwms50015lv3nhv7p7afo" class="article-share-link" data-share="baidu" data-title="">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/02/25/百度云加速下载/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-30行代码实现JS中的MVC" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/25/30行代码实现JS中的MVC/" class="article-date">
+  <time datetime="2016-02-25T06:51:34.000Z" itemprop="datePublished">2016-02-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/25/30行代码实现JS中的MVC/">30行代码实现JS中的MVC</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.cnblogs.com/front-end-ralph/p/5190442.html" target="_blank" rel="external">转帖</a></p>
+<p>一连串的名字走马观花式的出现和更迭，它们中一些已经渐渐淡出了大家的视野，一些还在迅速茁壮成长，一些则已经在特定的生态环境中独当一面舍我其谁。但不论如何，MVC已经并将持续深刻地影响前端工程师们的思维方式和工作方法。</p>
+<p>很多讲解MVC的例子都从一个具体的框架的某个概念入手，比如Backbone的collection或AngularJS中model，这当然不失为一个好办法。但框架之所以是框架，而不是类库（jQuery）或者工具集（Underscore），就是因为它们的背后有着众多优秀的设计理念和最佳实践，这些设计精髓相辅相成，环环相扣，缺一不可，要想在短时间内透过复杂的框架而看到某一种设计模式的本质并非是一件容易的事。</p>
+<p>这便是这篇随笔的由来——为了帮助大家理解概念而生的原型代码，应该越简单越好，简单到刚刚足以大家理解这个概念就够了。</p>
+<p>1.MVC的基础是观察者模式，这是实现model和view同步的关键</p>
+<p>为了简单起见，每个model实例中只包含一个primitive value值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Model</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._value = <span class="keyword">typeof</span> value === <span class="string">'undefined'</span> ? <span class="string">''</span> : value;</span><br><span class="line">    <span class="keyword">this</span>._listeners = [];</span><br><span class="line">&#125;</span><br><span class="line">Model.prototype.set = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">    self._value = value;</span><br><span class="line">    <span class="comment">// model中的值改变时，应通知注册过的回调函数</span></span><br><span class="line">    <span class="comment">// 按照Javascript事件处理的一般机制，我们异步地调用回调函数</span></span><br><span class="line">    <span class="comment">// 如果觉得setTimeout影响性能，也可以采用requestAnimationFrame</span></span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        self._listeners.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">listener</span>) </span>&#123;</span><br><span class="line">            listener.call(self, value);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">Model.prototype.watch = <span class="function"><span class="keyword">function</span> (<span class="params">listener</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 注册监听的回调函数</span></span><br><span class="line">    <span class="keyword">this</span>._listeners.push(listener);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>// html代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>// 逻辑代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> model = <span class="keyword">new</span> Model();</span><br><span class="line">    <span class="keyword">var</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>);</span><br><span class="line">    model.watch(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        div1.innerHTML = value;</span><br><span class="line">    &#125;);</span><br><span class="line">    model.set(<span class="string">'hello, this is a div'</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>借助观察者模式，我们已经实现了在调用model的set方法改变其值的时候，模板也同步更新，但这样的实现却很别扭，因为我们需要手动监听model值的改变（通过watch方法）并传入一个回调函数，有没有办法让view（一个或多个dom node）和model更简单的绑定呢？</p>
+<ol>
+<li>实现bind方法，绑定model和view<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Model.prototype.bind = <span class="function"><span class="keyword">function</span> (<span class="params">node</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 将watch的逻辑和通用的回调函数放到这里</span></span><br><span class="line">    <span class="keyword">this</span>.watch(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        node.innerHTML = value;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>// html代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div2"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>// 逻辑代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> model = <span class="keyword">new</span> Model();</span><br><span class="line">    model.bind(<span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>));</span><br><span class="line">    model.bind(<span class="built_in">document</span>.getElementById(<span class="string">'div2'</span>));</span><br><span class="line">    model.set(<span class="string">'this is a div'</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>通过一个简单的封装，view和model之间的绑定已经初见雏形，即使需要在一个model上绑定多个view，实现起来也很轻松。注意bind是Function类prototype上的一个原生方法，不过它和MVC的关系并不紧密，笔者又实在太喜欢bind这个单词，一语中的，言简意赅，所以索性在这里把原生方法覆盖了，大家可以忽略。言归正传，虽然绑定的复杂度降低了，这一步依然要依赖我们手动完成，有没有可能把绑定的逻辑从业务代码中彻底解耦呢？</p>
+<ol>
+<li>实现controller，将绑定从逻辑代码中解耦</li>
+</ol>
+<p>细心的朋友可能已经注意到，虽然讲的是MVC，但是上文中却只出现了Model类，View类不出现可以理解，毕竟HTML就是现成的View（事实上本文中从始至终也只是利用HTML作为View，javascript代码中并没有出现过View类），那Controller类为何也隐身了呢？别急，其实所谓的”逻辑代码”就是一个框架逻辑（姑且将本文的原型玩具称之为框架）和业务逻辑耦合度很高的代码段，现在我们就来将它分解一下。</p>
+<p>如果要将绑定的逻辑交给框架完成，那么就需要告诉框架如何来完成绑定。由于JS中较难完成annotation（注解），我们可以在view中做这层标记——使用html的标签属性就是一个简单有效的办法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Controller</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> models = &#123;&#125;;</span><br><span class="line">    <span class="comment">// 找到所有有bind属性的元素</span></span><br><span class="line">    <span class="keyword">var</span> views = <span class="built_in">document</span>.querySelectorAll(<span class="string">'[bind]'</span>);</span><br><span class="line">    <span class="comment">// 将views处理为普通数组</span></span><br><span class="line">    views = <span class="built_in">Array</span>.prototype.slice.call(views, <span class="number">0</span>);</span><br><span class="line">    views.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">view</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> modelName = view.getAttribute(<span class="string">'bind'</span>);</span><br><span class="line">        <span class="comment">// 取出或新建该元素所绑定的model</span></span><br><span class="line">        models[modelName] = models[modelName] || <span class="keyword">new</span> Model();</span><br><span class="line">        <span class="comment">// 完成该元素和指定model的绑定</span></span><br><span class="line">        models[modelName].bind(view);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 调用controller的具体逻辑，将models传入，方便业务处理</span></span><br><span class="line">    callback.call(<span class="keyword">this</span>, models);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>// html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div1"</span> <span class="attribute">bind</span>=<span class="value">"model1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div2"</span> <span class="attribute">bind</span>=<span class="value">"model1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>// 逻辑代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Controller(<span class="function"><span class="keyword">function</span> (<span class="params">models</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> model1 = models.model1;</span><br><span class="line">    model1.set(<span class="string">'this is a div'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>就这么简单吗？就这么简单：在Controller中完成业务逻辑并对Model进行修改，Model的变化触发View的自动更新，怎么样，算得上一个有模有样的MVC吧？当然，这样的”框架”还不足以用于生产环境，不过如果它能或多或少地帮助到大家对于MVC的理解的话，博主就非常满足了。</p>
+<p>整理后去掉注释的”框架”代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Model</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._value = <span class="keyword">typeof</span> value === <span class="string">'undefined'</span> ? <span class="string">''</span> : value;</span><br><span class="line">    <span class="keyword">this</span>._listeners = [];</span><br><span class="line">&#125;</span><br><span class="line">Model.prototype.set = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">    self._value = value;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        self._listeners.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">listener</span>) </span>&#123;</span><br><span class="line">            listener.call(self, value);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">Model.prototype.watch = <span class="function"><span class="keyword">function</span> (<span class="params">listener</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._listeners.push(listener);</span><br><span class="line">&#125;;</span><br><span class="line">Model.prototype.bind = <span class="function"><span class="keyword">function</span> (<span class="params">node</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.watch(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        node.innerHTML = value;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Controller</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> models = &#123;&#125;;</span><br><span class="line">    <span class="keyword">var</span> views = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">document</span>.querySelectorAll(<span class="string">'[bind]'</span>), <span class="number">0</span>);</span><br><span class="line">    views.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">view</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> modelName = view.getAttribute(<span class="string">'bind'</span>);</span><br><span class="line">        (models[modelName] = models[modelName] || <span class="keyword">new</span> Model()).bind(view);</span><br><span class="line">    &#125;);</span><br><span class="line">    callback.call(<span class="keyword">this</span>, models);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>一个简单的例子</li>
+</ol>
+<p>下面请大家看一个简单例子，如何实现电子表</p>
+<p>// html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">span</span> <span class="attribute">bind</span>=<span class="value">"hour"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span> : <span class="tag">&lt;<span class="title">span</span> <span class="attribute">bind</span>=<span class="value">"minute"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span> : <span class="tag">&lt;<span class="title">span</span> <span class="attribute">bind</span>=<span class="value">"second"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>// controller:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Controller(<span class="function"><span class="keyword">function</span> (<span class="params">models</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setTime</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">        models.hour.set(date.getHours());</span><br><span class="line">        models.minute.set(date.getMinutes());</span><br><span class="line">        models.second.set(date.getSeconds());</span><br><span class="line">    &#125;</span><br><span class="line">    setTime();</span><br><span class="line">    setInterval(setTime, <span class="number">1000</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>可以看出，controller中只负责更新model的逻辑，和view完全解耦；而view和model的绑定是通过view中的属性和框架中controller的初始化代码完成的，也没有出现在业务逻辑中；至于view的更新，也是通过框架中的观察者模式实现的。</p>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/02/25/30行代码实现JS中的MVC/" data-id="civlqwmts0022lv3nnsq7ql0l" class="article-share-link" data-share="baidu" data-title="30行代码实现JS中的MVC">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/02/25/30行代码实现JS中的MVC/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-activeMQ-一个服务器启动多个Broker" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/06/activeMQ-一个服务器启动多个Broker/" class="article-date">
+  <time datetime="2015-12-06T02:25:15.000Z" itemprop="datePublished">2015-12-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/06/activeMQ-一个服务器启动多个Broker/">activeMQ 一个服务器启动多个Broker</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1:把整个conf文件夹复制一份,比如叫做conf2</p>
+<p>2:修改里面的activemq.xml文件</p>
+<ul>
+<li>(1)里面的brokerName 不能跟原来的重复 </li>
+<li>(2)数据存放的文件名称不能重复,比如:<br><code>&lt;kahaDB directory=&quot;${activemq.data}/kahadb_2&quot;/&gt;</code></li>
+<li>(3)所有涉及的transportConnectors 的端口,都要跟前面的不一样 </li>
+</ul>
+<p>3:修改jetty.xml,主要就是修改端口,比如:<br><code>&lt;property name=“port” value=“8181”/&gt;</code>端口必须和前面的不一样 </p>
+<p>4:到bin下面,复制一个activemq,比如叫做activemq2: </p>
+<ul>
+<li>(1)修改程序的id,不能和前面的重复<br><code>ACTIVEMQ_PIDFILE=&quot;$ACTIVEMQ_DATA/activemq2-\</code>hostname`.pid” `</li>
+<li>(2)修改配置文件路径<br><code>ACTIVEMQ_CONF=&quot;$ACTIVEMQ_BASE/conf2&quot;</code></li>
+<li>(3)修改端口,里面有个tcp的61616的端口,要改成不一样的,最好跟activemq.xml里面的tcp的端口一致 </li>
+<li>(4)然后就可以执行了,如果执行没有权限的话,就授权:<code>chmod 751 activemq2</code></li>
+</ul>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/" data-id="civlqwmtc001tlv3nsotciukz" class="article-share-link" data-share="baidu" data-title="activeMQ 一个服务器启动多个Broker">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java自动生成图像" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/30/java自动生成图像/" class="article-date">
+  <time datetime="2015-11-30T08:37:31.000Z" itemprop="datePublished">2015-11-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/30/java自动生成图像/">java自动生成图像</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>项目中需要一些固定图片，比如右上角显示药品名称，下面放张图，图旁边是价格信息，等等，为了加快速度，商品的图已经有了，需要进行一个压缩（压缩也要注意比例问题），之后的是都是雷同的如果在PS上操作的话，这个工作可以使用个程序来搞定；</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ImageTest</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    String ext=<span class="string">"png"</span>;</span><br><span class="line">    FileInputStream in = <span class="keyword">new</span> FileInputStream(<span class="string">"/Users/tangshun/Desktop/img-01.jpg"</span>);</span><br><span class="line">    <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[in.available()];</span><br><span class="line">    in.read(bytes);</span><br><span class="line">    in.close();</span><br><span class="line">    Random random=<span class="keyword">new</span> Random(System.currentTimeMillis());</span><br><span class="line">    </span><br><span class="line">    ImageIcon imageIcon = <span class="keyword">new</span> ImageIcon(bytes);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 图形大小</span></span><br><span class="line">    <span class="keyword">int</span> width=<span class="number">236</span>,height=<span class="number">150</span>;</span><br><span class="line">    <span class="comment">// 建立内存图像</span></span><br><span class="line">    BufferedImage image = <span class="keyword">new</span> BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);</span><br><span class="line">    <span class="comment">// 从图像中取得图形对象</span></span><br><span class="line">    Graphics2D gg=(Graphics2D)image.getGraphics();</span><br><span class="line">    gg.setBackground(<span class="keyword">new</span> Color(<span class="number">233</span>,<span class="number">229</span>,<span class="number">252</span>));</span><br><span class="line">    gg.clearRect(<span class="number">0</span>, <span class="number">0</span>, width, height);</span><br><span class="line">    <span class="comment">//消除锯齿</span></span><br><span class="line">    gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);</span><br><span class="line">    <span class="comment">//消除文字锯齿</span></span><br><span class="line">    gg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//画图</span></span><br><span class="line">    gg.drawImage(imageIcon.getImage(),<span class="number">10</span>,<span class="number">55</span>,imageIcon.getIconWidth(),imageIcon.getIconHeight(),imageIcon.getImageObserver());</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//画圆角矩形</span></span><br><span class="line">    RoundRectangle2D rr2d = <span class="keyword">new</span> RoundRectangle2D.Float(<span class="number">10</span>+imageIcon.getIconWidth()+<span class="number">10</span>,<span class="number">55</span>+<span class="number">40</span>,<span class="number">76</span>,<span class="number">30</span>, <span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line">    gg.setColor(<span class="keyword">new</span> Color(<span class="number">133</span>,<span class="number">92</span>,<span class="number">200</span>));</span><br><span class="line">    gg.fill(rr2d);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//自定义字体</span></span><br><span class="line">    java.io.FileInputStream fi = <span class="keyword">new</span> java.io.FileInputStream(<span class="keyword">new</span> File(<span class="string">"/Users/tangshun/Documents/picture/UIUX/字体/open-sans/OpenSans-Bold.ttf"</span>));</span><br><span class="line">    java.io.BufferedInputStream fb = <span class="keyword">new</span> java.io.BufferedInputStream(fi);</span><br><span class="line">    Font nf = Font.createFont(Font.TRUETYPE_FONT, fb);</span><br><span class="line">    nf = nf.deriveFont(Font.BOLD, <span class="number">14</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//画字符串</span></span><br><span class="line">    Font f1 = <span class="keyword">new</span> Font(<span class="string">"PingFang SC"</span>,Font.BOLD,<span class="number">18</span>);</span><br><span class="line">    gg.setFont(f1);</span><br><span class="line">    gg.setColor(<span class="keyword">new</span> Color(<span class="number">133</span>,<span class="number">92</span>,<span class="number">200</span>));<span class="comment">//new Color(R,G,B);</span></span><br><span class="line">    gg.setStroke(<span class="keyword">new</span> BasicStroke(<span class="number">3</span>));</span><br><span class="line">    gg.drawString(<span class="string">"维达康 替吉奥胶囊"</span>, <span class="number">10</span>,<span class="number">30</span>);<span class="comment">//维达康 替吉奥胶囊</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//删除线的字符串</span></span><br><span class="line">    Font f2 = <span class="keyword">new</span> Font(<span class="string">"Microsoft YaHei"</span>,Font.PLAIN|Font.ITALIC,<span class="number">12</span>);</span><br><span class="line">    gg.setColor(Color.GRAY);<span class="comment">//new Color(R,G,B);</span></span><br><span class="line">    AttributedString as = <span class="keyword">new</span> AttributedString(<span class="string">"原价：90.88"</span>);</span><br><span class="line">    as.addAttribute(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);</span><br><span class="line">    as.addAttribute(TextAttribute.FONT, f2);</span><br><span class="line">    gg.drawString(as.getIterator(), <span class="number">10</span>+imageIcon.getIconWidth()+<span class="number">10</span>,<span class="number">55</span>+<span class="number">20</span>);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    Font f3 = <span class="keyword">new</span> Font(<span class="string">"Apple Braille"</span>,Font.BOLD,<span class="number">14</span>);</span><br><span class="line">    gg.setFont(nf);</span><br><span class="line">    gg.setColor(Color.WHITE);<span class="comment">//new Color(R,G,B);</span></span><br><span class="line">    gg.drawString(<span class="string">"￥48.88"</span>, <span class="number">10</span>+imageIcon.getIconWidth()+<span class="number">10</span>+<span class="number">10</span>,<span class="number">55</span>+<span class="number">40</span>+(<span class="number">30</span>/<span class="number">2</span>)+<span class="number">6</span>);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    String filepath = <span class="string">"/Users/tangshun/Desktop/"</span> + random.nextInt(<span class="number">99999</span>) + <span class="string">"."</span> + ext;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      ImageIO.write(image,ext,<span class="keyword">new</span> File(filepath));</span><br><span class="line">      System.out.println(<span class="string">"文件已经生成，路经为"</span> + filepath);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">      ex.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>素材：<br><img src="http://i68.tinypic.com/5ebiq1.jpg" alt="素材图片"></p>
+<p>结论：<br><img src="http://i64.tinypic.com/33ng8r5.jpg" alt="最后的图"></p>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2015/11/30/java自动生成图像/" data-id="civlqwmsw001mlv3n67ehz1fo" class="article-share-link" data-share="baidu" data-title="java自动生成图像">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2015/11/30/java自动生成图像/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+    </nav>
+  
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActiveMQ/" style="font-size: 15px;">ActiveMQ</a> <a href="/tags/Java-Tomcat/" style="font-size: 10px;">Java Tomcat</a> <a href="/tags/MAC/" style="font-size: 15px;">MAC</a> <a href="/tags/MAC-SSH/" style="font-size: 10px;">MAC , SSH</a> <a href="/tags/Swift2/" style="font-size: 10px;">Swift2</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/设计模型/" style="font-size: 10px;">设计模型</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/17/设计模式-状态模式/">设计模式-状态模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/17/设计模式-备忘录模式/">设计模式-备忘录模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/17/设计模式-命令模式/">设计模式-命令模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/17/设计模式-责任链模式/">设计模式-责任链模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/17/设计模式-迭代子模式/">设计模式-迭代子模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://vividict.com" target="_blank">在线字典</a>
+          </li>
+        
+          <li>
+            <a href="https://www.cmacapps.com/" target="_blank">破解Mac软件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 唐顺<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于我</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"14686039"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="http://cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>

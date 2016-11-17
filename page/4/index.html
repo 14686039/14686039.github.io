@@ -1,0 +1,711 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>技术与生活</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="好好工作；好好生活">
+<meta property="og:type" content="website">
+<meta property="og:title" content="技术与生活">
+<meta property="og:url" content="http://14686039.github.io/page/4/index.html">
+<meta property="og:site_name" content="技术与生活">
+<meta property="og:description" content="好好工作；好好生活">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="技术与生活">
+<meta name="twitter:description" content="好好工作；好好生活">
+  
+    <link rel="alternative" href="/atom.xml" title="技术与生活" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">技术与生活</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">热爱技术、更爱生活</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于我</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="14686039.github.io">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main">
+  
+    <article id="post-设计模式-单例模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/17/设计模式-单例模式/" class="article-date">
+  <time datetime="2016-11-17T02:23:03.000Z" itemprop="datePublished">2016-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/17/设计模式-单例模式/">设计模式-单例模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>单例模式有3个特点：一是某个类在某个上下文当中有且仅有一个实例；二是这个实例是自己创造出来的，别的类不好代办；三是在整个系统当中他必须能够提供这个单例。</p>
+</blockquote>
+<p>可以得出单例的类必须包含自己的一个静态属性，自己的构造方法为私有，确保外界无法实例化，提供一个静态方法，该方法实例化静态属性并且向外提供这个实例。</p>
+<p>他的 UML 图如下：<br><img src="http://ww2.sinaimg.cn/large/801b780agw1f97s8sqi5zj20ga0d2glu.jpg" alt=""></p>
+<p>该模式的使用条件是在环境下只需一个实例，就可以使用该模式；比如在现今中国（环境），说国家主席这个类就自然想到习大大，那么这个就是单例模式，所有需要国家主席解决的都到习大大这里，没有第二个。</p>
+<p>单例最简单的实现如下代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance;  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;   </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;  </span><br><span class="line">   instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">return</span> instance;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个属于懒汉模式，需要实例化的找我，但是也是线程不安全的；同时有2个线程同时调用 getInstance 方法可能会各自实例化各自的单例，这就不对了。改进下，把方法修改为<code>public static synchronized Singleton getInstance()</code>增加同步块，可能每次都同步下又有性能丢失。</p>
+<p>那么这次把实例化放到类装载时看看，就形成了饿汉模式，迫不及待的先行实例化<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();  </span><br><span class="line">     <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">     <span class="keyword">return</span> instance;  </span><br><span class="line">     &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个没有达到懒加载，我压根在环境里就不需要你这个单例，你给实例化出来干什么呢？或者有其他的情况导致类加载也会出现问题。</p>
+<p>再进行改变，使用内部类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonClass</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SingletonClass <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> SingletonInnerClass.sc;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonInnerClass</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> SingletonClass sc = <span class="keyword">new</span> SingletonClass();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个方式是即使父类实例化了，内部类也不一样实例化，只有显示调用 getInstance 才可以显示装载内部类，从而达到实例化的效果。</p>
+<p>使用枚举类来实现，是Effective Java作者Josh Bloch 提倡的方式，它不仅能避免多线程同步问题，而且还能防止反序列化重新创建新的对象。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Singleton &#123;  </span><br><span class="line">  INSTANCE;  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> INSTANCE;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后是双重检验来实现，确保唯一实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DoubleCheckedLockingSingleton</span></span>&#123;</span><br><span class="line">     <span class="keyword">private</span> <span class="keyword">volatile</span> DoubleCheckedLockingSingleton INSTANCE;</span><br><span class="line">     <span class="function"><span class="keyword">private</span> <span class="title">DoubleCheckedLockingSingleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> DoubleCheckedLockingSingleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">         <span class="keyword">if</span>(INSTANCE == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span>(DoubleCheckedLockingSingleton.class)&#123;</span><br><span class="line">                <span class="comment">//双重检验单例模式</span></span><br><span class="line">                <span class="keyword">if</span>(INSTANCE == <span class="keyword">null</span>)&#123;</span><br><span class="line">                    INSTANCE = <span class="keyword">new</span> DoubleCheckedLockingSingleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> INSTANCE;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>众多提倡的枚举类型，但在安卓开发过程中不太建议使用。单例模式使用频率非常高的一个模式，针对上面种种情况，需要各自筛选选用，并非都合适或不合适，尤其是最后的双重校验，在 java 编译器中，DoubleCheckedLockingSingleton类的初始化和INSTANCE变量赋值的顺序不可预料，有可能发生崩溃的危险。</p>
+</blockquote>
+<p>与单例对应的是多例模式，多例模式是单例模式的扩展版本，比如一个系统需要支持多国语言，每个语言就是一个实例，那么久需要对若干个国家语言实例化，但不能从外界去 new 操作实例化，仍然需要配合参数从该类获取特定的实例。其主要思路还是构造方法私有化，包括有参数的构造方法和无参数的构造方法都要私有化，仍然对外界提供实例，根据参数决定提供何种实例。</p>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-单例模式/" data-id="civlqwmrx000zlv3nyikvvbwp" class="article-share-link" data-share="baidu" data-title="设计模式-单例模式">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/11/17/设计模式-单例模式/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-设计模式-工厂模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/17/设计模式-工厂模式/" class="article-date">
+  <time datetime="2016-11-17T02:22:45.000Z" itemprop="datePublished">2016-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/17/设计模式-工厂模式/">设计模式-工厂模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>从上篇文章里面提到了工厂模式，今个就说说这个广泛使用的模式；“工厂模式专门负责将大量有共同接口的类实例化”——闫宏《java 与模式》。<br>工厂模式分为简单工厂模式、工厂方法模式与抽象工厂模式。</p>
+</blockquote>
+<p>###简单工厂模式<br>简单工厂模式又叫静态工厂模式，是最简单的一种，当然缺点也明显，先看下他的 UML 图<br><img src="http://ww1.sinaimg.cn/large/801b780agw1f96q7pmt8aj20qs0f8q3e.jpg" alt=""><br>从上图看到，他需要一个产品接口，和一个具体产品，然后工厂就能够根据需要造出对应的实例。</p>
+<p>直接上代码，先来个产品接口（为什么要这个东西？<strong>坑</strong>），当然抽象类也可以，这里用抽象类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractPerson</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AbstractPerson</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>有了抽象的产品，接着把具体的产品造出来，可以有 n 个，这里简化处理，举一个例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person1</span> <span class="keyword">extends</span> <span class="title">AbstractPerson</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"this is person1"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>好了，有了准备的材料，使用简单工厂的方法，把东西造出来<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> AbstractPerson <span class="title">person</span><span class="params">(<span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">        AbstractPerson person=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(num==<span class="number">1</span>)&#123;</span><br><span class="line">            person=<span class="keyword">new</span> Person1();</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(num==<span class="number">2</span>)&#123;</span><br><span class="line">            person=<span class="keyword">new</span> Person2();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> person;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>抽象工厂创造的是一个抽象的对象，这就是为什么要有个抽象接口的原因，填了之前的坑。</p>
+<blockquote>
+<p>现实的情况可能比这复杂许多，产品的级联更多，像组织结构一样，这些各种各样的产品，可以使用同一个工厂进行构造，当然，期间可以使用抽象接口进行继承来达到想要的结果，不再赘述。简单工厂使用静态<code>static</code>方法，使得工厂方法不能够继承，使得工厂等级也无法继承，这个时候工厂方法模式来了。</p>
+</blockquote>
+<p>###工厂方法模式<br>该模式是对简单工厂模式的进一步抽象，工厂本身不干具体的活了，他有几个小弟（继承者）来做具体的工厂工作。UML图如下<br><img src="http://ww2.sinaimg.cn/large/801b780agw1f96qvga2h0j20xu0guab6.jpg" alt=""></p>
+<p>来具体看下源码，首先看下抽象工厂，他只和抽象产品打交道<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Person <span class="title">getPerson</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>下面是抽象产品，依然和上面例子一样<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来，先把具体的商品，这里就是人给具体制造出来<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person1</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Person1"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person2</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Person2"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>两个人被构造出来了，接下来看下2个具体工厂<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person1Factory</span> <span class="keyword">extends</span> <span class="title">AbstractFactory</span></span>&#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">getPerson</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Person1();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person2Factory</span> <span class="keyword">extends</span> <span class="title">AbstractFactory</span></span>&#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">getPerson</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Person2();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>好，这下具体工厂都构造好，具体人也构造好，怎么使用呢？看下客户端吧<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        AbstractFactory factory=<span class="keyword">new</span> Person1Factory();</span><br><span class="line">        Person person1 = factory.getPerson();</span><br><span class="line">        factory=<span class="keyword">new</span> Person2Factory();</span><br><span class="line">        Person person2 = factory.getPerson();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里的意思就是需要什么人（产品），就到什么工厂去拿。这就对原来简单工厂进行了扩展，使得抽象工厂能够扩展 n 多具体工厂，而原来简单工厂核心是在一个具体类上。缺点是会造成工厂成堆。</p>
+<p>###抽象工厂<br>针对产品簇，该模式有独到之处，该模式 UML 图如下<br><img src="http://ww4.sinaimg.cn/large/801b780agw1f96rbvph9vj20t60csmz2.jpg" alt=""></p>
+<p>抽象产品不再是一个，抽象工厂还是和上一个一样，在具体的工厂里面所做的事也有所区别。</p>
+<p>这里代码我们采用传统的汽车构造来演示，虽然讨厌汽车这种奔死器的东西，汽车包括引擎和轮子等，为了简化，就造这两个东西，引擎有日系引擎和德系引擎，轮子同样有锦湖轮，有回力的等，先把抽象的造好，为了扩展。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Engine</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Wheel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>两个抽象产品出来了，啥事也没干。再把抽象工厂也弄出来<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Factory</span> </span>&#123;</span><br><span class="line">    <span class="function">Engine <span class="title">createEngine</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">Wheel <span class="title">createWheel</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>抽象工厂像个领导一样，象征性的做了点工作，其实也是啥也没干。那么还是把实际干事的请出来吧。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引擎部分</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EngineA</span> <span class="keyword">extends</span> <span class="title">Engine</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">EngineA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"创建日系引擎"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EngineB</span> <span class="keyword">extends</span> <span class="title">Engine</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">EngineB</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"创建德系引擎"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//车轮部分</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WheelA</span> <span class="keyword">extends</span> <span class="title">Wheel</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WheelA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"造锦湖轮胎轮子"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WheelB</span> <span class="keyword">extends</span> <span class="title">Wheel</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WheelB</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"造回力牌子轮子"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>好了，各个部件都做好了，具体工厂像个总工程师一样，向大伙发号施令进行组装，这里有2个具体工厂<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FactoryA</span> <span class="keyword">implements</span> <span class="title">Factory</span></span>&#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Engine <span class="title">createEngine</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> EngineA();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Wheel <span class="title">createWheel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> WheelA();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FactoryB</span> <span class="keyword">implements</span> <span class="title">Factory</span></span>&#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Engine <span class="title">createEngine</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> EngineB();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Wheel <span class="title">createWheel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> WheelB();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>好了，具体工厂组装完毕，我们需要的零件都好了，我们的客户端就和这些工厂打交道，不和具体生成产品的分包商打交道，工厂是总包。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      <span class="comment">//从第一个工厂买辆车</span></span><br><span class="line">        Factory f=<span class="keyword">new</span> FactoryA();</span><br><span class="line">        f.createEngine();</span><br><span class="line">        f.createWheel();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//从另外个工厂买辆车，有钱任性</span></span><br><span class="line">        f=<span class="keyword">new</span> FactoryB();</span><br><span class="line">        f.createEngine();</span><br><span class="line">        f.createWheel();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>到此为止，工厂模式告一段落，工厂模式用的地方很多，尤其是在构造级联对象的时候，需要考虑下工厂模式。所有的依赖都是依赖抽象，为什么呢？举个例子吧。</p>
+<blockquote>
+<p>能骑白马，可以说此人能骑马，能骑黑马也可以说是能骑马，这里就是把马作为依赖来说，白马黑马都是马的继承；反过来不一定；而如果把具体作为依赖呢，是这样子的，有个美女类，有个妹妹是美女的一种，哥哥喜欢这个妹妹，不能说哥哥喜欢美女，哥哥喜欢妹妹就是哥哥依赖具体的妹妹，不能上升到哥哥喜欢美女这个层面。——来自闫宏的《java与模式》的白话版</p>
+</blockquote>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-工厂模式/" data-id="civlqwmre000plv3nkoa6gtrx" class="article-share-link" data-share="baidu" data-title="设计模式-工厂模式">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/11/17/设计模式-工厂模式/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-设计模式-策略模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/17/设计模式-策略模式/" class="article-date">
+  <time datetime="2016-11-17T02:21:23.000Z" itemprop="datePublished">2016-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/17/设计模式-策略模式/">设计模式-策略模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>早想把23种常见的设计模式整理一遍，但总是各种原因导致不孕不育，今天正好需要讨论策略模式，那就从这个模式开始！所谓的设计模式都是前辈大牛整理出一套解决程序开发过程中特定问题的思路，于内功心法一样，千万不要只学招式，招式类似那些奇淫巧技的编程技巧，而要设计模式与招式并进，最终忘记模式，如同张三丰教张无忌太极拳一样。</p>
+<p>促销里面的各种不同的促销行为最终会导致不同的结论，一种不好的处理方式就是使用ifelse，如果是促销行为足够多，这ifelse就成了灾难，每次修改新的处理方法都得修改原来代码，这也不符合对修改关闭对扩展开启的开闭原则。策略模式并不是处理策略，而是组织策略。</p>
+</blockquote>
+<p>###策略模式的UML<br><img src="http://ww4.sinaimg.cn/large/801b780agw1f95n5foynbj20uc0i60tk.jpg" alt=""></p>
+<p>通过上图可以看出策略模式有以下角色构成：</p>
+<ul>
+<li>1、抽象策略（Strategy）角色：抽象策略角色由抽象类或接口来承担，它给出具体策略角色需要实现的接口；</li>
+<li>2、具体策略（ConcreteStrategy）角色：实现封装了具体的算法或行为；</li>
+<li>3、上下文（Context）角色：持有抽象策略类的引用。</li>
+</ul>
+<p>假设一个情况，订单最终形成订单总价，需要根据会员等级进行折扣计算，有一级会员，二级会员等等，每种会员等级不同折扣也不同，一级会员打八折，二级会员打九折，非会员不打折。此时如果按照ifelse的形式来是可以进行，但是涉及到下次增加一个特级会员就又得来修改这个ifelse。那么引入策略模式是不是就不需要写原来ifelse里面的业务逻辑呢？当然要写，只是组织方式不一样，以前是从头到尾直接铺成，现在使用策略模式就变成曲线救国了。<br>来段代码进行对比，先看下不采用模式进行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge ,MemberEnumeration member )</span></span>&#123;  </span><br><span class="line">  <span class="keyword">if</span>(member.equals(MemberEnumeration.ONE))&#123;  </span><br><span class="line">      <span class="keyword">return</span> charge*<span class="number">0.80</span>; <span class="comment">//一级会员8折 </span></span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(member.equals(MemberEnumeration.TWO))&#123;  </span><br><span class="line">      <span class="keyword">return</span> charge*<span class="number">0.90</span>;  <span class="comment">//二级会员9折</span></span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(member.equals(MemberEnumeration.NONE))&#123;  </span><br><span class="line">      <span class="keyword">return</span> charge;  <span class="comment">//非会员不打折</span></span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面代码非常直白，貌似也非常容易理解，但是扩展就没有，如果增加特级，上面代码就得修改，违背开闭原则。</p>
+<p>接下来采用策略模式来实现这个功能，首先会增加若干代码、若干类，甚至对初学者造成学习负担，但这些不是问题，我们的最终做项目做产品的满足随时随地的需求变动，这个重构是需要的。</p>
+<p>按照之前的思路来先定义一个接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Strategy</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge ,MemberEnumeration member )</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来做具体实现<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OneClassMemberStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span></span>&#123;  </span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge, MemberEnumeration member)</span> </span>&#123;  </span><br><span class="line">      Assert(member.equals(MemberEnumeration.ONE));</span><br><span class="line">      <span class="keyword">return</span> charge*<span class="number">0.8</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TwoClassMemberStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span></span>&#123;  </span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge, MemberEnumeration member)</span> </span>&#123;  </span><br><span class="line">      Assert(member.equals(MemberEnumeration.TWO));</span><br><span class="line">      <span class="keyword">return</span> charge*<span class="number">0.9</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoneClassMemberStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span></span>&#123;  </span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge, MemberEnumeration member)</span> </span>&#123;  </span><br><span class="line">      Assert(member.equals(MemberEnumeration.NONE));</span><br><span class="line">      <span class="keyword">return</span> charge;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>有了具体实现，可以造个工厂来生成这些具体策略，该步骤在这里不是必须的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StrategyFactory</span> </span>&#123;  </span><br><span class="line">  <span class="comment">//单例</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> StrategyFactory factory = <span class="keyword">new</span> StrategyFactory();  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">StrategyFactory</span><span class="params">()</span></span>&#123;  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Integer ,Strategy&gt; strategyMap = <span class="keyword">new</span> HashMap&lt;&gt;();  </span><br><span class="line">  <span class="keyword">static</span>&#123;  </span><br><span class="line">      strategyMap.put(MemberEnumeration.ONE.value(), <span class="keyword">new</span> OneClassMemberStrategy());  </span><br><span class="line">      strategyMap.put(MemberEnumeration.TWO.value(), <span class="keyword">new</span> TwoClassMemberStrategy());  </span><br><span class="line">      strategyMap.put(MemberEnumeration.NONE.value(), <span class="keyword">new</span> NoneClassMemberStrategy());  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> Strategy <span class="title">creator</span><span class="params">(Integer type)</span></span>&#123;  </span><br><span class="line">      <span class="keyword">return</span> strategyMap.get(type);  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StrategyFactory <span class="title">getInstance</span><span class="params">()</span></span>&#123;  </span><br><span class="line">      <span class="keyword">return</span> factory;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>有了这个工厂，我们来把上下文给弄出来<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Context</span> </span>&#123;  </span><br><span class="line">  <span class="comment">//依赖抽象</span></span><br><span class="line">  <span class="keyword">private</span> Strategy strategy;  </span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge, Integer type)</span> </span>&#123;  </span><br><span class="line">      <span class="comment">//从工厂里面抓到对应的策略出来使用</span></span><br><span class="line">      strategy = StrategyFactory.getInstance().creator(type);  </span><br><span class="line">      <span class="keyword">return</span> strategy.recharge(charge, MemberEnumeration.valueOf(type));  </span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Strategy <span class="title">getStrategy</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">return</span> strategy;  </span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStrategy</span><span class="params">(Strategy strategy)</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">this</span>.strategy = strategy;  </span><br><span class="line">  &#125;  </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最终我们再客户端调用的时候直接使用具体的策略和上下文即可，具体的策略注入到上下文<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Context context = <span class="keyword">new</span> Context();  </span><br><span class="line"><span class="comment">//一级会员买了100元的东西，得到最终价格80</span></span><br><span class="line">Double money = context.recharge(<span class="number">100</span>D,MemberEnumeration.ONE.value());  </span><br><span class="line">System.out.println(money);  <span class="comment">//80</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这样走了一大段，貌似比原来的复杂了很多，这有意义吗？还是有意义的，首先这次不再是n多的ifelse嵌套了，新增一个会员等级直接实现接口把该等级的会员价格计算，使用的时候，还是得修改几个地方，第一是工厂类里面增加新的会员实例化工作，这个可以利用反射（<em>关于反射后面再讨论</em>）获得实例。第二是客户端还得修改啊，其实真正的客户端的信息可以从数据库获取，作为入参进行处理，这样可以完全可扩展，只增加不修改。</p>
+</blockquote>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-策略模式/" data-id="civlqwmqz000flv3nxj08vuve" class="article-share-link" data-share="baidu" data-title="设计模式-策略模式">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/11/17/设计模式-策略模式/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Java里面运行JS演练场" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/17/Java里面运行JS演练场/" class="article-date">
+  <time datetime="2016-11-17T02:21:04.000Z" itemprop="datePublished">2016-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/17/Java里面运行JS演练场/">Java里面运行JS演练场</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>在策略的计算部分，很多情况采用动态脚本语言来进行，今天结合Java和JavaScript来进行一个小小的演练，其实在Java中执行JS并不是像想象的那样随心所欲，有些地方需要还是要做个转弯的思考。</p>
+</blockquote>
+<p><img src="http://ww4.sinaimg.cn/large/801b780agw1f94ircjpfyj20a604qq31.jpg" alt=""></p>
+<p>###1、开始环境构建<br>Java自JDK1.6以来，就支持JS的脚本执行，首先通过初始化脚本引擎管理器，通过这个管理器获取对应脚本的执行引擎，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ScriptEngineManager factory = <span class="keyword">new</span> ScriptEngineManager();</span><br><span class="line">ScriptEngine engine = factory.getEngineByName(<span class="string">"JavaScript"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>到这个地方，这个engine对象我们就可以随时随地的使用，下面开始幻化吧</p>
+<p>###2、Hello World<br>先从一个基本的程序开始，输出我们熟悉的Hello World<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String script = <span class="string">"function hello(name) &#123; return 'Hello,' + name;&#125;"</span>;</span><br><span class="line">    engine.eval(script);</span><br><span class="line">    Invocable inv = (Invocable) engine;</span><br><span class="line">    String res = (String) inv.invokeFunction(<span class="string">"hello"</span>, <span class="string">"World"</span>);</span><br><span class="line">    System.out.println(<span class="string">"res:"</span> + res);</span><br></pre></td></tr></table></figure></p>
+<p>第一行就是一个标准的JS函数，入参name，返回Hello+<code>name</code>这样一个形式<br>第二行就是把这个函数置入到引擎环境中<br>第四行调用hello方法，传入参数World，并且将返回值强制为String类型</p>
+<p>###3、变量<br>在引擎中设置一个变量有两种，第一是从java语言调用engine的<code>put</code>方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">engin.put(<span class="string">"name"</span>,<span class="string">"zhangsan"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>第二种是在脚本里面var一个变量，再在engine里面进行配置<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">engin.eval(<span class="string">"var name=lisi;"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>在和Java打交道的时候，更多从Java方面获取对象参数，然后到JS里面去运算；所以在JAVA里面把变量准备好，包括入参和出参都进行设定，然后在JS使用这些变量，当然也可以传入参数，输出复杂对象最好是设定一个变量。举个例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对上面的方法进行扩展</span></span><br><span class="line">Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();<span class="comment">//一个哈希表</span></span><br><span class="line">    map.put(<span class="string">"a"</span>, <span class="string">"abc"</span>);<span class="comment">//向哈希表增加一个元素</span></span><br><span class="line">    engine.put(<span class="string">"map"</span>, map);<span class="comment">//把这个哈希表丢到JS引擎中去</span></span><br><span class="line">    <span class="comment">//执行一段JS脚本，作用是把一个键值对为currentTime和当前时间丢到哈希表</span></span><br><span class="line">    engine.eval(<span class="string">"map.put('currentTime','20161022');"</span>);</span><br><span class="line">    Student student=<span class="keyword">new</span> Student();<span class="comment">//这是一个普通的POJO</span></span><br><span class="line">    student.setAge(<span class="number">12</span>);</span><br><span class="line">    student.setName(<span class="string">"张三"</span>);</span><br><span class="line">    engine.put(<span class="string">"student"</span>, student);</span><br><span class="line">    </span><br><span class="line">    String script = <span class="string">"function hello(name) &#123; return 'Hello,' + map.get('currentTime')+map.get('a')+student.getName();&#125;"</span>;</span><br><span class="line">    </span><br><span class="line">    engine.eval(script);</span><br><span class="line">    Invocable inv = (Invocable) engine;</span><br><span class="line">    String res = (String) inv.invokeFunction(<span class="string">"hello"</span>, <span class="string">"World"</span>);</span><br><span class="line">    </span><br><span class="line">    System.out.println(res);</span><br></pre></td></tr></table></figure></p>
+<p>###4、JS里面使用JDK<br>在JS脚本里面使用JDK的方法需要增加Packages后面包名、类和类的方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String js = <span class="string">"function getUUID()&#123;var f=Packages.java.util.UUID.randomUUID();print(f)&#125;"</span>;</span><br><span class="line">    engine.eval(js);</span><br><span class="line">    Invocable inv = (Invocable) engine;</span><br><span class="line">    inv.invokeFunction(<span class="string">"getUUID"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>很多时候，JS的功能不如Java强大，而这种JS中使用JAVA方法显得非常重要</p>
+<p>###5、JSON<br>JSON 作为对象的组织者介于JAva和JavaScript之间都能比较好的传输数据、组装数据，我们使用第三方JSON处理包来做一个例子<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String jsonStr="&#123;'key':'value','SubSets':[&#123;'x':'abc'&#125;,&#123;'y':'edf'&#125;],'random':Math.random()&#125;,&#123;'other':'info'&#125;";</span><br><span class="line">    JSONObject json=new JSONObject(jsonStr);</span><br><span class="line">//      engine.put("json", json);</span><br><span class="line">    String script = "function hello(json) &#123; return 'Hello,' </span><br><span class="line">    + json.getJSONArray(\"SubSets\").getJSONObject(0).get(\"x\").toString();&#125;";</span><br><span class="line">    engine.eval(script);</span><br><span class="line">    Invocable inv = (Invocable) engine;</span><br><span class="line">    String res = (String) inv.invokeFunction("hello", json);</span><br><span class="line">    System.out.println(res);</span><br></pre></td></tr></table></figure></p>
+<p>首先是一个比较复杂的JSON对象，使用org.json.JSONObject进行封装，作为入参传递进入JS引擎的hello方法，该方法对JSON对象进行解析也是利用org.json.JSONObject的方法。</p>
+<p>###6、实现Java接口<br>JS实现java的接口，来完成具体业务<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String script = <span class="string">"var obj = new Object();obj.run = function() &#123; println('执行具体方法==='+name);&#125;"</span>;</span><br><span class="line">    engine.put(<span class="string">"name"</span>, <span class="string">"全局参数"</span>);</span><br><span class="line">    engine.eval(script);</span><br><span class="line">    Object obj = engine.get(<span class="string">"obj"</span>);</span><br><span class="line">    Invocable inv = (Invocable) engine;</span><br><span class="line">    Runnable r = inv.getInterface(obj, Runnable.class);</span><br><span class="line">    Thread th = <span class="keyword">new</span> Thread(r);</span><br><span class="line">    th.start();</span><br></pre></td></tr></table></figure></p>
+<p>此处使用Runnable接口开启一个新的线程，具体的业务逻辑封装在JS里面，业务需要返回值可以自定义一个接口，比如<br><code>public ReturnObj execute();</code>，那么JS里面的<code>obj.execute</code>方法就是具体干活的地方。</p>
+<p>###7、其他<br>JS里面手动清除一个变量，或者对象使用delete方法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a=<span class="number">10</span>;</span><br><span class="line">a;<span class="comment">//出现10</span></span><br><span class="line"><span class="keyword">delete</span>(a)；</span><br><span class="line">a;<span class="comment">//出现Uncaught ReferenceError: a is not defined</span></span><br></pre></td></tr></table></figure></p>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/11/17/Java里面运行JS演练场/" data-id="civlqwmtp0020lv3n957925fm" class="article-share-link" data-share="baidu" data-title="Java里面运行JS演练场">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/11/17/Java里面运行JS演练场/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-促销模型小记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/17/促销模型小记/" class="article-date">
+  <time datetime="2016-11-17T02:17:56.000Z" itemprop="datePublished">2016-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/17/促销模型小记/">促销模型小记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>不管是B2B,C2C,在有交易的电子商务过程当中，不可避免的出现促销这样的事，一般常见的促销包括打折优惠，买多少减多少，买多少送几样等等，甚至是订单满多少钱可以免邮什么的，距离几公里内可以免邮什么的，五花八门，不易穷举。针对这样的情况，做了个小型的促销模型。</p>
+</blockquote>
+<p>下面就直接开始撸模型吧。</p>
+<p>###1、策略<br>我们需要一个基础的策略对象，比如买3送1，买5送3等这样的一个具体行为；这个策略对象有一些基本属性，包括策略的名字如买3送1，还要有个策略的计算方法，这个是核心，<strong>【坑】</strong>，稍后再说。再加上其他主键什么的大致样子如下<br><img src="http://ww2.sinaimg.cn/large/006y8lVagw1f93awz9rmcj30a60ci74o.jpg" alt="策略"></p>
+<p>###2、策略组<br>我们知道，在一次促销活动中，常见的一种现象是买3送1，买5送2；或者买100送10，买200送25这样的情况；那么我们如果购买5件，是不是就同时这两个优惠都起作用呢？显示不是，这样的活动其实是一种排他性的，同时也有优先级，比如满足买5送3的优先级就应该高于买2送1，否则买3送1就没有意义了。一旦满足高级别的促销，优先处理，否则继续寻找低级别的促销，直到结束。<br>这里把策略组和策略组的细节分为两个部分，分别表示策略组的基本熟悉和策略组组成部分<br><img src="http://ww1.sinaimg.cn/large/65e4f1e6gw1f93c0xhoh4j20nm0c2ab3.jpg" alt="策略组"></p>
+<blockquote>
+<p>有了策略组基本定义，可以继续完善对应的商品和策略之间的关联了</p>
+</blockquote>
+<p>###3、商品与策略组<br>商品不再与具体策略关联，而是和策略组进行，这样方便商品展示的时候显示该商品的促销描述，比如买5送3，买2送1，而这两个具体促销在促销表是两个行记录，需要处理才可以方便展现；当然，商品假设可能有多个促销策略，那么策略组之间也包括优先级，但某种程度上是并集效果，如买5送3同时又买200减10，假设买200减10优先级高，那么先处理，之后再计算买5送3，但一般商家不会这么干滴。<br><img src="http://ww1.sinaimg.cn/large/65e4f1e6gw1f93cdbjwlhj209q0cqmxg.jpg" alt="商品与策略组"></p>
+<p>###4、全局与策略<br>全局促销是针对某个会员对某次购买行为这样的整体促销，如订单满多少钱免邮什么的，会员打几折等，这些内容一般最后处理，在商品与策略组计算完毕之后总订单进行，如果有需要，也可以提前处理，看具体业务情况；这样的全局比较复杂，内容是包罗万象，比如配送距离3km免邮啦，各种会员等级折扣不同，订单满X元减Y元等等。为了方便处理，这里所有的情况统一为后面的策略处理对象。<br><img src="http://ww2.sinaimg.cn/large/65e4f1e6gw1f93cl7wunkj20940c83yu.jpg" alt="全局策略"></p>
+<p>###5、策略处理<br>回到一开始的一个坑，这里填下<br>策略公式可以是一段JSON对象，也可以是一个脚本，这里先是一个JSON对象来做个演示，比如买3送1这个具体的促销行为，转换为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'buyCount'</span>:<span class="string">'3'</span>,<span class="string">'giftCount'</span>:<span class="string">'1'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里的buyCount和giftCount都是预先准备好的，需要约束；算法以此为蓝本，传入一堆入参，进行处理，比如某个商品作为例子，该商品入参形式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'goodsID'</span>:<span class="string">'1000000000'</span>,<span class="string">'goodsPrice'</span>:<span class="string">'12.5'</span>,<span class="string">'count'</span>:<span class="string">'3'</span>,<span class="string">'allPrice'</span>:<span class="string">'37.5'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>该算法出来结果是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'new'</span>:<span class="string">'T'</span>,<span class="string">'goodsID'</span>:<span class="string">'1000000000'</span>,<span class="string">'goodsPrice'</span>:<span class="string">'12.5'</span>,<span class="string">'giftCount'</span>:<span class="string">'1'</span>,<span class="string">'lastPrice'</span>:<span class="string">'0'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中new的属性表示在商品列表新增一个条目，作为赠品出现<br>如果是优惠价格，比如优惠促销行为是：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'buyMoney'</span>:<span class="string">'200'</span>,<span class="string">'reduceCost'</span>:<span class="string">'10'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>入参修改为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'goodsID'</span>:<span class="string">'1000000000'</span>,<span class="string">'goodsPrice'</span>:<span class="string">'125'</span>,<span class="string">'count'</span>:<span class="string">'3'</span>,<span class="string">'allPrice'</span>:<span class="string">'375'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最终计算出来的结果是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'new'</span>:<span class="string">'F'</span>,<span class="string">'goodsID'</span>:<span class="string">'1000000000'</span>,<span class="string">'goodsPrice'</span>:<span class="string">'125'</span>,<span class="string">'reduCost'</span>:<span class="string">'10'</span>,<span class="string">'lastPrice'</span>:<span class="string">'365'</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###6、策略对象封装</p>
+<blockquote>
+<p>策略处理更加灵活的方式采用动态脚本进行</p>
+</blockquote>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/11/17/促销模型小记/" data-id="civlqwms90017lv3n77009u6y" class="article-share-link" data-share="baidu" data-title="促销模型小记">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/11/17/促销模型小记/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模型/">设计模型</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+    </nav>
+  
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActiveMQ/" style="font-size: 15px;">ActiveMQ</a> <a href="/tags/Java-Tomcat/" style="font-size: 10px;">Java Tomcat</a> <a href="/tags/MAC/" style="font-size: 15px;">MAC</a> <a href="/tags/MAC-SSH/" style="font-size: 10px;">MAC , SSH</a> <a href="/tags/Swift2/" style="font-size: 10px;">Swift2</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/设计模型/" style="font-size: 10px;">设计模型</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/17/设计模式-状态模式/">设计模式-状态模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/17/设计模式-备忘录模式/">设计模式-备忘录模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/17/设计模式-命令模式/">设计模式-命令模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/17/设计模式-责任链模式/">设计模式-责任链模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/17/设计模式-迭代子模式/">设计模式-迭代子模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://vividict.com" target="_blank">在线字典</a>
+          </li>
+        
+          <li>
+            <a href="https://www.cmacapps.com/" target="_blank">破解Mac软件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 唐顺<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于我</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"14686039"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="http://cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
