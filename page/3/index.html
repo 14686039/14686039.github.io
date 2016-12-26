@@ -75,6 +75,79 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-设计模式-代理模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/17/设计模式-代理模式/" class="article-date">
+  <time datetime="2016-11-17T02:27:04.000Z" itemprop="datePublished">2016-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/17/设计模式-代理模式/">设计模式-代理模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>代理模式:给某个对象提供代理对象，由代理对象控制原来对象的引用。一般情况在客户端和原对象之间不好沟通的时候，有代理对象来介于二者之间，完成沟通工作；一旦一个对象被代理对象管理，代理对象就可能对原来对象执行方法前后进行拦截处理。</p>
+</blockquote>
+<p>先来看下类图：<br><img src="http://ww1.sinaimg.cn/large/65e4f1e6gw1f9evf6l6mej20tq0nsgmv.jpg" alt=""></p>
+<ul>
+<li>抽象主题：声明一个接口，为真实主题和代理主题都要实现的</li>
+<li>代理主题：内部包含真实主题的引用，可以在如何时候对真实主题进行方法调用，他与真实主题有相同的接口，也就可以伪装自己，貌似自己也可以做与真实主题同样的事件。他控制真实对象，在需要真实对象出现的时候，就把他创建出来，真实主题就相当于傀儡；当然代理一般也会增加或修改真实主题的功能。</li>
+<li>真实主题：被代理，傀儡</li>
+</ul>
+<p>演示下静态代理<br>首先给出抽象主题<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接着给出具体主题<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RealSubject</span> <span class="keyword">implements</span> <span class="title">Subject</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"我是真实主题"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后代理出现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxySubject</span> <span class="keyword">implements</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Subject subject;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProxySubject</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(subject==<span class="keyword">null</span>)&#123;</span><br><span class="line">            subject=<span class="keyword">new</span> RealSubject();</span><br><span class="line">        &#125;</span><br><span class="line">        preMethod();</span><br><span class="line">        subject.method();</span><br><span class="line">        postMethod();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">postMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"代理人在执行前搞点事"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">preMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"代理人在执行后搞点事"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用客户端程序跑一次试试<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Subject subject=<span class="keyword">new</span> ProxySubject();</span><br><span class="line">        subject.method();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上属于静态代理，比较简单。与之对应的是动态代理，在运行时间内创建代理对象，JDK提供了 Proxy 和InvokationHandler<br>来处理<br>首先构造动态代理类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicProxy</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Object proxied;   </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DynamicProxy</span><span class="params">(Object proxied)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.proxied=proxied;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        before();</span><br><span class="line">        Object instance=method.invoke(proxied, args);</span><br><span class="line">        after();</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"第一步"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">after</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"第二步"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>客户端调用如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Subject real = <span class="keyword">new</span> RealSubject();   </span><br><span class="line">        Subject proxySubject = (Subject)Proxy.newProxyInstance(Subject.class.getClassLoader(), </span><br><span class="line">         <span class="keyword">new</span> Class[]&#123;Subject.class&#125;, </span><br><span class="line">         <span class="keyword">new</span> DynamicProxy(real));</span><br><span class="line">        proxySubject.method();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>动态代理创建对象过程可分为以下四个步骤：<br>1、通过实现InvocationHandler接口创建自己的调用处理器 IvocationHandler handler = new InvocationHandlerImpl(…);<br>2、通过为Proxy类指定ClassLoader对象和一组interface创建动态代理类<br>Class clazz = Proxy.getProxyClass(classLoader,new Class[]{…});<br>3、通过反射机制获取动态代理类的构造函数，其参数类型是调用处理器接口类型<br>Constructor constructor = clazz.getConstructor(new Class[]{InvocationHandler.class});<br>4、通过构造函数创建代理类实例，此时需将调用处理器对象作为参数被传入<br>Interface Proxy = (Interface)constructor.newInstance(new Object[] (handler));<br>为了简化对象创建过程，Proxy类中的newInstance方法封装了2~4，只需两步即可完成代理对象的创建。<br>生成的ProxySubject继承Proxy类实现Subject接口，实现的Subject的方法实际调用处理器的invoke方法，而invoke方法利用反射调用的是被代理对象的的方法（Object result=method.invoke(proxied,args)）</p>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-代理模式/" data-id="cix5l3ccf00119q3nx9diqa00" class="article-share-link" data-share="baidu" data-title="设计模式-代理模式">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/11/17/设计模式-代理模式/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-设计模式-装饰者模式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/17/设计模式-装饰者模式/" class="article-date">
@@ -130,7 +203,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-装饰者模式/" data-id="civlqwmqw000dlv3nr9q4ld59" class="article-share-link" data-share="baidu" data-title="设计模式-装饰者模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-装饰者模式/" data-id="cix5l3cbk000d9q3nn1lsml87" class="article-share-link" data-share="baidu" data-title="设计模式-装饰者模式">分享到</a>
       
 
       
@@ -210,7 +283,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-合成模式/" data-id="civlqwmrq000vlv3n8h2c4dm4" class="article-share-link" data-share="baidu" data-title="设计模式-合成模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-合成模式/" data-id="cix5l3cc8000v9q3npmoumcan" class="article-share-link" data-share="baidu" data-title="设计模式-合成模式">分享到</a>
       
 
       
@@ -280,7 +353,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-适配器模式/" data-id="civlqwmq90004lv3ndit8r347" class="article-share-link" data-share="baidu" data-title="设计模式-适配器模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-适配器模式/" data-id="cix5l3cb000049q3nku3laix6" class="article-share-link" data-share="baidu" data-title="设计模式-适配器模式">分享到</a>
       
 
       
@@ -358,88 +431,11 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-原型模式/" data-id="civlqwmrt000xlv3ntmj4oety" class="article-share-link" data-share="baidu" data-title="设计模式-原型模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-原型模式/" data-id="cix5l3ccb000x9q3nqfc55j40" class="article-share-link" data-share="baidu" data-title="设计模式-原型模式">分享到</a>
       
 
       
         <a href="http://14686039.github.io/2016/11/17/设计模式-原型模式/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-设计模式-构造者模式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/17/设计模式-构造者模式/" class="article-date">
-  <time datetime="2016-11-17T02:23:20.000Z" itemprop="datePublished">2016-11-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/17/设计模式-构造者模式/">设计模式-构造者模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>一个产品有不同的组成部分，而在程序里面需要把一个产品抽检出来需要较多的零件进行处理和组装，使得构造一个产品变得非常复杂，构造模式就是使得客户在不需要知道这么多复杂的细节，不必关心产品内部细节。</p>
-</blockquote>
-<p>首先看下构造这的类图<br><img src="http://ww4.sinaimg.cn/large/801b780agw1f97ywd66c9j20ro0qkmzo.jpg" alt=""><br>从这个图可以看出构造模式有四个模块：</p>
-<ul>
-<li>Director（导演角色），调用具体构造者创建产品对象，他是负责从客户端传来指令交给具体干活的类。</li>
-<li>Builder （抽象建造者），没有具体的业务意义，就是抽象出具体构造者的方法，简单说就是为了多态。</li>
-<li>ConcreteBuilder（具体构造者），苦力，实打实的把零件造好，组装好</li>
-<li>Product（抽象产品），这里仅仅是一个抽象产品，具体业务也行更加复杂</li>
-<li>ProductXXX（具体产品），对抽象产品的实现</li>
-</ul>
-<p>具体的情况也许并非如上图所示，如果确定系统开发过程中只有一个产品，那么没有必要分成这么多抽象，Builder 转化为一个具体构造者，直接引入 Product 进行处理也是可以的。</p>
-<p>接下来还是来点代码看看具体构造者模式是怎么玩的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Product</span></span>&#123;</span><br><span class="line"><span class="comment">//提供公共部分</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductOne</span> <span class="keyword">extends</span> <span class="title">Product</span></span>&#123;</span><br><span class="line"><span class="comment">//具体第一个产品相关属性方法</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductOne</span> <span class="keyword">extends</span> <span class="title">Product</span></span>&#123;</span><br><span class="line"><span class="comment">//具体第二个产品相关属性方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上面把产品类进行了设定，可以在抽象产品中实现一些共用的，再声明一些抽象方法迫使子类必须实现。接下看下 Builder 这块。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Builder</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildOne</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildTwo</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Product <span class="title">retrievePro</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">publc <span class="class"><span class="keyword">class</span> <span class="title">ConcreteBuilderOne</span> <span class="keyword">implements</span> <span class="title">Builder</span></span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Product product=<span class="keyword">new</span> ProductOne();</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildOne</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">//打造第一个零件</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildTwo</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">//打造第二个零件</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Product <span class="title">retrievePro</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">//组装出产品2</span></span><br><span class="line">  <span class="keyword">return</span> product;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">publc <span class="class"><span class="keyword">class</span> <span class="title">ConcreteBuilderTwo</span> <span class="keyword">implements</span> <span class="title">Builder</span></span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Product product=<span class="keyword">new</span> ProductTwo();</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildOne</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">//打造第一个零件</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buildTwo</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">//打造第二个零件</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Product <span class="title">retrievePro</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">//组装出产品2</span></span><br><span class="line">  <span class="keyword">return</span> product;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>最终导演出来进行组织下具体产品，给客户端提供友好接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Director</span></span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Builder builder;</span><br><span class="line">  <span class="comment">//这里可以结合工厂模式</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">construct</span><span class="params">(String type)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="string">"one"</span>.equals(type))&#123;</span><br><span class="line">      builder=<span class="keyword">new</span> ConcreteBuilderOne()</span><br><span class="line">      builder.buildOne();</span><br><span class="line">      builder.buildTwo();</span><br><span class="line">      builder.retrievePro();</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">"two"</span>.equals(type))&#123;</span><br><span class="line">      builder=<span class="keyword">new</span> ConcreteBuilderTwo()</span><br><span class="line">      builder.buildOne();</span><br><span class="line">      builder.buildTwo();</span><br><span class="line">      builder.retrievePro();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上述也许过于公式化，举个例子，有个人，姑且叫他东郭先生（还没有遇到狼）吧，他要盖房子，于是他找了张三打地基，李四砌墙，王五铺瓦，最终东郭先生就盖好了房子，图例来表示如下<br><img src="http://ww2.sinaimg.cn/large/801b780agw1f97zpixhj5j20xy0kwdh2.jpg" alt=""></p>
-<p>东郭先生就是一个导演的角色，而张三李四王五就是具体的构造者角色，东郭将盖房子这个事分别交给他们三个来完成，最后自己放个炮仗就说自己盖好房子了。</p>
-<blockquote>
-<p>构造者模式是在构造比较复杂对象，并且该对象可以拆分多个，每个拆分也是个对象或组成部分。可以对各个步骤进行依赖，也就是分步骤进行，如盖房子，先打地基，然后砌墙，最后铺瓦，这个顺序不可错（导演的功能），因此在一个属性在被赋值之前必须把另外一个属性也要赋值这样的情况，用构造者很好使。</p>
-</blockquote>
-
-
-        
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- artical f2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-9404963564058219"
-     data-ad-slot="7102642795"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-        
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-构造者模式/" data-id="civlqwmrb000nlv3nbcsc5z47" class="article-share-link" data-share="baidu" data-title="设计模式-构造者模式">分享到</a>
-      
-
-      
-        <a href="http://14686039.github.io/2016/11/17/设计模式-构造者模式/#ds-thread" class="article-comment-link">评论</a>
       
 
       
@@ -467,7 +463,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
     </div>
   </div>
 
@@ -476,7 +472,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 15px;">ActiveMQ</a> <a href="/tags/Java-Tomcat/" style="font-size: 10px;">Java Tomcat</a> <a href="/tags/MAC/" style="font-size: 15px;">MAC</a> <a href="/tags/MAC-SSH/" style="font-size: 10px;">MAC , SSH</a> <a href="/tags/Swift2/" style="font-size: 10px;">Swift2</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/设计模型/" style="font-size: 10px;">设计模型</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 13.33px;">ActiveMQ</a> <a href="/tags/Java-Tomcat/" style="font-size: 10px;">Java Tomcat</a> <a href="/tags/MAC/" style="font-size: 13.33px;">MAC</a> <a href="/tags/MAC-SSH/" style="font-size: 10px;">MAC , SSH</a> <a href="/tags/Swift2/" style="font-size: 10px;">Swift2</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/swift/" style="font-size: 10px;">swift</a> <a href="/tags/设计模型/" style="font-size: 10px;">设计模型</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
     </div>
   </div>
 
@@ -485,7 +481,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -495,6 +491,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/12/26/java-对象池技术/">java 对象池技术</a>
+          </li>
         
           <li>
             <a href="/2016/11/17/设计模式-状态模式/">设计模式-状态模式</a>
@@ -510,10 +510,6 @@
         
           <li>
             <a href="/2016/11/17/设计模式-责任链模式/">设计模式-责任链模式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/17/设计模式-迭代子模式/">设计模式-迭代子模式</a>
           </li>
         
       </ul>
