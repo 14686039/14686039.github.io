@@ -75,6 +75,79 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-设计模式-责任链模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/17/设计模式-责任链模式/" class="article-date">
+  <time datetime="2016-11-17T02:30:17.000Z" itemprop="datePublished">2016-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/17/设计模式-责任链模式/">设计模式-责任链模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>责任链模式里面的很多对象对其下家的引用而形成一条连锁，请求在这个链条上传递，直到被处理完毕，而客户端并不知道链条上哪个链接点处理了这个事件。开发 Web 项目的时候，过滤器就是这样工作的，过滤器互相嵌套，一个接着一个处理请求。这个好处就是在客户端不在意的情况下动态处理连接点以及分配任务。</p>
+</blockquote>
+<p>按照惯例，先上 UML 类图</p>
+<p><img src="http://ww1.sinaimg.cn/large/65e4f1e6gw1f9ln5jbt59j20to0lomy5.jpg" alt=""></p>
+<ul>
+<li>Handler :抽象处理角色，定义一个处理请求的接口，可以设定返回下家的引用；</li>
+<li>ConcreteHandler：具体处理角色，接收到请求的具体处理者，可以选择处理也可以不处理，把请求传递下一个连接点。</li>
+</ul>
+<p>看下具体的代码：<br>先把抽象处理者写出来，他是一个抽象类或者接口,这里使用抽象类，每个处理者给一个名字 name 属性<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Handler</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name=name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> Handler handler;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Handler <span class="title">getHandler</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> handler;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setHandler</span><span class="params">(Handler handler)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.handler = handler;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再把具体的处理者实现出来<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConcreteHandler</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        System.out.println(<span class="string">"当前处理:"</span>+getName());</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(getHandler()!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            getHandler().handle();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在该具体方法的 handle 里面，处理自个当前需要做的事件，然后寻找后续处理者，把到最后完成。</p>
+<p>看下客户端如何处理<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Handler h1=<span class="keyword">new</span> ConcreteHandler(<span class="string">"handler1"</span>);</span><br><span class="line">        Handler h2=<span class="keyword">new</span> ConcreteHandler(<span class="string">"handler2"</span>);</span><br><span class="line">        h1.setHandler(h2);</span><br><span class="line">        h1.handle();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>在责任链模式当中，对处理者而言，一旦一个请求只有一个处理者处理了，称之为纯的责任链模式，然并卵，现实没有这么纯的责任链；那么不纯的就是一个请求被0个或多个处理者处理了，这个情况很常见。责任链使得客户端请求与接收端处理减低耦合度，使得多个处理者都可以处理这个请求。这个链可以是一棵树，也可以是链表，也可以是个环。但是每个处理者只可以传递任务给下一个处理者，或者自己处理掉，不可能同时传递多个。</p>
+</blockquote>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-责任链模式/" data-id="cixk65bas0009vl3nkz65169i" class="article-share-link" data-share="baidu" data-title="设计模式-责任链模式">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/11/17/设计模式-责任链模式/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-设计模式-迭代子模式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/17/设计模式-迭代子模式/" class="article-date">
@@ -131,7 +204,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-迭代子模式/" data-id="cix5lf4jw0007aw3nz9iei4c6" class="article-share-link" data-share="baidu" data-title="设计模式-迭代子模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-迭代子模式/" data-id="cixk65baq0007vl3np2k1hi3f" class="article-share-link" data-share="baidu" data-title="设计模式-迭代子模式">分享到</a>
       
 
       
@@ -210,7 +283,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-观察者模式/" data-id="cix5lf4k7000baw3nb85inhra" class="article-share-link" data-share="baidu" data-title="设计模式-观察者模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-观察者模式/" data-id="cixk65bau000bvl3nwurux0sn" class="article-share-link" data-share="baidu" data-title="设计模式-观察者模式">分享到</a>
       
 
       
@@ -278,7 +351,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-模板方法模式/" data-id="cix5lf4ki000jaw3n0j7se4em" class="article-share-link" data-share="baidu" data-title="设计模式-模板方法模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-模板方法模式/" data-id="cixk65bbd000jvl3ng82kklis" class="article-share-link" data-share="baidu" data-title="设计模式-模板方法模式">分享到</a>
       
 
       
@@ -360,7 +433,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-桥梁模式/" data-id="cix5lf4kl000law3nnsdyz35h" class="article-share-link" data-share="baidu" data-title="设计模式-桥梁模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-桥梁模式/" data-id="cixk65bbg000lvl3npjw6ph5d" class="article-share-link" data-share="baidu" data-title="设计模式-桥梁模式">分享到</a>
       
 
       
@@ -377,92 +450,9 @@
 
 
   
-    <article id="post-设计模式-享元模式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/17/设计模式-享元模式/" class="article-date">
-  <time datetime="2016-11-17T02:27:42.000Z" itemprop="datePublished">2016-11-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/17/设计模式-享元模式/">设计模式-享元模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>享元模式(Flyweight Pattern)：运用共享技术有效地支持大量细粒度对象的复用。系统只使用少量的对象，而这些对象都很相似，状态变化很小，可以实现对象的多次复用。由于享元模式要求能够共享的对象必须是细粒度对象，因此它又称为轻量级模式，它是一种对象结构型模式。</p>
-</blockquote>
-<p>享元模式从字面上翻译是“蝇量级模式”，其实并不太好理解。这个模式的作用就是在一个系统当中有很多很多的对象，而这些对象很相似，有细微地方不同，单数数量太大，影响系统性能，为了避免系统中出现大量相同或相似的对象，同时又不影响客户端程序通过面向对象的方式对这些对象进行操作，享元模式横空出世。</p>
-<p>好比一个系统里面的字符，有非常之多，每个字符在显示的时候有的颜色不一样，有的大小不一样，有的字体不一样，享元模式通过共享技术实现相同或相似对象的重用，在逻辑上每一个出现的字符都有一个对象与之对应，然而在物理上它们却共享同一个享元对象，这个对象可以出现在一个字符串的不同地方，相同的字符对象都指向同一个实例。而享元模式里面一个重要的地方是享元池，里面装满了各种享元对象。这里可以看出享元模式的“享”是共享，“元”代表公共对象的最原始的状态。</p>
-<p>先来看下享元模式的类图：</p>
-<p><img src="http://ww1.sinaimg.cn/large/65e4f1e6gw1f9fxi8d3tij20xm0meac0.jpg" alt=""></p>
-<ul>
-<li><code>Flyweight</code>（抽象享元类）：通常是一个接口或抽象类，在抽象享元类中声明了具体享元类公共的方法，这些方法可以向外界提供享元对象的内部数据（内部状态），同时也可以通过这些方法来设置外部数据（外部状态）。</li>
-<li><code>ConcreteFlyweight</code>（具体享元类）：它实现了抽象享元类，其实例称为<code>享元对象</code>；在具体享元类中为内部状态提供了存储空间。通常我们可以结合单例模式来设计具体享元类，为每一个具体享元类提供唯一的享元对象。</li>
-<li><code>UnsharedConcreteFlyweight</code>（非共享具体享元类）：并不是所有的抽象享元类的子类都需要被共享，不能被共享的子类可设计为非共享具体享元类；当需要一个非共享具体享元类的对象时可以直接通过实例化创建。</li>
-<li><code>FlyweightFactory</code>（享元工厂类）：享元工厂类用于创建并管理享元对象，它针对抽象享元类编程，将各种类型的具体享元对象存储在一个享元池中，享元池一般设计为一个存储“键值对”的集合（也可以是其他类型的集合），可以结合工厂模式进行设计；当用户请求一个具体享元对象时，享元工厂提供一个存储在享元池中已创建的实例或者创建一个新的实例（如果不存在的话），返回新创建的实例并将其存储在享元池中。</li>
-</ul>
-<p>代码实现下：<br>享元模式的抽象接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Flyweight</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">(String state)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>具体的享元类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteFlyweight</span> <span class="keyword">extends</span> <span class="title">Flyweight</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Character intrinsicState=<span class="keyword">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//构造函数，设置内部状态</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConcreteFlyweight</span><span class="params">(Character intrinsicState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.intrinsicState=intrinsicState;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//外部状态作为参数进入方法</span></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">(String extrinsicState)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"内部状态是："</span>+intrinsicState);</span><br><span class="line">        System.out.println(<span class="string">"外部状态是："</span>+ extrinsicState);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>不需要共享的情况，有时候就是需要在内存里面新增一个<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnsharedConcreteFlyweight</span> <span class="keyword">extends</span> <span class="title">Flyweight</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operation</span><span class="params">(String extrinsicstate)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"不共享的具体状态:"</span>+extrinsicstate);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>接下来是享元模式的工厂，负责整合这些“元”,由一个 Hash 表进行管理，在构造的时候没有把不共享的“元”增加进去，当然也可以进行判断。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlyweightFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> HashMap&lt;String,Flyweight&gt; characters=<span class="keyword">new</span> HashMap&lt;String,Flyweight&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FlyweightFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        characters.put(<span class="string">"A"</span>, <span class="keyword">new</span> ConcreteFlyweight(<span class="string">'a'</span>));</span><br><span class="line">        characters.put(<span class="string">"B"</span>, <span class="keyword">new</span> ConcreteFlyweight(<span class="string">'b'</span>));</span><br><span class="line">        characters.put(<span class="string">"C"</span>, <span class="keyword">new</span> ConcreteFlyweight(<span class="string">'c'</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Flyweight <span class="title">getFlyweight</span><span class="params">(String key)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> characters.get(key);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Client 端将通过工厂从里面获取，工厂一般可以做成单例，确保系统范围只有一个享元工厂。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        FlyweightFactory factory=<span class="keyword">new</span> FlyweightFactory();</span><br><span class="line">        Flyweight a1=factory.getFlyweight(<span class="string">"A"</span>);</span><br><span class="line">        a1.operation(<span class="string">"StateA1"</span>);</span><br><span class="line">        </span><br><span class="line">        Flyweight a2=factory.getFlyweight(<span class="string">"A"</span>);</span><br><span class="line">        a2.operation(<span class="string">"StateA2"</span>);</span><br><span class="line">        </span><br><span class="line">        Flyweight b=factory.getFlyweight(<span class="string">"B"</span>);</span><br><span class="line">        b.operation(<span class="string">"StateB"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>看下结果：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">内部状态是：<span class="tag">a</span></span><br><span class="line">外部状态是：StateA1</span><br><span class="line">内部状态是：<span class="tag">a</span></span><br><span class="line">外部状态是：StateA2</span><br><span class="line">内部状态是：<span class="tag">b</span></span><br><span class="line">外部状态是：StateB</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>扩展：有的时候需要把几个 Flyweight 组合为一个，这就出现了具体复合享元角色，他是有一些单个的享元角色组合而成，提供一个集合进行管理，当然也继承抽象的享元角色，也有 operation()方法，这个方法的唯一参数代表复合对象的外部状态，而且这个外部状态和内部包括的小享元的外部状态一致，内部状态不一定一样。由于内部状态会改变，所以也是不能共享的。</p>
-</blockquote>
-<p>###优点和缺点</p>
-<p>享元模式的主要优点如下：<br>(1) 可以极大减少内存中对象的数量，使得相同或相似对象在内存中只保存一份，从而可以节约系统资源，提高系统性能。<br>(2) 享元模式的外部状态相对独立，而且不会影响其内部状态，从而使得享元对象可以在不同的环境中被共享。</p>
-<p>享元模式的主要缺点如下：<br>(1) 享元模式使得系统变得复杂，需要分离出内部状态和外部状态，这使得程序的逻辑复杂化。<br>(2) 为了使对象可以共享，享元模式需要将享元对象的部分状态外部化，而读取外部状态将使得运行时间变长。</p>
-<p>该模式使用频率不高，场合不多，在以下情况下可以考虑使用享元模式：<br>(1) 一个系统有大量相同或者相似的对象，造成内存的大量耗费。<br>(2) 对象的大部分状态都可以外部化，可以将这些外部状态传入对象中。<br>(3) 在使用享元模式时需要维护一个存储享元对象的享元池，而这需要耗费一定的系统资源，因此，应当在需要多次重复使用享元对象时才值得使用享元模式。</p>
-
-
-        
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- artical f2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-9404963564058219"
-     data-ad-slot="7102642795"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-        
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-享元模式/" data-id="cix5lf4le0013aw3nu6kdh2az" class="article-share-link" data-share="baidu" data-title="设计模式-享元模式">分享到</a>
-      
-
-      
-        <a href="http://14686039.github.io/2016/11/17/设计模式-享元模式/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -475,7 +465,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
     </div>
   </div>
 
@@ -493,7 +483,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -503,6 +493,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/05/自定义类加载器和动态加载-Java-代码/">自定义类加载器和动态加载 Java 代码</a>
+          </li>
         
           <li>
             <a href="/2016/12/26/java-对象池技术/">java 对象池技术</a>
@@ -518,10 +512,6 @@
         
           <li>
             <a href="/2016/11/17/设计模式-命令模式/">设计模式-命令模式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/17/设计模式-责任链模式/">设计模式-责任链模式</a>
           </li>
         
       </ul>
@@ -555,7 +545,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 唐顺<br>
+      &copy; 2017 唐顺<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
       .
       Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>

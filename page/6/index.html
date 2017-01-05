@@ -75,6 +75,78 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-activeMQ-一个服务器启动多个Broker" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/06/activeMQ-一个服务器启动多个Broker/" class="article-date">
+  <time datetime="2015-12-06T02:25:15.000Z" itemprop="datePublished">2015-12-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/06/activeMQ-一个服务器启动多个Broker/">activeMQ 一个服务器启动多个Broker</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1:把整个conf文件夹复制一份,比如叫做conf2</p>
+<p>2:修改里面的activemq.xml文件</p>
+<ul>
+<li>(1)里面的brokerName 不能跟原来的重复 </li>
+<li>(2)数据存放的文件名称不能重复,比如:<br><code>&lt;kahaDB directory=&quot;${activemq.data}/kahadb_2&quot;/&gt;</code></li>
+<li>(3)所有涉及的transportConnectors 的端口,都要跟前面的不一样 </li>
+</ul>
+<p>3:修改jetty.xml,主要就是修改端口,比如:<br><code>&lt;property name=“port” value=“8181”/&gt;</code>端口必须和前面的不一样 </p>
+<p>4:到bin下面,复制一个activemq,比如叫做activemq2: </p>
+<ul>
+<li>(1)修改程序的id,不能和前面的重复<br><code>ACTIVEMQ_PIDFILE=&quot;$ACTIVEMQ_DATA/activemq2-\</code>hostname`.pid” `</li>
+<li>(2)修改配置文件路径<br><code>ACTIVEMQ_CONF=&quot;$ACTIVEMQ_BASE/conf2&quot;</code></li>
+<li>(3)修改端口,里面有个tcp的61616的端口,要改成不一样的,最好跟activemq.xml里面的tcp的端口一致 </li>
+<li>(4)然后就可以执行了,如果执行没有权限的话,就授权:<code>chmod 751 activemq2</code></li>
+</ul>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/" data-id="cixk65bd5001xvl3nc6tdv0sn" class="article-share-link" data-share="baidu" data-title="activeMQ 一个服务器启动多个Broker">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-java自动生成图像" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/30/java自动生成图像/" class="article-date">
@@ -121,7 +193,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/30/java自动生成图像/" data-id="cix5lf4lz001maw3nl6xp57r4" class="article-share-link" data-share="baidu" data-title="java自动生成图像">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/30/java自动生成图像/" data-id="cixk65bcs001pvl3n3v6809ec" class="article-share-link" data-share="baidu" data-title="java自动生成图像">分享到</a>
       
 
       
@@ -214,7 +286,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/26/activeMQ快速上手/" data-id="cix5lf4m7001saw3n80xog858" class="article-share-link" data-share="baidu" data-title="activeMQ快速上手">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/26/activeMQ快速上手/" data-id="cixk65bd0001uvl3niga7irrg" class="article-share-link" data-share="baidu" data-title="activeMQ快速上手">分享到</a>
       
 
       
@@ -278,7 +350,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/" data-id="cix5lf4md001xaw3n5sd9pzf8" class="article-share-link" data-share="baidu" data-title="Mac下SSH终端证书方式到远程服务器">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/" data-id="cixk65bde001zvl3nb1rptb32" class="article-share-link" data-share="baidu" data-title="Mac下SSH终端证书方式到远程服务器">分享到</a>
       
 
       
@@ -350,7 +422,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/06/swift-函数与闭包/" data-id="cix5lf4lq001daw3nyrmlq07r" class="article-share-link" data-share="baidu" data-title="swift-函数与闭包">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/06/swift-函数与闭包/" data-id="cixk65bci001gvl3n6kz5szh5" class="article-share-link" data-share="baidu" data-title="swift-函数与闭包">分享到</a>
       
 
       
@@ -367,69 +439,9 @@
 
 
   
-    <article id="post-mac-ithoughtsX" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/06/mac-ithoughtsX/" class="article-date">
-  <time datetime="2015-11-06T11:54:16.000Z" itemprop="datePublished">2015-11-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/06/mac-ithoughtsX/">mac-ithoughtsX</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##ithoughtsX 破解版 不喜勿下<br><img src="http://i68.tinypic.com/2csceoi.jpg" alt="ithoughtsX 破解版"><br>iThoughts 是 iOS 平台上公认最佳的思维导图工具之一，你几乎可以在所有工具类 App 的榜单中见到它的大名。最近作者突然更换了开发者账户，并改名推出了焕然一新的通用版本，界面完全符合 iOS 7 开发标准，让人眼前一亮。</p>
-<p>不要以为思维导图是什么高深的东西，其实工作上小到写一篇文章，大到组织一个项目；生活中小到制作一次购物清单，大到完成一次装修计划，我们都可以制作一份思维导图出来。可以说，iThoughts 让我们的 iOS 设备拥有了取代纸笔的可能。</p>
-<p>[链接]: <a href="http://pan.baidu.com/s/1pJ3phvt" target="_blank" rel="external">http://pan.baidu.com/s/1pJ3phvt</a> 密码: x82u</p>
-
-
-        
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- artical f2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-9404963564058219"
-     data-ad-slot="7102642795"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-        
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://14686039.github.io/2015/11/06/mac-ithoughtsX/" data-id="cix5lf4lv001jaw3ndqop39sk" class="article-share-link" data-share="baidu" data-title="mac-ithoughtsX">分享到</a>
-      
-
-      
-        <a href="http://14686039.github.io/2015/11/06/mac-ithoughtsX/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -442,7 +454,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
     </div>
   </div>
 
@@ -460,7 +472,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -470,6 +482,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/05/自定义类加载器和动态加载-Java-代码/">自定义类加载器和动态加载 Java 代码</a>
+          </li>
         
           <li>
             <a href="/2016/12/26/java-对象池技术/">java 对象池技术</a>
@@ -485,10 +501,6 @@
         
           <li>
             <a href="/2016/11/17/设计模式-命令模式/">设计模式-命令模式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/17/设计模式-责任链模式/">设计模式-责任链模式</a>
           </li>
         
       </ul>
@@ -522,7 +534,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 唐顺<br>
+      &copy; 2017 唐顺<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
       .
       Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
