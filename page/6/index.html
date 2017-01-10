@@ -75,6 +75,95 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-30行代码实现JS中的MVC" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/25/30行代码实现JS中的MVC/" class="article-date">
+  <time datetime="2016-02-25T06:51:34.000Z" itemprop="datePublished">2016-02-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/25/30行代码实现JS中的MVC/">30行代码实现JS中的MVC</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.cnblogs.com/front-end-ralph/p/5190442.html" target="_blank" rel="external">转帖</a></p>
+<p>一连串的名字走马观花式的出现和更迭，它们中一些已经渐渐淡出了大家的视野，一些还在迅速茁壮成长，一些则已经在特定的生态环境中独当一面舍我其谁。但不论如何，MVC已经并将持续深刻地影响前端工程师们的思维方式和工作方法。</p>
+<p>很多讲解MVC的例子都从一个具体的框架的某个概念入手，比如Backbone的collection或AngularJS中model，这当然不失为一个好办法。但框架之所以是框架，而不是类库（jQuery）或者工具集（Underscore），就是因为它们的背后有着众多优秀的设计理念和最佳实践，这些设计精髓相辅相成，环环相扣，缺一不可，要想在短时间内透过复杂的框架而看到某一种设计模式的本质并非是一件容易的事。</p>
+<p>这便是这篇随笔的由来——为了帮助大家理解概念而生的原型代码，应该越简单越好，简单到刚刚足以大家理解这个概念就够了。</p>
+<p>1.MVC的基础是观察者模式，这是实现model和view同步的关键</p>
+<p>为了简单起见，每个model实例中只包含一个primitive value值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Model</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._value = <span class="keyword">typeof</span> value === <span class="string">'undefined'</span> ? <span class="string">''</span> : value;</span><br><span class="line">    <span class="keyword">this</span>._listeners = [];</span><br><span class="line">&#125;</span><br><span class="line">Model.prototype.set = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">    self._value = value;</span><br><span class="line">    <span class="comment">// model中的值改变时，应通知注册过的回调函数</span></span><br><span class="line">    <span class="comment">// 按照Javascript事件处理的一般机制，我们异步地调用回调函数</span></span><br><span class="line">    <span class="comment">// 如果觉得setTimeout影响性能，也可以采用requestAnimationFrame</span></span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        self._listeners.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">listener</span>) </span>&#123;</span><br><span class="line">            listener.call(self, value);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">Model.prototype.watch = <span class="function"><span class="keyword">function</span> (<span class="params">listener</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 注册监听的回调函数</span></span><br><span class="line">    <span class="keyword">this</span>._listeners.push(listener);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>// html代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>// 逻辑代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> model = <span class="keyword">new</span> Model();</span><br><span class="line">    <span class="keyword">var</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>);</span><br><span class="line">    model.watch(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        div1.innerHTML = value;</span><br><span class="line">    &#125;);</span><br><span class="line">    model.set(<span class="string">'hello, this is a div'</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>借助观察者模式，我们已经实现了在调用model的set方法改变其值的时候，模板也同步更新，但这样的实现却很别扭，因为我们需要手动监听model值的改变（通过watch方法）并传入一个回调函数，有没有办法让view（一个或多个dom node）和model更简单的绑定呢？</p>
+<ol>
+<li>实现bind方法，绑定model和view<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Model.prototype.bind = <span class="function"><span class="keyword">function</span> (<span class="params">node</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 将watch的逻辑和通用的回调函数放到这里</span></span><br><span class="line">    <span class="keyword">this</span>.watch(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        node.innerHTML = value;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>// html代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div2"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>// 逻辑代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> model = <span class="keyword">new</span> Model();</span><br><span class="line">    model.bind(<span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>));</span><br><span class="line">    model.bind(<span class="built_in">document</span>.getElementById(<span class="string">'div2'</span>));</span><br><span class="line">    model.set(<span class="string">'this is a div'</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>通过一个简单的封装，view和model之间的绑定已经初见雏形，即使需要在一个model上绑定多个view，实现起来也很轻松。注意bind是Function类prototype上的一个原生方法，不过它和MVC的关系并不紧密，笔者又实在太喜欢bind这个单词，一语中的，言简意赅，所以索性在这里把原生方法覆盖了，大家可以忽略。言归正传，虽然绑定的复杂度降低了，这一步依然要依赖我们手动完成，有没有可能把绑定的逻辑从业务代码中彻底解耦呢？</p>
+<ol>
+<li>实现controller，将绑定从逻辑代码中解耦</li>
+</ol>
+<p>细心的朋友可能已经注意到，虽然讲的是MVC，但是上文中却只出现了Model类，View类不出现可以理解，毕竟HTML就是现成的View（事实上本文中从始至终也只是利用HTML作为View，javascript代码中并没有出现过View类），那Controller类为何也隐身了呢？别急，其实所谓的”逻辑代码”就是一个框架逻辑（姑且将本文的原型玩具称之为框架）和业务逻辑耦合度很高的代码段，现在我们就来将它分解一下。</p>
+<p>如果要将绑定的逻辑交给框架完成，那么就需要告诉框架如何来完成绑定。由于JS中较难完成annotation（注解），我们可以在view中做这层标记——使用html的标签属性就是一个简单有效的办法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Controller</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> models = &#123;&#125;;</span><br><span class="line">    <span class="comment">// 找到所有有bind属性的元素</span></span><br><span class="line">    <span class="keyword">var</span> views = <span class="built_in">document</span>.querySelectorAll(<span class="string">'[bind]'</span>);</span><br><span class="line">    <span class="comment">// 将views处理为普通数组</span></span><br><span class="line">    views = <span class="built_in">Array</span>.prototype.slice.call(views, <span class="number">0</span>);</span><br><span class="line">    views.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">view</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> modelName = view.getAttribute(<span class="string">'bind'</span>);</span><br><span class="line">        <span class="comment">// 取出或新建该元素所绑定的model</span></span><br><span class="line">        models[modelName] = models[modelName] || <span class="keyword">new</span> Model();</span><br><span class="line">        <span class="comment">// 完成该元素和指定model的绑定</span></span><br><span class="line">        models[modelName].bind(view);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 调用controller的具体逻辑，将models传入，方便业务处理</span></span><br><span class="line">    callback.call(<span class="keyword">this</span>, models);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>// html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div1"</span> <span class="attribute">bind</span>=<span class="value">"model1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div2"</span> <span class="attribute">bind</span>=<span class="value">"model1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>// 逻辑代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Controller(<span class="function"><span class="keyword">function</span> (<span class="params">models</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> model1 = models.model1;</span><br><span class="line">    model1.set(<span class="string">'this is a div'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>就这么简单吗？就这么简单：在Controller中完成业务逻辑并对Model进行修改，Model的变化触发View的自动更新，怎么样，算得上一个有模有样的MVC吧？当然，这样的”框架”还不足以用于生产环境，不过如果它能或多或少地帮助到大家对于MVC的理解的话，博主就非常满足了。</p>
+<p>整理后去掉注释的”框架”代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Model</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._value = <span class="keyword">typeof</span> value === <span class="string">'undefined'</span> ? <span class="string">''</span> : value;</span><br><span class="line">    <span class="keyword">this</span>._listeners = [];</span><br><span class="line">&#125;</span><br><span class="line">Model.prototype.set = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">    self._value = value;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        self._listeners.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">listener</span>) </span>&#123;</span><br><span class="line">            listener.call(self, value);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">Model.prototype.watch = <span class="function"><span class="keyword">function</span> (<span class="params">listener</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._listeners.push(listener);</span><br><span class="line">&#125;;</span><br><span class="line">Model.prototype.bind = <span class="function"><span class="keyword">function</span> (<span class="params">node</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.watch(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        node.innerHTML = value;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Controller</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> models = &#123;&#125;;</span><br><span class="line">    <span class="keyword">var</span> views = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">document</span>.querySelectorAll(<span class="string">'[bind]'</span>), <span class="number">0</span>);</span><br><span class="line">    views.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">view</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> modelName = view.getAttribute(<span class="string">'bind'</span>);</span><br><span class="line">        (models[modelName] = models[modelName] || <span class="keyword">new</span> Model()).bind(view);</span><br><span class="line">    &#125;);</span><br><span class="line">    callback.call(<span class="keyword">this</span>, models);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>一个简单的例子</li>
+</ol>
+<p>下面请大家看一个简单例子，如何实现电子表</p>
+<p>// html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">span</span> <span class="attribute">bind</span>=<span class="value">"hour"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span> : <span class="tag">&lt;<span class="title">span</span> <span class="attribute">bind</span>=<span class="value">"minute"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span> : <span class="tag">&lt;<span class="title">span</span> <span class="attribute">bind</span>=<span class="value">"second"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>// controller:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Controller(<span class="function"><span class="keyword">function</span> (<span class="params">models</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setTime</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">        models.hour.set(date.getHours());</span><br><span class="line">        models.minute.set(date.getMinutes());</span><br><span class="line">        models.second.set(date.getSeconds());</span><br><span class="line">    &#125;</span><br><span class="line">    setTime();</span><br><span class="line">    setInterval(setTime, <span class="number">1000</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>可以看出，controller中只负责更新model的逻辑，和view完全解耦；而view和model的绑定是通过view中的属性和框架中controller的初始化代码完成的，也没有出现在业务逻辑中；至于view的更新，也是通过框架中的观察者模式实现的。</p>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/02/25/30行代码实现JS中的MVC/" data-id="cixqxn62300286o3n862e3mc5" class="article-share-link" data-share="baidu" data-title="30行代码实现JS中的MVC">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/02/25/30行代码实现JS中的MVC/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-activeMQ-一个服务器启动多个Broker" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/12/06/activeMQ-一个服务器启动多个Broker/" class="article-date">
@@ -130,7 +219,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/" data-id="cixk65bd5001xvl3nc6tdv0sn" class="article-share-link" data-share="baidu" data-title="activeMQ 一个服务器启动多个Broker">分享到</a>
+        <a data-url="http://14686039.github.io/2015/12/06/activeMQ-一个服务器启动多个Broker/" data-id="cixqxn61w001x6o3nj6jsvbds" class="article-share-link" data-share="baidu" data-title="activeMQ 一个服务器启动多个Broker">分享到</a>
       
 
       
@@ -193,7 +282,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/30/java自动生成图像/" data-id="cixk65bcs001pvl3n3v6809ec" class="article-share-link" data-share="baidu" data-title="java自动生成图像">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/30/java自动生成图像/" data-id="cixqxn61d001p6o3nfd967s08" class="article-share-link" data-share="baidu" data-title="java自动生成图像">分享到</a>
       
 
       
@@ -286,7 +375,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/26/activeMQ快速上手/" data-id="cixk65bd0001uvl3niga7irrg" class="article-share-link" data-share="baidu" data-title="activeMQ快速上手">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/26/activeMQ快速上手/" data-id="cixqxn61n001u6o3nkwzqg3p0" class="article-share-link" data-share="baidu" data-title="activeMQ快速上手">分享到</a>
       
 
       
@@ -350,7 +439,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/" data-id="cixk65bde001zvl3nb1rptb32" class="article-share-link" data-share="baidu" data-title="Mac下SSH终端证书方式到远程服务器">分享到</a>
+        <a data-url="http://14686039.github.io/2015/11/12/Mac下SSH终端证书方式到远程服务器/" data-id="cixqxn61x001z6o3nx3espn1c" class="article-share-link" data-share="baidu" data-title="Mac下SSH终端证书方式到远程服务器">分享到</a>
       
 
       
@@ -359,78 +448,6 @@
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-swift-函数与闭包" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/06/swift-函数与闭包/" class="article-date">
-  <time datetime="2015-11-06T12:10:16.000Z" itemprop="datePublished">2015-11-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/06/swift-函数与闭包/">swift-函数与闭包</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##函数</p>
-<p>使用<code>func</code>来定义一个函数 使用<code>-&gt;</code>代表返回值<br>举个例子<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">hello</span><span class="params">(name:String)</span></span>-&gt;<span class="type">String</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"hello <span class="subst">\(name)</span>！"</span></span><br><span class="line">&#125;</span><br><span class="line">hello(<span class="string">"少年"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>可以使用元组返回多个值<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">minmax</span><span class="params">(nums:[Int])</span></span>-&gt;(<span class="built_in">min</span>:<span class="type">Int</span>,<span class="built_in">max</span>:<span class="type">Int</span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> <span class="built_in">min</span>=nums[<span class="number">0</span>]</span><br><span class="line">	<span class="keyword">var</span> <span class="built_in">max</span>=nums[<span class="number">0</span>]</span><br><span class="line">	<span class="keyword">for</span> num <span class="keyword">in</span> nums&#123;</span><br><span class="line">		<span class="keyword">if</span>(num &gt; <span class="built_in">max</span>)&#123;</span><br><span class="line">			<span class="built_in">max</span> = num</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(num &lt; <span class="built_in">min</span>)&#123;</span><br><span class="line">			<span class="built_in">min</span> = num</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> (<span class="built_in">min</span>,<span class="built_in">max</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> xxx=minmax([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"min:<span class="subst">\(xxx.<span class="built_in">min</span>)</span> max:<span class="subst">\(xxx.<span class="built_in">max</span>)</span>"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>上面<code>func minmax(nums:[Int])-&gt;(min:Int,max:Int){</code>可以写成<code>func minmax(nums:Int...)-&gt;(min:Int,max:Int){</code>,神奇的点点点</p>
-<p>函数嵌套<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">hello</span><span class="params">(name:String)</span></span>-&gt;<span class="type">String</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> string = <span class="string">"good morning,"</span> </span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">hi</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> string+<span class="string">"<span class="subst">\(name)</span>"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> hi()</span><br><span class="line">&#125;</span><br><span class="line">hello(<span class="string">"xiaoming"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>返回函数类型</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">one</span><span class="params">(name:String)</span></span>-&gt;(<span class="type">String</span>-&gt;<span class="type">String</span>)&#123;</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">two</span><span class="params">(string:String)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> string+<span class="string">"<span class="subst">\(name)</span>"</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> two</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> s=one(<span class="string">"xiaoming"</span>)</span><br><span class="line">s=s(<span class="string">"hello"</span>)</span><br></pre></td></tr></table></figure>
-<p>函数作为参数</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">lessThanTen</span><span class="params">(x:Int)</span></span>-&gt;<span class="type">Bool</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x&lt;<span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">hasMatchAny</span><span class="params">(list:[Int],condition:Int-&gt;Bool)</span></span>-&gt;<span class="type">Bool</span>&#123;</span><br><span class="line">	<span class="keyword">for</span> item <span class="keyword">in</span> list&#123;</span><br><span class="line">		<span class="keyword">if</span>(condition(item))&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> number=[<span class="number">12</span>,<span class="number">33</span>,<span class="number">55</span>,<span class="number">9</span>]</span><br><span class="line"><span class="keyword">var</span> hasMatch=hasMatchAny(number,condition:lessThanTen)</span><br></pre></td></tr></table></figure>
-<p>**注意：使用的生活需要<code>condition:</code></p>
-<h2 id="闭包，比较复杂的东西，先来点简单的">闭包，比较复杂的东西，先来点简单的</h2><p>如上的代码可以修改下<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hasnum2=hasMatchAny(number,condition: &#123;(a:<span class="type">Int</span>)-&gt;<span class="type">Bool</span> <span class="keyword">in</span> <span class="keyword">return</span> a&lt;<span class="number">10</span>&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>闭包其实是把函数进行简化处理了，官方计算器的那个例子说明的非常好，摘录下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回 (Int,Int)-&gt;Int) 这样的一个函数</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">caculate</span><span class="params">(opr:String-&gt;<span class="params">(Int,Int)</span></span></span>-&gt;<span class="type">Int</span>)&#123;</span><br><span class="line">	<span class="comment">//定义下+</span></span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">add</span><span class="params">(a:Int,b:Int)</span></span>&#123;<span class="keyword">return</span> a+b&#125;</span><br><span class="line">	<span class="func"><span class="keyword">func</span> <span class="title">sub</span><span class="params">(a:Int,b:Int)</span></span>&#123;<span class="keyword">return</span> a-b&#125;</span><br><span class="line">	<span class="keyword">var</span> result:(<span class="type">Int</span>,<span class="type">Int</span>)-&gt;<span class="type">Int</span>)</span><br><span class="line">	<span class="keyword">switch</span>(opr)&#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"+"</span></span><br><span class="line">			result=add</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"-"</span></span><br><span class="line">			result=sub</span><br><span class="line">		<span class="keyword">default</span></span><br><span class="line">			result=add</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上面这个是一个普通的返回函数的一个函数，可以通过闭包进行改写<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">caculate</span><span class="params">(opr:String-&gt;<span class="params">(Int,Int)</span></span></span>-&gt;<span class="type">Int</span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> result:(<span class="type">Int</span>,<span class="type">Int</span>)-&gt;<span class="type">Int</span>)</span><br><span class="line">	<span class="keyword">switch</span>(opr)&#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"+"</span></span><br><span class="line">			result=&#123;(a:<span class="type">Int</span>,b:<span class="type">Int</span>)-&gt;<span class="type">Int</span> <span class="keyword">in</span> <span class="keyword">return</span> a+b&#125;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"-"</span></span><br><span class="line">			result=&#123;(a:<span class="type">Int</span>,b:<span class="type">Int</span>)-&gt;<span class="type">Int</span> <span class="keyword">in</span> <span class="keyword">return</span> a-b&#125;</span><br><span class="line">		<span class="keyword">default</span></span><br><span class="line">			result=&#123;(a:<span class="type">Int</span>,b:<span class="type">Int</span>)-&gt;<span class="type">Int</span> <span class="keyword">in</span> <span class="keyword">return</span> a+b&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>单行return可以省略，类型智能推断，参数缩写，所以switch部分改写下</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(opr)&#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"+"</span></span><br><span class="line">		result=&#123;$<span class="number">0</span>+$<span class="number">1</span>&#125;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"-"</span></span><br><span class="line">		result=&#123;$<span class="number">0</span>-$<span class="number">1</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-        
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- artical f2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-9404963564058219"
-     data-ad-slot="7102642795"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-        
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://14686039.github.io/2015/11/06/swift-函数与闭包/" data-id="cixk65bci001gvl3n6kz5szh5" class="article-share-link" data-share="baidu" data-title="swift-函数与闭包">分享到</a>
-      
-
-      
-        <a href="http://14686039.github.io/2015/11/06/swift-函数与闭包/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swift/">swift</a></li></ul>
 
     </footer>
   </div>
@@ -454,7 +471,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
     </div>
   </div>
 
@@ -472,7 +489,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -482,6 +499,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/10/Annotation-使用案例/">Annotation 使用案例</a>
+          </li>
         
           <li>
             <a href="/2017/01/05/自定义类加载器和动态加载-Java-代码/">自定义类加载器和动态加载 Java 代码</a>
@@ -497,10 +518,6 @@
         
           <li>
             <a href="/2016/11/17/设计模式-备忘录模式/">设计模式-备忘录模式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/17/设计模式-命令模式/">设计模式-命令模式</a>
           </li>
         
       </ul>

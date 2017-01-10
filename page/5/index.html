@@ -75,6 +75,85 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-设计模式-策略模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/17/设计模式-策略模式/" class="article-date">
+  <time datetime="2016-11-17T02:21:23.000Z" itemprop="datePublished">2016-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/17/设计模式-策略模式/">设计模式-策略模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>早想把23种常见的设计模式整理一遍，但总是各种原因导致不孕不育，今天正好需要讨论策略模式，那就从这个模式开始！所谓的设计模式都是前辈大牛整理出一套解决程序开发过程中特定问题的思路，于内功心法一样，千万不要只学招式，招式类似那些奇淫巧技的编程技巧，而要设计模式与招式并进，最终忘记模式，如同张三丰教张无忌太极拳一样。</p>
+<p>促销里面的各种不同的促销行为最终会导致不同的结论，一种不好的处理方式就是使用ifelse，如果是促销行为足够多，这ifelse就成了灾难，每次修改新的处理方法都得修改原来代码，这也不符合对修改关闭对扩展开启的开闭原则。策略模式并不是处理策略，而是组织策略。</p>
+</blockquote>
+<p>###策略模式的UML<br><img src="http://ww4.sinaimg.cn/large/801b780agw1f95n5foynbj20uc0i60tk.jpg" alt=""></p>
+<p>通过上图可以看出策略模式有以下角色构成：</p>
+<ul>
+<li>1、抽象策略（Strategy）角色：抽象策略角色由抽象类或接口来承担，它给出具体策略角色需要实现的接口；</li>
+<li>2、具体策略（ConcreteStrategy）角色：实现封装了具体的算法或行为；</li>
+<li>3、上下文（Context）角色：持有抽象策略类的引用。</li>
+</ul>
+<p>假设一个情况，订单最终形成订单总价，需要根据会员等级进行折扣计算，有一级会员，二级会员等等，每种会员等级不同折扣也不同，一级会员打八折，二级会员打九折，非会员不打折。此时如果按照ifelse的形式来是可以进行，但是涉及到下次增加一个特级会员就又得来修改这个ifelse。那么引入策略模式是不是就不需要写原来ifelse里面的业务逻辑呢？当然要写，只是组织方式不一样，以前是从头到尾直接铺成，现在使用策略模式就变成曲线救国了。<br>来段代码进行对比，先看下不采用模式进行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge ,MemberEnumeration member )</span></span>&#123;  </span><br><span class="line">  <span class="keyword">if</span>(member.equals(MemberEnumeration.ONE))&#123;  </span><br><span class="line">      <span class="keyword">return</span> charge*<span class="number">0.80</span>; <span class="comment">//一级会员8折 </span></span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(member.equals(MemberEnumeration.TWO))&#123;  </span><br><span class="line">      <span class="keyword">return</span> charge*<span class="number">0.90</span>;  <span class="comment">//二级会员9折</span></span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(member.equals(MemberEnumeration.NONE))&#123;  </span><br><span class="line">      <span class="keyword">return</span> charge;  <span class="comment">//非会员不打折</span></span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面代码非常直白，貌似也非常容易理解，但是扩展就没有，如果增加特级，上面代码就得修改，违背开闭原则。</p>
+<p>接下来采用策略模式来实现这个功能，首先会增加若干代码、若干类，甚至对初学者造成学习负担，但这些不是问题，我们的最终做项目做产品的满足随时随地的需求变动，这个重构是需要的。</p>
+<p>按照之前的思路来先定义一个接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Strategy</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge ,MemberEnumeration member )</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来做具体实现<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OneClassMemberStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span></span>&#123;  </span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge, MemberEnumeration member)</span> </span>&#123;  </span><br><span class="line">      Assert(member.equals(MemberEnumeration.ONE));</span><br><span class="line">      <span class="keyword">return</span> charge*<span class="number">0.8</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TwoClassMemberStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span></span>&#123;  </span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge, MemberEnumeration member)</span> </span>&#123;  </span><br><span class="line">      Assert(member.equals(MemberEnumeration.TWO));</span><br><span class="line">      <span class="keyword">return</span> charge*<span class="number">0.9</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoneClassMemberStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span></span>&#123;  </span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge, MemberEnumeration member)</span> </span>&#123;  </span><br><span class="line">      Assert(member.equals(MemberEnumeration.NONE));</span><br><span class="line">      <span class="keyword">return</span> charge;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>有了具体实现，可以造个工厂来生成这些具体策略，该步骤在这里不是必须的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StrategyFactory</span> </span>&#123;  </span><br><span class="line">  <span class="comment">//单例</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> StrategyFactory factory = <span class="keyword">new</span> StrategyFactory();  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">StrategyFactory</span><span class="params">()</span></span>&#123;  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Integer ,Strategy&gt; strategyMap = <span class="keyword">new</span> HashMap&lt;&gt;();  </span><br><span class="line">  <span class="keyword">static</span>&#123;  </span><br><span class="line">      strategyMap.put(MemberEnumeration.ONE.value(), <span class="keyword">new</span> OneClassMemberStrategy());  </span><br><span class="line">      strategyMap.put(MemberEnumeration.TWO.value(), <span class="keyword">new</span> TwoClassMemberStrategy());  </span><br><span class="line">      strategyMap.put(MemberEnumeration.NONE.value(), <span class="keyword">new</span> NoneClassMemberStrategy());  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> Strategy <span class="title">creator</span><span class="params">(Integer type)</span></span>&#123;  </span><br><span class="line">      <span class="keyword">return</span> strategyMap.get(type);  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StrategyFactory <span class="title">getInstance</span><span class="params">()</span></span>&#123;  </span><br><span class="line">      <span class="keyword">return</span> factory;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>有了这个工厂，我们来把上下文给弄出来<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Context</span> </span>&#123;  </span><br><span class="line">  <span class="comment">//依赖抽象</span></span><br><span class="line">  <span class="keyword">private</span> Strategy strategy;  </span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge, Integer type)</span> </span>&#123;  </span><br><span class="line">      <span class="comment">//从工厂里面抓到对应的策略出来使用</span></span><br><span class="line">      strategy = StrategyFactory.getInstance().creator(type);  </span><br><span class="line">      <span class="keyword">return</span> strategy.recharge(charge, MemberEnumeration.valueOf(type));  </span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Strategy <span class="title">getStrategy</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">return</span> strategy;  </span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStrategy</span><span class="params">(Strategy strategy)</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">this</span>.strategy = strategy;  </span><br><span class="line">  &#125;  </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最终我们再客户端调用的时候直接使用具体的策略和上下文即可，具体的策略注入到上下文<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Context context = <span class="keyword">new</span> Context();  </span><br><span class="line"><span class="comment">//一级会员买了100元的东西，得到最终价格80</span></span><br><span class="line">Double money = context.recharge(<span class="number">100</span>D,MemberEnumeration.ONE.value());  </span><br><span class="line">System.out.println(money);  <span class="comment">//80</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这样走了一大段，貌似比原来的复杂了很多，这有意义吗？还是有意义的，首先这次不再是n多的ifelse嵌套了，新增一个会员等级直接实现接口把该等级的会员价格计算，使用的时候，还是得修改几个地方，第一是工厂类里面增加新的会员实例化工作，这个可以利用反射（<em>关于反射后面再讨论</em>）获得实例。第二是客户端还得修改啊，其实真正的客户端的信息可以从数据库获取，作为入参进行处理，这样可以完全可扩展，只增加不修改。</p>
+</blockquote>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-策略模式/" data-id="cixqxn5zc000f6o3n32cg9obh" class="article-share-link" data-share="baidu" data-title="设计模式-策略模式">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/11/17/设计模式-策略模式/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Java里面运行JS演练场" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/17/Java里面运行JS演练场/" class="article-date">
@@ -133,7 +212,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/Java里面运行JS演练场/" data-id="cixk65bdj0024vl3nzuz5vi1s" class="article-share-link" data-share="baidu" data-title="Java里面运行JS演练场">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/Java里面运行JS演练场/" data-id="cixqxn62000246o3ng9ys8bj1" class="article-share-link" data-share="baidu" data-title="Java里面运行JS演练场">分享到</a>
       
 
       
@@ -211,7 +290,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/促销模型小记/" data-id="cixk65bcd001avl3nn4j87gzu" class="article-share-link" data-share="baidu" data-title="促销模型小记">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/促销模型小记/" data-id="cixqxn60v001a6o3n03k72ygu" class="article-share-link" data-share="baidu" data-title="促销模型小记">分享到</a>
       
 
       
@@ -278,7 +357,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/05/09/MAC升级后无法修改-usr-sbin等目录/" data-id="cixk65bdh0022vl3no840w0ba" class="article-share-link" data-share="baidu" data-title="MAC升级后无法修改/usr/sbin等目录">分享到</a>
+        <a data-url="http://14686039.github.io/2016/05/09/MAC升级后无法修改-usr-sbin等目录/" data-id="cixqxn61y00226o3ni5urfpzo" class="article-share-link" data-share="baidu" data-title="MAC升级后无法修改/usr/sbin等目录">分享到</a>
       
 
       
@@ -347,7 +426,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/02/25/百度云加速下载/" data-id="cixk65bc90018vl3n86w9jng3" class="article-share-link" data-share="baidu" data-title="">分享到</a>
+        <a data-url="http://14686039.github.io/2016/02/25/百度云加速下载/" data-id="cixqxn60q00186o3njqb4x7bx" class="article-share-link" data-share="baidu" data-title="">分享到</a>
       
 
       
@@ -355,95 +434,6 @@
       
 
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-30行代码实现JS中的MVC" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/25/30行代码实现JS中的MVC/" class="article-date">
-  <time datetime="2016-02-25T06:51:34.000Z" itemprop="datePublished">2016-02-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/25/30行代码实现JS中的MVC/">30行代码实现JS中的MVC</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://www.cnblogs.com/front-end-ralph/p/5190442.html" target="_blank" rel="external">转帖</a></p>
-<p>一连串的名字走马观花式的出现和更迭，它们中一些已经渐渐淡出了大家的视野，一些还在迅速茁壮成长，一些则已经在特定的生态环境中独当一面舍我其谁。但不论如何，MVC已经并将持续深刻地影响前端工程师们的思维方式和工作方法。</p>
-<p>很多讲解MVC的例子都从一个具体的框架的某个概念入手，比如Backbone的collection或AngularJS中model，这当然不失为一个好办法。但框架之所以是框架，而不是类库（jQuery）或者工具集（Underscore），就是因为它们的背后有着众多优秀的设计理念和最佳实践，这些设计精髓相辅相成，环环相扣，缺一不可，要想在短时间内透过复杂的框架而看到某一种设计模式的本质并非是一件容易的事。</p>
-<p>这便是这篇随笔的由来——为了帮助大家理解概念而生的原型代码，应该越简单越好，简单到刚刚足以大家理解这个概念就够了。</p>
-<p>1.MVC的基础是观察者模式，这是实现model和view同步的关键</p>
-<p>为了简单起见，每个model实例中只包含一个primitive value值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Model</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._value = <span class="keyword">typeof</span> value === <span class="string">'undefined'</span> ? <span class="string">''</span> : value;</span><br><span class="line">    <span class="keyword">this</span>._listeners = [];</span><br><span class="line">&#125;</span><br><span class="line">Model.prototype.set = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">    self._value = value;</span><br><span class="line">    <span class="comment">// model中的值改变时，应通知注册过的回调函数</span></span><br><span class="line">    <span class="comment">// 按照Javascript事件处理的一般机制，我们异步地调用回调函数</span></span><br><span class="line">    <span class="comment">// 如果觉得setTimeout影响性能，也可以采用requestAnimationFrame</span></span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        self._listeners.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">listener</span>) </span>&#123;</span><br><span class="line">            listener.call(self, value);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">Model.prototype.watch = <span class="function"><span class="keyword">function</span> (<span class="params">listener</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 注册监听的回调函数</span></span><br><span class="line">    <span class="keyword">this</span>._listeners.push(listener);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>// html代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>// 逻辑代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> model = <span class="keyword">new</span> Model();</span><br><span class="line">    <span class="keyword">var</span> div1 = <span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>);</span><br><span class="line">    model.watch(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        div1.innerHTML = value;</span><br><span class="line">    &#125;);</span><br><span class="line">    model.set(<span class="string">'hello, this is a div'</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
-<p>借助观察者模式，我们已经实现了在调用model的set方法改变其值的时候，模板也同步更新，但这样的实现却很别扭，因为我们需要手动监听model值的改变（通过watch方法）并传入一个回调函数，有没有办法让view（一个或多个dom node）和model更简单的绑定呢？</p>
-<ol>
-<li>实现bind方法，绑定model和view<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Model.prototype.bind = <span class="function"><span class="keyword">function</span> (<span class="params">node</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 将watch的逻辑和通用的回调函数放到这里</span></span><br><span class="line">    <span class="keyword">this</span>.watch(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        node.innerHTML = value;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>// html代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div2"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>// 逻辑代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> model = <span class="keyword">new</span> Model();</span><br><span class="line">    model.bind(<span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>));</span><br><span class="line">    model.bind(<span class="built_in">document</span>.getElementById(<span class="string">'div2'</span>));</span><br><span class="line">    model.set(<span class="string">'this is a div'</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
-<p>通过一个简单的封装，view和model之间的绑定已经初见雏形，即使需要在一个model上绑定多个view，实现起来也很轻松。注意bind是Function类prototype上的一个原生方法，不过它和MVC的关系并不紧密，笔者又实在太喜欢bind这个单词，一语中的，言简意赅，所以索性在这里把原生方法覆盖了，大家可以忽略。言归正传，虽然绑定的复杂度降低了，这一步依然要依赖我们手动完成，有没有可能把绑定的逻辑从业务代码中彻底解耦呢？</p>
-<ol>
-<li>实现controller，将绑定从逻辑代码中解耦</li>
-</ol>
-<p>细心的朋友可能已经注意到，虽然讲的是MVC，但是上文中却只出现了Model类，View类不出现可以理解，毕竟HTML就是现成的View（事实上本文中从始至终也只是利用HTML作为View，javascript代码中并没有出现过View类），那Controller类为何也隐身了呢？别急，其实所谓的”逻辑代码”就是一个框架逻辑（姑且将本文的原型玩具称之为框架）和业务逻辑耦合度很高的代码段，现在我们就来将它分解一下。</p>
-<p>如果要将绑定的逻辑交给框架完成，那么就需要告诉框架如何来完成绑定。由于JS中较难完成annotation（注解），我们可以在view中做这层标记——使用html的标签属性就是一个简单有效的办法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Controller</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> models = &#123;&#125;;</span><br><span class="line">    <span class="comment">// 找到所有有bind属性的元素</span></span><br><span class="line">    <span class="keyword">var</span> views = <span class="built_in">document</span>.querySelectorAll(<span class="string">'[bind]'</span>);</span><br><span class="line">    <span class="comment">// 将views处理为普通数组</span></span><br><span class="line">    views = <span class="built_in">Array</span>.prototype.slice.call(views, <span class="number">0</span>);</span><br><span class="line">    views.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">view</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> modelName = view.getAttribute(<span class="string">'bind'</span>);</span><br><span class="line">        <span class="comment">// 取出或新建该元素所绑定的model</span></span><br><span class="line">        models[modelName] = models[modelName] || <span class="keyword">new</span> Model();</span><br><span class="line">        <span class="comment">// 完成该元素和指定model的绑定</span></span><br><span class="line">        models[modelName].bind(view);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 调用controller的具体逻辑，将models传入，方便业务处理</span></span><br><span class="line">    callback.call(<span class="keyword">this</span>, models);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>// html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div1"</span> <span class="attribute">bind</span>=<span class="value">"model1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"div2"</span> <span class="attribute">bind</span>=<span class="value">"model1"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>// 逻辑代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Controller(<span class="function"><span class="keyword">function</span> (<span class="params">models</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> model1 = models.model1;</span><br><span class="line">    model1.set(<span class="string">'this is a div'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>就这么简单吗？就这么简单：在Controller中完成业务逻辑并对Model进行修改，Model的变化触发View的自动更新，怎么样，算得上一个有模有样的MVC吧？当然，这样的”框架”还不足以用于生产环境，不过如果它能或多或少地帮助到大家对于MVC的理解的话，博主就非常满足了。</p>
-<p>整理后去掉注释的”框架”代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Model</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._value = <span class="keyword">typeof</span> value === <span class="string">'undefined'</span> ? <span class="string">''</span> : value;</span><br><span class="line">    <span class="keyword">this</span>._listeners = [];</span><br><span class="line">&#125;</span><br><span class="line">Model.prototype.set = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">    self._value = value;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        self._listeners.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">listener</span>) </span>&#123;</span><br><span class="line">            listener.call(self, value);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">Model.prototype.watch = <span class="function"><span class="keyword">function</span> (<span class="params">listener</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._listeners.push(listener);</span><br><span class="line">&#125;;</span><br><span class="line">Model.prototype.bind = <span class="function"><span class="keyword">function</span> (<span class="params">node</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.watch(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        node.innerHTML = value;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Controller</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> models = &#123;&#125;;</span><br><span class="line">    <span class="keyword">var</span> views = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">document</span>.querySelectorAll(<span class="string">'[bind]'</span>), <span class="number">0</span>);</span><br><span class="line">    views.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">view</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> modelName = view.getAttribute(<span class="string">'bind'</span>);</span><br><span class="line">        (models[modelName] = models[modelName] || <span class="keyword">new</span> Model()).bind(view);</span><br><span class="line">    &#125;);</span><br><span class="line">    callback.call(<span class="keyword">this</span>, models);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<ol>
-<li>一个简单的例子</li>
-</ol>
-<p>下面请大家看一个简单例子，如何实现电子表</p>
-<p>// html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">span</span> <span class="attribute">bind</span>=<span class="value">"hour"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span> : <span class="tag">&lt;<span class="title">span</span> <span class="attribute">bind</span>=<span class="value">"minute"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span> : <span class="tag">&lt;<span class="title">span</span> <span class="attribute">bind</span>=<span class="value">"second"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>// controller:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Controller(<span class="function"><span class="keyword">function</span> (<span class="params">models</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">setTime</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">        models.hour.set(date.getHours());</span><br><span class="line">        models.minute.set(date.getMinutes());</span><br><span class="line">        models.second.set(date.getSeconds());</span><br><span class="line">    &#125;</span><br><span class="line">    setTime();</span><br><span class="line">    setInterval(setTime, <span class="number">1000</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>可以看出，controller中只负责更新model的逻辑，和view完全解耦；而view和model的绑定是通过view中的属性和框架中controller的初始化代码完成的，也没有出现在业务逻辑中；至于view的更新，也是通过框架中的观察者模式实现的。</p>
-
-
-        
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- artical f2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-9404963564058219"
-     data-ad-slot="7102642795"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-        
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://14686039.github.io/2016/02/25/30行代码实现JS中的MVC/" data-id="cixk65bdm0026vl3nlekeyg87" class="article-share-link" data-share="baidu" data-title="30行代码实现JS中的MVC">分享到</a>
-      
-
-      
-        <a href="http://14686039.github.io/2016/02/25/30行代码实现JS中的MVC/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
     </footer>
   </div>
   
@@ -466,7 +456,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
     </div>
   </div>
 
@@ -484,7 +474,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -494,6 +484,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/10/Annotation-使用案例/">Annotation 使用案例</a>
+          </li>
         
           <li>
             <a href="/2017/01/05/自定义类加载器和动态加载-Java-代码/">自定义类加载器和动态加载 Java 代码</a>
@@ -509,10 +503,6 @@
         
           <li>
             <a href="/2016/11/17/设计模式-备忘录模式/">设计模式-备忘录模式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/17/设计模式-命令模式/">设计模式-命令模式</a>
           </li>
         
       </ul>

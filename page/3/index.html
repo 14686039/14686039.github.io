@@ -75,6 +75,88 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-设计模式-桥梁模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/17/设计模式-桥梁模式/" class="article-date">
+  <time datetime="2016-11-17T02:28:12.000Z" itemprop="datePublished">2016-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/17/设计模式-桥梁模式/">设计模式-桥梁模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>桥梁模式是为了解决将抽象部分与实现部分分离，好让他们都在自己的维度上有多维度地变化。</p>
+</blockquote>
+<p>为了充分理解上面的含义，举个例子来说明，假如市面上电视和遥控器来自不同产家，遥控器要实现针对每个不同的电视需要不同的遥控器，那么我们可能看到如下的结果</p>
+<p><img src="http://ww4.sinaimg.cn/large/65e4f1e6gw1f9h94o2kd3j20ya0q640k.jpg" alt=""></p>
+<p>每个具体的遥控器都去继承或是实现遥控器的抽象或是接口，并且在每个具体的遥控器内部都聚合了各自的电视机接口。这种方案可以解决问题，可以解决遥控器与电视机的对应关系。可是，却有一个问题，就像上面场景中所说的，如果这里的有一些新的电视机出现，那么生产遥控器的产商还得去生产新的遥控器。这样一来各自的遥控器数量不但不好把握，而且这样的设计很繁杂</p>
+<p>下面开始桥梁模式，首先看下 UML 类图<br><img src="http://ww2.sinaimg.cn/large/65e4f1e6gw1f9h9e1rfvmj20um0iiq4b.jpg" alt=""></p>
+<ul>
+<li><p>Abstraction（抽象类）：用于定义抽象类的接口，它一般是抽象类而不是接口，其中定义了一个Implementor（实现类接口）类型的对象并可以维护该对象，它与Implementor之间具有关联关系，它既可以包含抽象业务方法，也可以包含具体业务方法。</p>
+</li>
+<li><p>RefinedAbstraction（扩充抽象类）：扩充由Abstraction定义的接口，通常情况下它不再是抽象类而是具体类，它实现了在Abstraction中声明的抽象业务方法，在RefinedAbstraction中可以调用在Implementor中定义的业务方法。</p>
+</li>
+<li><p>Implementor（实现类接口）：定义实现类的接口，这个接口不一定要与Abstraction的接口完全一致，事实上这两个接口可以完全不同，一般而言，Implementor接口仅提供基本操作，而Abstraction定义的接口可能会做更多更复杂的操作。Implementor接口对这些基本操作进行了声明，而具体实现交给其子类。通过关联关系，在Abstraction中不仅拥有自己的方法，还可以调用到Implementor中定义的方法，使用关联关系来替代继承关系。</p>
+</li>
+<li><p>ConcreteImplementor（具体实现类）：具体实现Implementor接口，在不同的ConcreteImplementor中提供基本操作的不同实现，在程序运行时，ConcreteImplementor对象将替换其父类对象，提供给抽象类具体的业务操作方法。</p>
+</li>
+</ul>
+<p>再举个例子来看，比如画笔有类型不同，颜色不同；那么类型中也有可能新增，颜色也有可能新增，如何设计这个情况</p>
+<p><img src="http://ww1.sinaimg.cn/large/65e4f1e6gw1f9h9m22pw6j21aq0o8aee.jpg" alt=""><br>如果需要增加一种新型号的毛笔，只需扩展左侧的“抽象部分”，增加一个新的扩充抽象类；如果需要增加一种新的颜色，只需扩展右侧的“实现部分”，增加一个新的具体实现类。扩展非常方便，无须修改已有代码，且不会导致类的数目增长过快。</p>
+<p>代码过一遍，首先把毛笔抽象类写出<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Maobi</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> MyColor color;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setColor</span><span class="params">(MyColor color)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.color=color;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>把具体的两个毛笔实现类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BigMaobi</span> <span class="keyword">extends</span> <span class="title">Maobi</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//着色</span></span><br><span class="line">        System.out.println(<span class="string">"这个是大毛笔！"</span>);</span><br><span class="line">        color.color();</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmallMaobi</span> <span class="keyword">extends</span> <span class="title">Maobi</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这个是小毛笔"</span>);</span><br><span class="line">        color.color();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>抽象部分，颜色的接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">MyColor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">color</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>颜色接口的 具体实现<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedColor</span> <span class="keyword">extends</span> <span class="title">MyColor</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">color</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"红色"</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GreenColor</span> <span class="keyword">extends</span> <span class="title">MyColor</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">color</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这个是绿色"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后构建客户端运行下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Maobi mb=<span class="keyword">new</span> BigMaobi();</span><br><span class="line">        MyColor color=<span class="keyword">new</span> RedColor();</span><br><span class="line">        mb.setColor(color);</span><br><span class="line">        mb.paint();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以得出，需要改造笔的不同型号，继承 Maobi 类就可以，和颜色无关，颜色需要新增的话，就实现 MyColor，也与毛笔类型无关，这样在各自的维度自由飞翔。</p>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-桥梁模式/" data-id="cixqxn5zw000l6o3ngisqzdcx" class="article-share-link" data-share="baidu" data-title="设计模式-桥梁模式">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/11/17/设计模式-桥梁模式/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-设计模式-享元模式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/17/设计模式-享元模式/" class="article-date">
@@ -141,7 +223,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-享元模式/" data-id="cixk65bc40013vl3ngrdc7jcq" class="article-share-link" data-share="baidu" data-title="设计模式-享元模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-享元模式/" data-id="cixqxn60l00136o3nae7i8cut" class="article-share-link" data-share="baidu" data-title="设计模式-享元模式">分享到</a>
       
 
       
@@ -214,7 +296,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-代理模式/" data-id="cixk65bc10011vl3nvw0zk9ny" class="article-share-link" data-share="baidu" data-title="设计模式-代理模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-代理模式/" data-id="cixqxn60j00116o3n3mg7xrwh" class="article-share-link" data-share="baidu" data-title="设计模式-代理模式">分享到</a>
       
 
       
@@ -286,7 +368,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-装饰者模式/" data-id="cixk65bb5000dvl3n4czt2sap" class="article-share-link" data-share="baidu" data-title="设计模式-装饰者模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-装饰者模式/" data-id="cixqxn5z9000d6o3njw1ekize" class="article-share-link" data-share="baidu" data-title="设计模式-装饰者模式">分享到</a>
       
 
       
@@ -366,81 +448,11 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-合成模式/" data-id="cixk65bbv000vvl3nmucfgfs5" class="article-share-link" data-share="baidu" data-title="设计模式-合成模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-合成模式/" data-id="cixqxn60a000v6o3ntbun2w15" class="article-share-link" data-share="baidu" data-title="设计模式-合成模式">分享到</a>
       
 
       
         <a href="http://14686039.github.io/2016/11/17/设计模式-合成模式/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-设计模式-适配器模式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/17/设计模式-适配器模式/" class="article-date">
-  <time datetime="2016-11-17T02:25:34.000Z" itemprop="datePublished">2016-11-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/17/设计模式-适配器模式/">设计模式-适配器模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>适配器模式是把一个雷的接口转换为另外一种接口，以方便客户端调用。</p>
-</blockquote>
-<p>这有什么意义呢？打个比方，美国的日用电压是110v，而我们中国是220v，中国的使用老美的电器就需要一个变压器，这个变压器就相当于适配器。</p>
-<p>适配器有两种情况，分别是类的适配器和对象适配器模式，有什么区别呢？</p>
-<p>###类适配器</p>
-<p>先看下 UML 类图<br><img src="http://ww2.sinaimg.cn/large/65e4f1e6gw1f9bpsm9fcyj20vo0icwf5.jpg" alt=""></p>
-<p>target 是最终需要的接口；<br>adaptee 是源适配，也就是需要适配的接口（老美的110v）；<br>adapter 具体的适配器核心，把源转换成目标</p>
-<p>这里 Adapter 继承 Adaptee，这个模式的缺点是源和源的子类无法都使用该适配器，也就继承的这个类有此功能，这就大大削弱了该模式的威力。下面稍加改造，能量就凸显出来，请看对象适配器模式</p>
-<p>###对象适配器模式<br>看下 UML 类图<br><img src="http://ww1.sinaimg.cn/large/65e4f1e6gw1f9bq1k0i98j20ro0hugmh.jpg" alt=""><br>在适配器里面引入源，这样源的所有方法都可以使用，如果是源的子类也可以传入，妙也。</p>
-<p>###什么时候使用这个模式<br>1、现有的类的接口不符合需求<br>2、用于彼此之间关系不大的类<br>3、不太适合对子类做适配器</p>
-<p>模式都不是帮助我们做具体的事，只是属于一种思考问题和解决问题的方法；适配器模式并不是帮助我们做适配器的具体事，而是把源接口对接到目标接口提供一种方法。至于里面是怎么转换，还是得在 Adapter 里面自行实现。</p>
-<p>适配器模式比较简单，不再码砖头做例子，我们日常开发前期开源把接口定好，然后呼啦啦的写代码，一旦接口不匹配，这个时候可以请出这个模式，简直神了。</p>
-
-
-        
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- artical f2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-9404963564058219"
-     data-ad-slot="7102642795"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-        
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-适配器模式/" data-id="cixk65bam0004vl3ntefnt1e2" class="article-share-link" data-share="baidu" data-title="设计模式-适配器模式">分享到</a>
-      
-
-      
-        <a href="http://14686039.github.io/2016/11/17/设计模式-适配器模式/#ds-thread" class="article-comment-link">评论</a>
       
 
       
@@ -468,7 +480,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
     </div>
   </div>
 
@@ -486,7 +498,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -496,6 +508,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/10/Annotation-使用案例/">Annotation 使用案例</a>
+          </li>
         
           <li>
             <a href="/2017/01/05/自定义类加载器和动态加载-Java-代码/">自定义类加载器和动态加载 Java 代码</a>
@@ -511,10 +527,6 @@
         
           <li>
             <a href="/2016/11/17/设计模式-备忘录模式/">设计模式-备忘录模式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/17/设计模式-命令模式/">设计模式-命令模式</a>
           </li>
         
       </ul>

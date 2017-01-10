@@ -75,6 +75,76 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-设计模式-适配器模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/17/设计模式-适配器模式/" class="article-date">
+  <time datetime="2016-11-17T02:25:34.000Z" itemprop="datePublished">2016-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/17/设计模式-适配器模式/">设计模式-适配器模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>适配器模式是把一个雷的接口转换为另外一种接口，以方便客户端调用。</p>
+</blockquote>
+<p>这有什么意义呢？打个比方，美国的日用电压是110v，而我们中国是220v，中国的使用老美的电器就需要一个变压器，这个变压器就相当于适配器。</p>
+<p>适配器有两种情况，分别是类的适配器和对象适配器模式，有什么区别呢？</p>
+<p>###类适配器</p>
+<p>先看下 UML 类图<br><img src="http://ww2.sinaimg.cn/large/65e4f1e6gw1f9bpsm9fcyj20vo0icwf5.jpg" alt=""></p>
+<p>target 是最终需要的接口；<br>adaptee 是源适配，也就是需要适配的接口（老美的110v）；<br>adapter 具体的适配器核心，把源转换成目标</p>
+<p>这里 Adapter 继承 Adaptee，这个模式的缺点是源和源的子类无法都使用该适配器，也就继承的这个类有此功能，这就大大削弱了该模式的威力。下面稍加改造，能量就凸显出来，请看对象适配器模式</p>
+<p>###对象适配器模式<br>看下 UML 类图<br><img src="http://ww1.sinaimg.cn/large/65e4f1e6gw1f9bq1k0i98j20ro0hugmh.jpg" alt=""><br>在适配器里面引入源，这样源的所有方法都可以使用，如果是源的子类也可以传入，妙也。</p>
+<p>###什么时候使用这个模式<br>1、现有的类的接口不符合需求<br>2、用于彼此之间关系不大的类<br>3、不太适合对子类做适配器</p>
+<p>模式都不是帮助我们做具体的事，只是属于一种思考问题和解决问题的方法；适配器模式并不是帮助我们做适配器的具体事，而是把源接口对接到目标接口提供一种方法。至于里面是怎么转换，还是得在 Adapter 里面自行实现。</p>
+<p>适配器模式比较简单，不再码砖头做例子，我们日常开发前期开源把接口定好，然后呼啦啦的写代码，一旦接口不匹配，这个时候可以请出这个模式，简直神了。</p>
+
+
+        
+          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- artical f2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9404963564058219"
+     data-ad-slot="7102642795"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-适配器模式/" data-id="cixqxn5yt00046o3ne867munc" class="article-share-link" data-share="baidu" data-title="设计模式-适配器模式">分享到</a>
+      
+
+      
+        <a href="http://14686039.github.io/2016/11/17/设计模式-适配器模式/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-设计模式-原型模式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/17/设计模式-原型模式/" class="article-date">
@@ -136,7 +206,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-原型模式/" data-id="cixk65bbx000xvl3nv23r5a09" class="article-share-link" data-share="baidu" data-title="设计模式-原型模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-原型模式/" data-id="cixqxn60d000x6o3n9g26041b" class="article-share-link" data-share="baidu" data-title="设计模式-原型模式">分享到</a>
       
 
       
@@ -213,7 +283,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-构造者模式/" data-id="cixk65bbi000nvl3n0dezlhty" class="article-share-link" data-share="baidu" data-title="设计模式-构造者模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-构造者模式/" data-id="cixqxn5zz000n6o3n7d9asrug" class="article-share-link" data-share="baidu" data-title="设计模式-构造者模式">分享到</a>
       
 
       
@@ -289,7 +359,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-单例模式/" data-id="cixk65bbz000zvl3n4d8ccp5y" class="article-share-link" data-share="baidu" data-title="设计模式-单例模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-单例模式/" data-id="cixqxn60g000z6o3newx8j4xi" class="article-share-link" data-share="baidu" data-title="设计模式-单例模式">分享到</a>
       
 
       
@@ -375,90 +445,11 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-工厂模式/" data-id="cixk65bbl000pvl3nang3ljx5" class="article-share-link" data-share="baidu" data-title="设计模式-工厂模式">分享到</a>
+        <a data-url="http://14686039.github.io/2016/11/17/设计模式-工厂模式/" data-id="cixqxn601000p6o3n6pd9wz9i" class="article-share-link" data-share="baidu" data-title="设计模式-工厂模式">分享到</a>
       
 
       
         <a href="http://14686039.github.io/2016/11/17/设计模式-工厂模式/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-设计模式-策略模式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/17/设计模式-策略模式/" class="article-date">
-  <time datetime="2016-11-17T02:21:23.000Z" itemprop="datePublished">2016-11-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/17/设计模式-策略模式/">设计模式-策略模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>早想把23种常见的设计模式整理一遍，但总是各种原因导致不孕不育，今天正好需要讨论策略模式，那就从这个模式开始！所谓的设计模式都是前辈大牛整理出一套解决程序开发过程中特定问题的思路，于内功心法一样，千万不要只学招式，招式类似那些奇淫巧技的编程技巧，而要设计模式与招式并进，最终忘记模式，如同张三丰教张无忌太极拳一样。</p>
-<p>促销里面的各种不同的促销行为最终会导致不同的结论，一种不好的处理方式就是使用ifelse，如果是促销行为足够多，这ifelse就成了灾难，每次修改新的处理方法都得修改原来代码，这也不符合对修改关闭对扩展开启的开闭原则。策略模式并不是处理策略，而是组织策略。</p>
-</blockquote>
-<p>###策略模式的UML<br><img src="http://ww4.sinaimg.cn/large/801b780agw1f95n5foynbj20uc0i60tk.jpg" alt=""></p>
-<p>通过上图可以看出策略模式有以下角色构成：</p>
-<ul>
-<li>1、抽象策略（Strategy）角色：抽象策略角色由抽象类或接口来承担，它给出具体策略角色需要实现的接口；</li>
-<li>2、具体策略（ConcreteStrategy）角色：实现封装了具体的算法或行为；</li>
-<li>3、上下文（Context）角色：持有抽象策略类的引用。</li>
-</ul>
-<p>假设一个情况，订单最终形成订单总价，需要根据会员等级进行折扣计算，有一级会员，二级会员等等，每种会员等级不同折扣也不同，一级会员打八折，二级会员打九折，非会员不打折。此时如果按照ifelse的形式来是可以进行，但是涉及到下次增加一个特级会员就又得来修改这个ifelse。那么引入策略模式是不是就不需要写原来ifelse里面的业务逻辑呢？当然要写，只是组织方式不一样，以前是从头到尾直接铺成，现在使用策略模式就变成曲线救国了。<br>来段代码进行对比，先看下不采用模式进行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge ,MemberEnumeration member )</span></span>&#123;  </span><br><span class="line">  <span class="keyword">if</span>(member.equals(MemberEnumeration.ONE))&#123;  </span><br><span class="line">      <span class="keyword">return</span> charge*<span class="number">0.80</span>; <span class="comment">//一级会员8折 </span></span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(member.equals(MemberEnumeration.TWO))&#123;  </span><br><span class="line">      <span class="keyword">return</span> charge*<span class="number">0.90</span>;  <span class="comment">//二级会员9折</span></span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(member.equals(MemberEnumeration.NONE))&#123;  </span><br><span class="line">      <span class="keyword">return</span> charge;  <span class="comment">//非会员不打折</span></span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上面代码非常直白，貌似也非常容易理解，但是扩展就没有，如果增加特级，上面代码就得修改，违背开闭原则。</p>
-<p>接下来采用策略模式来实现这个功能，首先会增加若干代码、若干类，甚至对初学者造成学习负担，但这些不是问题，我们的最终做项目做产品的满足随时随地的需求变动，这个重构是需要的。</p>
-<p>按照之前的思路来先定义一个接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Strategy</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge ,MemberEnumeration member )</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>接下来做具体实现<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OneClassMemberStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span></span>&#123;  </span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge, MemberEnumeration member)</span> </span>&#123;  </span><br><span class="line">      Assert(member.equals(MemberEnumeration.ONE));</span><br><span class="line">      <span class="keyword">return</span> charge*<span class="number">0.8</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TwoClassMemberStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span></span>&#123;  </span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge, MemberEnumeration member)</span> </span>&#123;  </span><br><span class="line">      Assert(member.equals(MemberEnumeration.TWO));</span><br><span class="line">      <span class="keyword">return</span> charge*<span class="number">0.9</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NoneClassMemberStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span></span>&#123;  </span><br><span class="line">    <span class="annotation">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge, MemberEnumeration member)</span> </span>&#123;  </span><br><span class="line">      Assert(member.equals(MemberEnumeration.NONE));</span><br><span class="line">      <span class="keyword">return</span> charge;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>有了具体实现，可以造个工厂来生成这些具体策略，该步骤在这里不是必须的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StrategyFactory</span> </span>&#123;  </span><br><span class="line">  <span class="comment">//单例</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> StrategyFactory factory = <span class="keyword">new</span> StrategyFactory();  </span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">StrategyFactory</span><span class="params">()</span></span>&#123;  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Integer ,Strategy&gt; strategyMap = <span class="keyword">new</span> HashMap&lt;&gt;();  </span><br><span class="line">  <span class="keyword">static</span>&#123;  </span><br><span class="line">      strategyMap.put(MemberEnumeration.ONE.value(), <span class="keyword">new</span> OneClassMemberStrategy());  </span><br><span class="line">      strategyMap.put(MemberEnumeration.TWO.value(), <span class="keyword">new</span> TwoClassMemberStrategy());  </span><br><span class="line">      strategyMap.put(MemberEnumeration.NONE.value(), <span class="keyword">new</span> NoneClassMemberStrategy());  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> Strategy <span class="title">creator</span><span class="params">(Integer type)</span></span>&#123;  </span><br><span class="line">      <span class="keyword">return</span> strategyMap.get(type);  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StrategyFactory <span class="title">getInstance</span><span class="params">()</span></span>&#123;  </span><br><span class="line">      <span class="keyword">return</span> factory;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>有了这个工厂，我们来把上下文给弄出来<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Context</span> </span>&#123;  </span><br><span class="line">  <span class="comment">//依赖抽象</span></span><br><span class="line">  <span class="keyword">private</span> Strategy strategy;  </span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">public</span> Double <span class="title">recharge</span><span class="params">(Double charge, Integer type)</span> </span>&#123;  </span><br><span class="line">      <span class="comment">//从工厂里面抓到对应的策略出来使用</span></span><br><span class="line">      strategy = StrategyFactory.getInstance().creator(type);  </span><br><span class="line">      <span class="keyword">return</span> strategy.recharge(charge, MemberEnumeration.valueOf(type));  </span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Strategy <span class="title">getStrategy</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">return</span> strategy;  </span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStrategy</span><span class="params">(Strategy strategy)</span> </span>&#123;  </span><br><span class="line">      <span class="keyword">this</span>.strategy = strategy;  </span><br><span class="line">  &#125;  </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>最终我们再客户端调用的时候直接使用具体的策略和上下文即可，具体的策略注入到上下文<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Context context = <span class="keyword">new</span> Context();  </span><br><span class="line"><span class="comment">//一级会员买了100元的东西，得到最终价格80</span></span><br><span class="line">Double money = context.recharge(<span class="number">100</span>D,MemberEnumeration.ONE.value());  </span><br><span class="line">System.out.println(money);  <span class="comment">//80</span></span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>这样走了一大段，貌似比原来的复杂了很多，这有意义吗？还是有意义的，首先这次不再是n多的ifelse嵌套了，新增一个会员等级直接实现接口把该等级的会员价格计算，使用的时候，还是得修改几个地方，第一是工厂类里面增加新的会员实例化工作，这个可以利用反射（<em>关于反射后面再讨论</em>）获得实例。第二是客户端还得修改啊，其实真正的客户端的信息可以从数据库获取，作为入参进行处理，这样可以完全可扩展，只增加不修改。</p>
-</blockquote>
-
-
-        
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- artical f2 -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-9404963564058219"
-     data-ad-slot="7102642795"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-        
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://14686039.github.io/2016/11/17/设计模式-策略模式/" data-id="cixk65bb8000fvl3n8qj0uoxw" class="article-share-link" data-share="baidu" data-title="设计模式-策略模式">分享到</a>
-      
-
-      
-        <a href="http://14686039.github.io/2016/11/17/设计模式-策略模式/#ds-thread" class="article-comment-link">评论</a>
       
 
       
@@ -486,7 +477,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Tomcat/">Java Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC/">MAC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MAC-SSH/">MAC , SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift2/">Swift2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/">swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模型/">设计模型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">18</span></li></ul>
     </div>
   </div>
 
@@ -504,7 +495,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">10</span></li></ul>
     </div>
   </div>
 
@@ -514,6 +505,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/10/Annotation-使用案例/">Annotation 使用案例</a>
+          </li>
         
           <li>
             <a href="/2017/01/05/自定义类加载器和动态加载-Java-代码/">自定义类加载器和动态加载 Java 代码</a>
@@ -529,10 +524,6 @@
         
           <li>
             <a href="/2016/11/17/设计模式-备忘录模式/">设计模式-备忘录模式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/17/设计模式-命令模式/">设计模式-命令模式</a>
           </li>
         
       </ul>
